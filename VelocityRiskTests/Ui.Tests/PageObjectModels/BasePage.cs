@@ -7,23 +7,21 @@ using Ui.Tests.PageObjectModels.Components;
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class BasePage
+    public class ComponentBasePage
     {
+        protected string PageUrl = "https://velocityrisk.com/";
+
         protected readonly IWebDriver Driver;
 
-        [FindsBy(How = How.Id, Using = "site-navigation")]
         protected MenuBar MenuBar;
 
-        [FindsBy(How = How.ClassName, Using = "header_white")]
         protected Header Header;
 
-        [FindsBy(How = How.ClassName, Using = "bottom_part")]
         protected Footer Footer;
 
-        [FindsBy(How = How.Id, Using = "cookie-law-info-bar")]
         protected CookieInfo CookieInfo;
 
-        public BasePage(IWebDriver driver)
+        public ComponentBasePage(IWebDriver driver)
         {
             Driver = driver;
 
@@ -45,6 +43,11 @@ namespace Ui.Tests.PageObjectModels
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
 
             Thread.Sleep(2000);
+        }
+
+        public void NavigateTo()
+        {
+            Driver.Navigate().GoToUrl(PageUrl);
         }
     }
 }

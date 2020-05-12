@@ -2,10 +2,11 @@
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class AgentPage : BasePage
+    public class AgentPage : ComponentBasePage
     {
-        private const string PAGE_URL = "https://velocityrisk.com/for-agents/";
-
-        public AgentPage(IWebDriver driver) : base(driver) { }
+        public AgentPage(IWebDriver driver) : base(driver)
+        {
+            PageUrl = "https://velocityrisk.com/for-agents/";
+        }
     }
 }

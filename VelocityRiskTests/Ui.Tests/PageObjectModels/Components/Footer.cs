@@ -2,13 +2,8 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class Footer
+    public class Footer : ComponentBasePage
     {
-        protected readonly IWebDriver Driver;
-
-        public Footer(IWebDriver driver)
-        {
-            Driver = driver;
-        }
+        public Footer(IWebDriver driver) : base(driver) { }
     }
 }

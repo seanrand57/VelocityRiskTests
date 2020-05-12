@@ -2,15 +2,11 @@
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class ClaimsPage : BasePage
+    public class ClaimsPage : ComponentBasePage
     {
-        private const string PAGE_URL = "https://velocityrisk.com/claims/";
-
-        public ClaimsPage(IWebDriver driver) : base(driver) { }
-
-        public void NavigateTo()
+        public ClaimsPage(IWebDriver driver) : base(driver)
         {
-            Driver.Navigate().GoToUrl(PAGE_URL);
+            PageUrl = "https://velocityrisk.com/claims/";
         }
 
         public void ClickExpandPanel()

@@ -2,13 +2,8 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class MenuBar
+    public class MenuBar : ComponentBasePage
     {
-        protected readonly IWebDriver Driver;
-
-        public MenuBar(IWebDriver driver)
-        {
-            Driver = driver;
-        }
+        public MenuBar(IWebDriver driver) : base(driver) { }
     }
 }

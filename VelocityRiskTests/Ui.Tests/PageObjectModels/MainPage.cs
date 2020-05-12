@@ -2,25 +2,13 @@
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class MainPage
+    public class MainPage : ComponentBasePage
     {
-        private readonly IWebDriver _driver;
-
-        private const string PAGE_URL = "https://velocityrisk.com/";
-
-        public MainPage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
-
-        public void NavigateTo()
-        {
-            _driver.Navigate().GoToUrl(PAGE_URL);
-        }
+        public MainPage(IWebDriver driver) : base(driver) { }
 
         public IWebElement GetMenuLinkByItemName(string menuItemName)
         {
-            return _driver.FindElement(By.XPath("//a[contains(text(), '" + menuItemName + "')]"));
+            return Driver.FindElement(By.XPath("//a[contains(text(), '" + menuItemName + "')]"));
         }
 
         public bool IsMenuPresents(string menuItemName)

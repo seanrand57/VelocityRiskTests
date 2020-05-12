@@ -2,13 +2,8 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class Header
+    public class Header : ComponentBasePage
     {
-        protected readonly IWebDriver Driver;
-
-        public Header(IWebDriver driver)
-        {
-            Driver = driver;
-        }
+        public Header(IWebDriver driver) : base(driver) { }
     }
 }
