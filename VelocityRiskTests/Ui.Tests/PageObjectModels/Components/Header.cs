@@ -2,7 +2,7 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class Header : ComponentBasePage
+    public class Header : BaseComponent
     {
         public Header(IWebDriver driver) : base(driver) { }
     }

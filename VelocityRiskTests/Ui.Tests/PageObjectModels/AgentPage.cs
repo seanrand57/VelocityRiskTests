@@ -2,7 +2,7 @@
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class AgentPage : ComponentBasePage
+    public class AgentPage : BasePage
     {
         public AgentPage(IWebDriver driver) : base(driver)
         {

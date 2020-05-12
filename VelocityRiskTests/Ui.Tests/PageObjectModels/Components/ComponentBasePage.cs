@@ -2,11 +2,11 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class ComponentBasePage
+    public class BaseComponent
     {
         protected readonly IWebDriver Driver;
 
-        public ComponentBasePage(IWebDriver driver)
+        public BaseComponent(IWebDriver driver)
         {
             Driver = driver;
         }

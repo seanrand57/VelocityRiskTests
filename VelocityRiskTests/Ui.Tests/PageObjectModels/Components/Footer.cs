@@ -2,7 +2,7 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class Footer : ComponentBasePage
+    public class Footer : BaseComponent
     {
         public Footer(IWebDriver driver) : base(driver) { }
     }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using Ui.Tests.PageObjectModels.Components;
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class ComponentBasePage
+    public class BasePage
     {
         protected string PageUrl = "https://velocityrisk.com/";
 
@@ -21,7 +20,7 @@ namespace Ui.Tests.PageObjectModels
 
         protected CookieInfo CookieInfo;
 
-        public ComponentBasePage(IWebDriver driver)
+        public BasePage(IWebDriver driver)
         {
             Driver = driver;
 

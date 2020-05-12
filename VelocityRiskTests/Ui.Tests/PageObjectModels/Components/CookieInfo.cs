@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class CookieInfo : ComponentBasePage
+    public class CookieInfo : BaseComponent
     {
         [FindsBy(How = How.XPath, Using = "(//span a)[0]")]
         private IWebElement _disclaimer;
