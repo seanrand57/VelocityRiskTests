@@ -2,7 +2,6 @@
 using OpenQA.Selenium.Support.PageObjects;
 using System.Collections.Generic;
 using Ui.Tests.DataModels.Models;
-using Ui.Tests.DataModels.PageFragment;
 
 namespace Ui.Tests.DataModels.PageObjects
 {
@@ -24,14 +23,20 @@ namespace Ui.Tests.DataModels.PageObjects
         [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart commercialfirst_subpart']/div[@class='commercial_content']/a")]
         public IWebElement HomeownersLink { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart commercialfirst_subpart']/div[@class='commercial_content']/a")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart middle_subpart']/div[@class='commercial_content']/a")]
         public IWebElement RentalPropertiesLink { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart commercialfirst_subpart']/div[@class='commercial_content']/a")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart']/div[@class='commercial_content']/a")]
         public IWebElement CondominiumsLink { get; set; }
 
+        
+        [FindsBy(How = How.ClassName, Using = "faq_button open-modal-popup")]
         public IWebElement GetStartedButton { get; set; }
+
+        [FindsBy(How = How.ClassName, Using = "faq_button")]
         public IWebElement MakePaymentButton { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Manage Account")]
         public IWebElement ManageAccountButton { get; set; }
 
         [FindsBy(How = How.ClassName, Using = "expand_text")]
