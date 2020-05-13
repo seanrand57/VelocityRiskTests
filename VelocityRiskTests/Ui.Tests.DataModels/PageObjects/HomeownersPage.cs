@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using System.Collections.Generic;
-using Ui.Tests.DataModels.Models;
 
 namespace Ui.Tests.DataModels.PageObjects
 {
@@ -28,7 +26,6 @@ namespace Ui.Tests.DataModels.PageObjects
 
         [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart']/div[@class='commercial_content']/a")]
         public IWebElement CondominiumsLink { get; set; }
-
         
         [FindsBy(How = How.ClassName, Using = "faq_button open-modal-popup")]
         public IWebElement GetStartedButton { get; set; }
@@ -48,10 +45,31 @@ namespace Ui.Tests.DataModels.PageObjects
         [FindsBy(How = How.ClassName, Using = "modal_popupbutton open-modal-popup")]
         public IWebElement ContactUsButton { get; set; }
 
-        public List<EarthquakeItem> EarthquakePart { get; set; }
+        [FindsBy(How = How.LinkText, Using = "National Weather Service")]
+        public IWebElement NationalWeatherServiceLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "NOAA National Hurricane Center")]
+        public IWebElement NOAANationalHurricaneCenterLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "USGS World EQ Maps")]
+        public IWebElement USGSWorldEQMapsLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Northern California EQ Data")]
+        public IWebElement NothernCaliforniaEQDataLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Southern California EQ Data")]
+        public IWebElement SouthernCaliforniaEQDataLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Pacific Northwest EQ Data")]
+        public IWebElement PacificNorthwestEQDataLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "Intermountain West EQ Data")]
+        public IWebElement IntermountainWestEQDataLink { get; set; }
+
+        [FindsBy(How = How.LinkText, Using = "FEMA Flood Maps")]
+        public IWebElement FEMAFloodMapsLink { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//p[@class='contact_title']/a")]
         public IWebElement ReportClaimLink { get; set; }
-
     }
 }
