@@ -17,38 +17,38 @@ namespace Ui.Tests.PageObjectModels
         public IWebElement LogInButton { get; set; }
 
 
-        [FindsBy(How = How.LinkText, Using = "Velocity Flex Home")]
+        [FindsBy(How = How.XPath, Using = "//p//a[contains(text(), 'Velocity Flex Home')]")]
         public IWebElement VelocityFlexHomeLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Connecticut")]
+        [FindsBy(How = How.XPath, Using = "//li//a[contains(text(), 'Connecticut')]")]
         public IWebElement ConnecticutLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Florida")]
+        [FindsBy(How = How.XPath, Using = "//li//a[contains(text(), 'Florida')]")]
         public IWebElement FloridaLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "New Jersey")]
+        [FindsBy(How = How.XPath, Using = "//li//a[contains(text(), 'New Jersey')]")]
         public IWebElement NewJerseyLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "New York")]
+        [FindsBy(How = How.XPath, Using = "//li//a[contains(text(), 'New York')]")]
         public IWebElement NewYorkLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "North Carolina")]
+        [FindsBy(How = How.XPath, Using = "//li//a[contains(text(), 'North Carolina')]")]
         public IWebElement NorthCarolinaLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "Texas")]
+        [FindsBy(How = How.XPath, Using = "//li//a[contains(text(), 'Texas')]")]
         public IWebElement TexasLink { get; set; }
 
-        [FindsBy(How = How.LinkText, Using = "here")]
+        [FindsBy(How = How.XPath, Using = "//p//a[contains(text(), 'here')]")]
         public IWebElement SmallCommercialPortalLink { get; set; }
 
 
-        [FindsBy(How = How.CssSelector, Using = "a[href='https://velocityrisk.com/wp-content/uploads/2018/08/Large-Commercial-Producer-Application.pdf']")]
+        [FindsBy(How = How.XPath, Using = "//div[@Class='cta_part']//span[contains(text(), 'Large Commercial')]")]
         public IWebElement LargeCommercialButton { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(), 'Small Commercial')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@Class='cta_part']//span[contains(text(), 'Small Commercial')]")]
         public IWebElement SmallCommercialButton { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(), 'Personal Lines')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@Class='cta_part']//span[contains(text(), 'Personal Lines')]")]
         public IWebElement PersonalLinesButton { get; set; }
     }
 }
