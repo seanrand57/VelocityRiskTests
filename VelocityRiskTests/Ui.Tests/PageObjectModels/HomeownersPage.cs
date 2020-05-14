@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
-namespace Ui.Tests.DataModels.PageObjects
+namespace Ui.Tests.PageObjectModels
 {
     public class HomeownersPage
     {
@@ -49,25 +49,25 @@ namespace Ui.Tests.DataModels.PageObjects
         public IWebElement NationalWeatherServiceLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "NOAA National Hurricane Center")]
-        public IWebElement NOAANationalHurricaneCenterLink { get; set; }
+        public IWebElement NoaaNationalHurricaneCenterLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "USGS World EQ Maps")]
-        public IWebElement USGSWorldEQMapsLink { get; set; }
+        public IWebElement UsgsWorldEqMapsLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "Northern California EQ Data")]
-        public IWebElement NothernCaliforniaEQDataLink { get; set; }
+        public IWebElement NothernCaliforniaEqDataLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "Southern California EQ Data")]
-        public IWebElement SouthernCaliforniaEQDataLink { get; set; }
+        public IWebElement SouthernCaliforniaEqDataLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "Pacific Northwest EQ Data")]
-        public IWebElement PacificNorthwestEQDataLink { get; set; }
+        public IWebElement PacificNorthwestEqDataLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "Intermountain West EQ Data")]
-        public IWebElement IntermountainWestEQDataLink { get; set; }
+        public IWebElement IntermountainWestEqDataLink { get; set; }
 
         [FindsBy(How = How.LinkText, Using = "FEMA Flood Maps")]
-        public IWebElement FEMAFloodMapsLink { get; set; }
+        public IWebElement FemaFloodMapsLink { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//p[@class='contact_title']/a")]
         public IWebElement ReportClaimLink { get; set; }
