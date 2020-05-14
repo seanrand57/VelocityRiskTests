@@ -1,48 +1,35 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class MenuBar : BaseComponent
+    public class MenuItem
     {
-        // Agents
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=1]")]
-        private IWebElement _agents;
-
-        // Homeowners
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=2]")]
-        private IWebElement _homeowners;
-
-        // Business
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=3]/ul/li[position()=1]")]
-        private IWebElement _largeCommercial;
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=3]/ul/li[position()=2]")]
-        private IWebElement _smallCommercial;
-
-        // Customers
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=4]/ul/li[position()=1]")]
-        private IWebElement _claims;
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=4]/ul/li[position()=2]/ul/li[position()=1]")]
-        private IWebElement _manageYourPolicy;
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=4]/ul/li[position()=2]/ul/li[position()=2]")]
-        private IWebElement _makePayment;
-
-        // Notes and News
-        [FindsBy(How = How.XPath, Using = "//ul[@id='top-menu']/li[position()=5]")]
-        private IWebElement _notesAndNews;
-
-        public MenuBar(IWebDriver driver) : base(driver) { }
-
-        public IWebElement GetMenuLinkByItemName(string itemName)
+        private MenuItem(string value)
         {
-            return Driver.FindElement(By.XPath("//a[contains(text(), '" + itemName + "')]"));
+            Value = value;
         }
 
-        public bool IsMenuItemPresented(string itemName)
+        public string Value { get; set; }
+
+        public static MenuItem Agents => new MenuItem("Agents");
+        public static MenuItem Homeowners => new MenuItem("Homeowners");
+        public static MenuItem BusinessLargeCommercial => new MenuItem("Large Commercial");
+        public static MenuItem BusinessSmallCommercial => new MenuItem("Small Commercial");
+        public static MenuItem CustomersClaims => new MenuItem("Claims");
+        public static MenuItem CustomersManageYourPolicy => new MenuItem("Manage Your Policy");
+        public static MenuItem CustomersMakePayment=> new MenuItem("Make a Payment");
+        public static MenuItem NotesAndNews=> new MenuItem("Notes and News");
+    }
+
+    public class MenuBar : BaseComponent
+    {
+        public MenuBar(IWebDriver driver) : base(driver) { }
+
+        public bool IsMenuItemPresented(MenuItem item)
         {
             try
             {
-                GetMenuLinkByItemName(itemName);
+                GetMenuLinkByItemName(item);
                 return true;
             }
             catch
@@ -51,9 +38,30 @@ namespace Ui.Tests.PageObjectModels.Components
             }
         }
 
-        public void ClickMenuItemByName(string itemName)
+        public void ClickAgentsMenuItem() => ClickMenuItemByName(MenuItem.Agents);
+
+        public void ClickHomeownersMenuItem() => ClickMenuItemByName(MenuItem.Homeowners);
+
+        public void ClickBusinessLargeCommercialsMenuItem() => ClickMenuItemByName(MenuItem.BusinessLargeCommercial);
+
+        public void ClickBusinessSmallCommercialsMenuItem() => ClickMenuItemByName(MenuItem.BusinessSmallCommercial);
+
+        public void ClickCustomersClaimsMenuItem() => ClickMenuItemByName(MenuItem.CustomersClaims);
+
+        public void ClickCustomersManageYourPolicyMenuItem() => ClickMenuItemByName(MenuItem.CustomersManageYourPolicy);
+
+        public void ClickCustomersMakePaymentMenuItem() => ClickMenuItemByName(MenuItem.CustomersMakePayment);
+
+        public void ClickNotesAndNewsMenuItem() => ClickMenuItemByName(MenuItem.NotesAndNews);
+
+        private IWebElement GetMenuLinkByItemName(MenuItem item)
         {
-            var menuItem = GetMenuLinkByItemName(itemName);
+            return Driver.FindElement(By.XPath($"/li/a[contains(text(), '{item.Value}')]"));
+        }
+
+        private void ClickMenuItemByName(MenuItem item)
+        {
+            var menuItem = GetMenuLinkByItemName(item);
 
             var parentElements = menuItem.FindElements(By.XPath("ancestor::ul[@class = 'sub-menu']"));
             if (parentElements.Count > 0)
