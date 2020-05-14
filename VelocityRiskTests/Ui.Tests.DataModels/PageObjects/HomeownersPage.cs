@@ -18,14 +18,14 @@ namespace Ui.Tests.DataModels.PageObjects
             _driver.Navigate().GoToUrl(pageUrl);
         }
         
-        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart commercialfirst_subpart']/div[@class='commercial_content']/a")]
-        public IWebElement HomeownersLink { get; set; }
+        [FindsBy(How = How.XPath, Using = "//h3[text() ='Homeowners']/following-sibling::a")]
+        public IWebElement HomeownersMoreInfoLink { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart middle_subpart']/div[@class='commercial_content']/a")]
-        public IWebElement RentalPropertiesLink { get; set; }
+        [FindsBy(How = How.XPath, Using = "//h3[text() ='Rental Properties']/following-sibling::a")]
+        public IWebElement RentalPropertiesMoreInfoLink { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='commercial_subpart']/div[@class='commercial_content']/a")]
-        public IWebElement CondominiumsLink { get; set; }
+        [FindsBy(How = How.XPath, Using = "//h3[text() ='Condominiums']/following-sibling::a")]
+        public IWebElement CondominiumsMoreInfoLink { get; set; }
         
         [FindsBy(How = How.ClassName, Using = "faq_button open-modal-popup")]
         public IWebElement GetStartedButton { get; set; }
