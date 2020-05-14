@@ -6,10 +6,10 @@ namespace Ui.Tests.PageObjectModels
     public class MakePaymentPage : BasePage
     {
         [FindsBy(How = How.XPath, Using = "//input[@value='Pay with Check']")]
-        private IWebElement _payWithCheck;
+        public IWebElement PayWithCheck;
 
         [FindsBy(How = How.XPath, Using = "//input[@value='Pay with Credit Card']")]
-        private IWebElement _payWithCreditCard;
+        public IWebElement PayWithCreditCard;
 
         public MakePaymentPage(IWebDriver driver) : base(driver)
         {
