@@ -2,30 +2,30 @@
 
 namespace Ui.Tests.PageObjectModels.Components
 {
-    public class MenuItem
+    public class MenuItemType
     {
-        private MenuItem(string value)
+        private MenuItemType(string value)
         {
             Value = value;
         }
 
         public string Value { get; set; }
 
-        public static MenuItem Agents => new MenuItem("Agents");
-        public static MenuItem Homeowners => new MenuItem("Homeowners");
-        public static MenuItem BusinessLargeCommercial => new MenuItem("Large Commercial");
-        public static MenuItem BusinessSmallCommercial => new MenuItem("Small Commercial");
-        public static MenuItem CustomersClaims => new MenuItem("Claims");
-        public static MenuItem CustomersManageYourPolicy => new MenuItem("Manage Your Policy");
-        public static MenuItem CustomersMakePayment=> new MenuItem("Make a Payment");
-        public static MenuItem NotesAndNews=> new MenuItem("Notes and News");
+        public static MenuItemType Agents => new MenuItemType("Agents");
+        public static MenuItemType Homeowners => new MenuItemType("Homeowners");
+        public static MenuItemType BusinessLargeCommercial => new MenuItemType("Large Commercial");
+        public static MenuItemType BusinessSmallCommercial => new MenuItemType("Small Commercial");
+        public static MenuItemType CustomersClaims => new MenuItemType("Claims");
+        public static MenuItemType CustomersManageYourPolicy => new MenuItemType("Manage Your Policy");
+        public static MenuItemType CustomersMakePayment => new MenuItemType("Make a Payment");
+        public static MenuItemType NotesAndNews => new MenuItemType("Notes and News");
     }
 
     public class MenuBar : BaseComponent
     {
         public MenuBar(IWebDriver driver) : base(driver) { }
 
-        public bool IsMenuItemPresented(MenuItem item)
+        public bool IsMenuItemPresented(MenuItemType item)
         {
             try
             {
@@ -38,28 +38,28 @@ namespace Ui.Tests.PageObjectModels.Components
             }
         }
 
-        public void ClickAgentsMenuItem() => ClickMenuItemByName(MenuItem.Agents);
+        public void ClickAgentsMenuItem() => ClickMenuItemByName(MenuItemType.Agents);
 
-        public void ClickHomeownersMenuItem() => ClickMenuItemByName(MenuItem.Homeowners);
+        public void ClickHomeownersMenuItem() => ClickMenuItemByName(MenuItemType.Homeowners);
 
-        public void ClickBusinessLargeCommercialsMenuItem() => ClickMenuItemByName(MenuItem.BusinessLargeCommercial);
+        public void ClickBusinessLargeCommercialsMenuItem() => ClickMenuItemByName(MenuItemType.BusinessLargeCommercial);
 
-        public void ClickBusinessSmallCommercialsMenuItem() => ClickMenuItemByName(MenuItem.BusinessSmallCommercial);
+        public void ClickBusinessSmallCommercialsMenuItem() => ClickMenuItemByName(MenuItemType.BusinessSmallCommercial);
 
-        public void ClickCustomersClaimsMenuItem() => ClickMenuItemByName(MenuItem.CustomersClaims);
+        public void ClickCustomersClaimsMenuItem() => ClickMenuItemByName(MenuItemType.CustomersClaims);
 
-        public void ClickCustomersManageYourPolicyMenuItem() => ClickMenuItemByName(MenuItem.CustomersManageYourPolicy);
+        public void ClickCustomersManageYourPolicyMenuItem() => ClickMenuItemByName(MenuItemType.CustomersManageYourPolicy);
 
-        public void ClickCustomersMakePaymentMenuItem() => ClickMenuItemByName(MenuItem.CustomersMakePayment);
+        public void ClickCustomersMakePaymentMenuItem() => ClickMenuItemByName(MenuItemType.CustomersMakePayment);
 
-        public void ClickNotesAndNewsMenuItem() => ClickMenuItemByName(MenuItem.NotesAndNews);
+        public void ClickNotesAndNewsMenuItem() => ClickMenuItemByName(MenuItemType.NotesAndNews);
 
-        private IWebElement GetMenuLinkByItemName(MenuItem item)
+        private IWebElement GetMenuLinkByItemName(MenuItemType item)
         {
             return Driver.FindElement(By.XPath($"/li/a[contains(text(), '{item.Value}')]"));
         }
 
-        private void ClickMenuItemByName(MenuItem item)
+        private void ClickMenuItemByName(MenuItemType item)
         {
             var menuItem = GetMenuLinkByItemName(item);
 

@@ -11,7 +11,7 @@ namespace Ui.Tests.PageObjectModels
             return Driver.FindElement(By.XPath("//a[contains(text(), '" + menuItemName + "')]"));
         }
 
-        public bool IsMenuPresents(string menuItemName)
+        public bool MenuPresents(string menuItemName)
         {
             try
             {
