@@ -5,6 +5,8 @@ namespace Ui.Tests
 {
     public class DataContext
     {
+        public static string BaseUrl => "https://velocityrisk.com/";
+
         public static List<MenuItem> LoadMenuItems()
         {
             return

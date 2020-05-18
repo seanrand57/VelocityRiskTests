@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
@@ -46,6 +48,40 @@ namespace Ui.Tests
 
             // collapse panel
             claimsPage.ClickPaneITitleByName(panelItem.Title);
+        }
+
+        [Test]
+        public void TestCase_10_Customers_ManageOurPolicy()
+        {
+            // 1. Click "Customes -> Manage ur Policy" menu item
+            NavigateToCorporateWebsiteBaseUrl();
+            var customersMenuItemElementLocator = By.XPath("//a[contains(text(), 'Customers')]");
+            var customersMenuItemElement = GetElemetByLocator(customersMenuItemElementLocator);
+            WaitUntilElementIsVisible(customersMenuItemElementLocator, 3);
+            MouseHoverToElement(customersMenuItemElement);
+            var currentTabsCount = Driver.WindowHandles.Count;
+            ClickOnElementByLocator(By.XPath("//a[contains(text(), 'Manage Your Policy')]"));
+            SwitchToNewOpenedTab();
+
+            // 2. Verify new tab is opened
+            IsLinkOpenedOnNewTab(currentTabsCount).ShouldBeTrue();
+
+            // 3. Verify new tab is /Login.asp page
+            Driver.Url.ShouldContain("://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f");
+
+            // 4. Verify new tab is under Https protocol
+            Driver.Url.Split(':')[0].ShouldBe("https");
+
+            // 5. Verify new tab page title and header (Customer Portal)
+            Driver.Title.ShouldBe("Login Page");
+            GetElemetByLocator(By.XPath("//header")).Text.ShouldContain("Customer Portal");
+
+            BaseTearDown();
+        }
+
+        private void NavigateToCorporateWebsiteBaseUrl()
+        {
+            Driver.Navigate().GoToUrl(DataContext.BaseUrl);
         }
 
         // some links are opened in new tabs, we need to select a tab and get the url
