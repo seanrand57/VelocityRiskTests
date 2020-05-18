@@ -17,6 +17,8 @@ namespace Ui.Tests
         public void MenuItemsAreCorrectTest(MenuItem menuItem)
         {
             var mainPage = new MainPage(Driver);
+            mainPage.NavigateTo();
+
             var isMenuElement = mainPage.MenuPresents(menuItem.Name);
             isMenuElement.ShouldBeTrue($"It was not possible to find menu item : {menuItem.Name} on UI");
 
@@ -31,6 +33,8 @@ namespace Ui.Tests
         public void PanelItemsAreCorrectTest(PanelItem panelItem)
         {
             var claimsPage = new ClaimsPage(Driver);
+            claimsPage.NavigateTo();
+
             var isPanelElement = claimsPage.IsPanelElementPresent(panelItem.Title);
             isPanelElement.ShouldBeTrue($"It was not possible to find panel item : {panelItem.Title} on UI");
 

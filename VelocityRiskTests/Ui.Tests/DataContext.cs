@@ -17,7 +17,7 @@ namespace Ui.Tests
                     new MenuItem {Id = 5, Name = "Claims", Link = "https://velocityrisk.com/claims/"},
                     new MenuItem {Id = 6, Name = "Manage Your Policy", Link = "https://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f"},
                     new MenuItem {Id = 7, Name = "Make a Payment", Link = "https://portal.icheckgateway.com/Velocity/"},
-                    new MenuItem {Id = 8, Name = "Notes and news", Link = "https://velocityrisk.com/news-and-notes/"}
+                    new MenuItem {Id = 8, Name = "Notes and News", Link = "https://velocityrisk.com/news-and-notes/"}
                 };
         }
 
@@ -35,9 +35,9 @@ File a claim online using the appropriate option below:
 
 For homeowners, click here and use client access code vel6475.
 
-For small commercial, click here and use client access code vel6942 or email your claim to smallbusiness.claims@velocityrisk.com.
+For small commercial, click here and use client access code vel6942 or email your claim to smallbusiness.claims@velocityrisk.com.
 
-For large commercial, click here and use client access code vel6459 or email your claim to business.claims @velocityrisk.com."},
+For large commercial, click here and use client access code vel6459 or email your claim to business.claims@velocityrisk.com."},
                 new PanelItem {Id = 2, Title = "Questions on an existing claim?", Content =
 @"For questions on existing claims, call 844-878-2567.
 
@@ -59,7 +59,7 @@ Clarify the next step in the process
 
 2. Evaluation
 
-If an inspection of your property is needed, the claim professional will meet with you on location.They will:
+If an inspection of your property is needed, the claim professional will meet with you on location. They will:
 
 Discuss your damages
 Gather all the facts about your loss
