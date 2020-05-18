@@ -5,11 +5,9 @@ namespace Ui.Tests.PageObjectModels
 {
     public class MakePaymentPage : BasePage
     {
-        [FindsBy(How = How.XPath, Using = "//input[@value='Pay with Check']")]
-        public IWebElement PayWithCheck;
+        public IWebElement PayWithCheck => Driver.FindElement(By.XPath("//input[@value='Pay with Check']"));
 
-        [FindsBy(How = How.XPath, Using = "//input[@value='Pay with Credit Card']")]
-        public IWebElement PayWithCreditCard;
+        public IWebElement PayWithCreditCard => Driver.FindElement(By.XPath("//input[@value='Pay with Credit Card']"));
 
         public MakePaymentPage(IWebDriver driver) : base(driver)
         {

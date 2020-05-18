@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
+using Ui.Tests.Steps;
 
 namespace Ui.Tests
 {
@@ -53,35 +54,28 @@ namespace Ui.Tests
         [Test]
         public void TestCase_10_Customers_ManageOurPolicy()
         {
-            // 1. Click "Customes -> Manage ur Policy" menu item
-            NavigateToCorporateWebsiteBaseUrl();
-            var customersMenuItemElementLocator = By.XPath("//a[contains(text(), 'Customers')]");
-            var customersMenuItemElement = GetElemetByLocator(customersMenuItemElementLocator);
-            WaitUntilElementIsVisible(customersMenuItemElementLocator, 3);
-            MouseHoverToElement(customersMenuItemElement);
-            var currentTabsCount = Driver.WindowHandles.Count;
-            ClickOnElementByLocator(By.XPath("//a[contains(text(), 'Manage Your Policy')]"));
-            SwitchToNewOpenedTab();
+            var steps = new ManageYourPolicySteps(Driver);
 
-            // 2. Verify new tab is opened
-            IsLinkOpenedOnNewTab(currentTabsCount).ShouldBeTrue();
+            steps.GoToBasePage();
 
-            // 3. Verify new tab is /Login.asp page
-            Driver.Url.ShouldContain("://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f");
-
-            // 4. Verify new tab is under Https protocol
-            Driver.Url.Split(':')[0].ShouldBe("https");
-
-            // 5. Verify new tab page title and header (Customer Portal)
-            Driver.Title.ShouldBe("Login Page");
-            GetElemetByLocator(By.XPath("//header")).Text.ShouldContain("Customer Portal");
-
-            BaseTearDown();
+            steps.ClickCustomesManageYourPolicyMenuItem();
+            steps.VerifyNewTabIsOpened();
+            steps.VerifyNewTabIsLoginPage();
+            steps.VerifyNewTabIsUnderHttpsProtocol();
+            steps.VerifyNewTabPageTitleAndHeader();
         }
 
-        private void NavigateToCorporateWebsiteBaseUrl()
+        [Test]
+        public void TestCase_11_Customers_MakeAPayment()
         {
-            Driver.Navigate().GoToUrl(DataContext.BaseUrl);
+            var steps = new MakeAPaymentSteps(Driver);
+
+            steps.GoToBasePage();
+
+            steps.ClickCustomesMakeAPaymentMenuItem();
+            steps.VerifyNewTabIsOpened();
+            steps.VerifyNewTabIsUnderHttpsProtocol();
+            steps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }
 
         // some links are opened in new tabs, we need to select a tab and get the url
