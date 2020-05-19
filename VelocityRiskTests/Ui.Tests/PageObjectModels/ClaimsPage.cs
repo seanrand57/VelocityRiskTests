@@ -9,6 +9,7 @@ namespace Ui.Tests.PageObjectModels
             PageUrl = "https://velocityrisk.com/claims/";
         }
 
+        // todo: move to appropriate Steps method
         public void ClickExpandPanel()
         {
             var expandAllButton = Driver.FindElement(By.ClassName("expand_all_btn"));
@@ -16,6 +17,7 @@ namespace Ui.Tests.PageObjectModels
             expandAllButton.Click();
         }
 
+        // todo: move to appropriate Steps method
         public void ClickPaneITitleByName(string panelItemName)
         {
             var spanElement = GetPanelLinkByItemName(panelItemName);
@@ -28,11 +30,13 @@ namespace Ui.Tests.PageObjectModels
             aElement.Click();
         }
 
+        // todo: move to appropriate Steps method
         public IWebElement GetPanelLinkByItemName(string panelItemTitle)
         {
             return Driver.FindElement(By.XPath("//span[contains(text(), '" + panelItemTitle + "')]"));
         }
 
+        // todo: move to appropriate Steps method
         public bool IsPanelElementPresent(string panelItemTitle)
         {
             try
@@ -45,6 +49,7 @@ namespace Ui.Tests.PageObjectModels
             }
         }
 
+        // todo: move to appropriate Steps method
         public string GetPanelContent(string panelItemTitle)
         {
             var panelItem = GetPanelLinkByItemName(panelItemTitle);

@@ -1,41 +1,29 @@
-﻿using System;
-using System.Threading;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using Ui.Tests.PageObjectModels.Components;
+using System;
+using System.Threading;
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class BasePage
+    public abstract class BasePage
     {
-        protected string PageUrl = "https://velocityrisk.com/";
+        protected string PageUrl;
 
         protected readonly IWebDriver Driver;
-
-        protected MenuBar MenuBar;
-
-        protected Header Header;
-
-        protected Footer Footer;
-
-        protected CookieInfo CookieInfo;
 
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
-
-            MenuBar = new MenuBar(driver);
-            Header = new Header(driver);
-            Footer = new Footer(driver);
-            CookieInfo = new CookieInfo(driver);
         }
 
+        // todo: use the same method from BaseSteps class
         public void WaitForClickable(IWebElement webElement, int timeOut = 20)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
             wait.Until(ExpectedConditions.ElementToBeClickable(webElement));
         }
 
+        // todo: move to BaseSteps class
         public void ScrollToElement(IWebElement element)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
@@ -44,6 +32,7 @@ namespace Ui.Tests.PageObjectModels
             Thread.Sleep(2000);
         }
 
+        // todo: move to BaseSteps class
         public void NavigateTo()
         {
             Driver.Navigate().GoToUrl(PageUrl);

@@ -15,17 +15,35 @@ namespace Ui.Tests
 
         public static IEnumerable<PanelItem> PanelInfoExpected { get; } = DataContext.LoadPanelItems();
 
+        private BaseSteps _baseSteps;
+        private ManageYourPolicySteps _manageYourPolicySteps;
+        private MakeAPaymentSteps _makeAPaymentSteps;
+
+        [OneTimeSetUp]
+        public void Initialize()
+        {
+            _baseSteps = new BaseSteps(Driver);
+            _makeAPaymentSteps = new MakeAPaymentSteps(Driver);
+            _manageYourPolicySteps = new ManageYourPolicySteps(Driver);
+        }
+
+        [SetUp]
+        public void BeforEachTest()
+        {
+            _baseSteps.GoToHomePage();
+        }
+
         [Test]
         [TestCaseSource("MenuInfoExpected")]
         public void MenuItemsAreCorrectTest(MenuItem menuItem)
         {
-            var mainPage = new MainPage(Driver);
-            mainPage.NavigateTo();
+            var homePage = new HomePage(Driver);
+            homePage.NavigateTo();
 
-            var isMenuElement = mainPage.MenuPresents(menuItem.Name);
+            var isMenuElement = homePage.MenuPresents(menuItem.Name);
             isMenuElement.ShouldBeTrue($"It was not possible to find menu item : {menuItem.Name} on UI");
 
-            mainPage.ClickMenuItemByName(menuItem.Name);
+            homePage.ClickMenuItemByName(menuItem.Name);
 
             var actualUrl = GetUrl();
             actualUrl.ShouldBe(menuItem.Link, $"It was not possible to find expected link for menu item : {menuItem.Name} on UI");
@@ -52,30 +70,23 @@ namespace Ui.Tests
         }
 
         [Test]
-        public void TestCase_10_Customers_ManageOurPolicy()
+        public void TestCase_10_Customers_ManageYourPolicy()
         {
-            var steps = new ManageYourPolicySteps(Driver);
-
-            steps.GoToBasePage();
-
-            steps.ClickCustomesManageYourPolicyMenuItem();
-            steps.VerifyNewTabIsOpened();
-            steps.VerifyNewTabIsLoginPage();
-            steps.VerifyNewTabIsUnderHttpsProtocol();
-            steps.VerifyNewTabPageTitleAndHeader();
+            _manageYourPolicySteps.ClickCustomesManageYourPolicyMenuItem();
+            _manageYourPolicySteps.VerifyNewTabIsOpened();
+            _manageYourPolicySteps.VerifyNewTabIsLoginPage("://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f");
+            _manageYourPolicySteps.VerifyNewTabIsUnderHttpsProtocol();
+            _manageYourPolicySteps.VerifyNewTabPageTitle("Login Page");
+            _manageYourPolicySteps.VerifyNewTabPageHeader("Customer Portal");
         }
 
         [Test]
         public void TestCase_11_Customers_MakeAPayment()
         {
-            var steps = new MakeAPaymentSteps(Driver);
-
-            steps.GoToBasePage();
-
-            steps.ClickCustomesMakeAPaymentMenuItem();
-            steps.VerifyNewTabIsOpened();
-            steps.VerifyNewTabIsUnderHttpsProtocol();
-            steps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
+            _makeAPaymentSteps.ClickCustomesMakeAPaymentMenuItem();
+            _makeAPaymentSteps.VerifyNewTabIsOpened();
+            _makeAPaymentSteps.VerifyNewTabIsUnderHttpsProtocol();
+            _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }
 
         // some links are opened in new tabs, we need to select a tab and get the url

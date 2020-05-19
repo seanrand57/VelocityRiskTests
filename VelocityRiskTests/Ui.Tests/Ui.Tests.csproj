@@ -29,4 +29,19 @@
     <PackageReference Include="SpecFlow" Version="3.3.16-beta" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\ShouldlyCustomMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShouldlyCustomMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ShouldlyCustomMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShouldlyCustomMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
