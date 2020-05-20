@@ -136,7 +136,10 @@ namespace Ui.Tests
         [Test]
         public void Test_Case_5_HomeownersLinksAreCorrectTest()
         {
-            _mainPage.ClickMenuItemByName("Claims");
+            var homePage = new HomePage(Driver);
+            homePage.NavigateTo();
+
+            homePage.ClickMenuItemByName("Claims");
             var claimsPage = new ClaimsPage(Driver);
             claimsPage.ClickPaneITitleByName("File a claim");            
 
@@ -183,7 +186,9 @@ namespace Ui.Tests
         public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest()
         {
             //Act
-             _mainPage.ClickOnWhoWeAreMenuItemLink();
+            var homePage = new HomePage(Driver);
+            homePage.NavigateTo();
+            homePage.ClickOnWhoWeAreMenuItemLink();
 
             var whoWeArePage = new WhoWeArePage(Driver);
 
@@ -217,11 +222,14 @@ namespace Ui.Tests
         [Test]
         public void Test_Case_9_VelocityLogoImageAndNavBarAreCorrect()
         {
-            var velocityLogoImage = _mainPage.GetLogo();
+            var homePage = new HomePage(Driver);
+            homePage.NavigateTo();
+
+            var velocityLogoImage = homePage.GetLogo();
             var isLogoPresent = velocityLogoImage.Displayed;
             isLogoPresent.ShouldBeTrue();
 
-            var navBar = _mainPage.GetNavBar();
+            var navBar = homePage.GetNavBar();
             var navBarColor = navBar.GetCssValue("background-color");
 
             navBarColor.ShouldBe("rgba(245, 127, 38, 1)");
