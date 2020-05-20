@@ -15,12 +15,6 @@ namespace Ui.Tests.Steps
         {
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersMakePaymentMenuItem();
-            SwitchToLastOpenedTab();
-        }
-
-        public void VerifyNewTabIsLoginPage(string expectedUrl)
-        {
-            Driver.Url.ShouldContain(expectedUrl);
         }
 
         public void VerifyCustomerHasOptionToPayByCreditCardOrCheck()

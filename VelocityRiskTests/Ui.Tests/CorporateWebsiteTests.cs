@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
@@ -19,6 +17,7 @@ namespace Ui.Tests
         private BaseSteps _baseSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;
         private MakeAPaymentSteps _makeAPaymentSteps;
+        private int _tabsCountBeforeEachTest;
 
         [OneTimeSetUp]
         public void Initialize()
@@ -26,6 +25,7 @@ namespace Ui.Tests
             _baseSteps = new BaseSteps(Driver);
             _makeAPaymentSteps = new MakeAPaymentSteps(Driver);
             _manageYourPolicySteps = new ManageYourPolicySteps(Driver);
+            _tabsCountBeforeEachTest = 1;
         }
 
         [SetUp]
@@ -79,10 +79,10 @@ namespace Ui.Tests
         [Test]
         public void TestCase_10_Customers_ManageYourPolicy()
         {
-            int currentTabsCount = _baseSteps.GetCurrentTabsCount();
             _manageYourPolicySteps.ClickCustomesManageYourPolicyMenuItem();
-            _makeAPaymentSteps.VerifyNewTabIsOpened(currentTabsCount);
-            _manageYourPolicySteps.VerifyNewTabIsLoginPage(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
+            _manageYourPolicySteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
+            _manageYourPolicySteps.SwitchToLastOpenedTab();
+            _manageYourPolicySteps.VerifyPageUrlWithoutProtocol(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
             _manageYourPolicySteps.VerifyProtocolIsHttps();
             _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
             _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
@@ -91,9 +91,9 @@ namespace Ui.Tests
         [Test]
         public void TestCase_11_Customers_MakeAPayment()
         {
-            int currentTabsCount = _baseSteps.GetCurrentTabsCount();
             _makeAPaymentSteps.ClickCustomesMakeAPaymentMenuItem();
-            _makeAPaymentSteps.VerifyNewTabIsOpened(currentTabsCount);
+            _makeAPaymentSteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
+            _manageYourPolicySteps.SwitchToLastOpenedTab();
             _makeAPaymentSteps.VerifyProtocolIsHttps();
             _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }

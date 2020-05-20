@@ -30,6 +30,13 @@ namespace Ui.Tests.Steps
             homePage.NavigateTo();
         }
 
+        public void VerifyPageUrlWithoutProtocol(string urlWitoutProtocol)
+        {
+            Driver.Url.ShouldContain(urlWitoutProtocol,
+                $"Url of the current tab (without protocol part) " +
+                $"should contain text '{urlWitoutProtocol}'");
+        }
+
         public void VerifyProtocolIsHttps()
         {
             Driver.Url.Split(':')[0].ShouldBe("https",
@@ -65,23 +72,23 @@ namespace Ui.Tests.Steps
             });
         }
 
-        protected void MouseHoverToElement(IWebElement element)
+        public void MouseHoverToElement(IWebElement element)
         {
             Actions action = new Actions(Driver);
             action.MoveToElement(element).Perform();
         }
 
-        protected void SwitchToLastOpenedTab()
+        public void SwitchToLastOpenedTab()
         {
             SwitchToTabByItsName(Driver.WindowHandles.Last());
         }
 
-        protected void SwitchBackToDefaultTab()
+        public void SwitchBackToDefaultTab()
         {
             SwitchToTabByItsName(Driver.WindowHandles.First());
         }
 
-        protected void SwitchToTabByItsName(string tabName)
+        public void SwitchToTabByItsName(string tabName)
         {
             Driver.SwitchTo().Window(tabName);
         }
@@ -98,7 +105,7 @@ namespace Ui.Tests.Steps
             }
         }
 
-        protected IWebElement WaitForClickable(IWebElement webElement, int timeOut = 20)
+        public IWebElement WaitForClickable(IWebElement webElement, int timeOut = 20)
         {
             var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
             var element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(webElement));

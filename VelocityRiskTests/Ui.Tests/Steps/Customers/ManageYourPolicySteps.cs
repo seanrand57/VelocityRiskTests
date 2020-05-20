@@ -18,13 +18,6 @@ namespace Ui.Tests.Steps
         {
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersManageYourPolicyMenuItem();
-            SwitchToLastOpenedTab();
-        }
-
-        public void VerifyNewTabIsLoginPage(string expectedUrl)
-        {
-            Driver.Url.ShouldContain(expectedUrl,
-                $"Url of the current tab should contain text '{expectedUrl}'");
         }
 
         public void VerifyNewTabPageTitle(string expectedText)
