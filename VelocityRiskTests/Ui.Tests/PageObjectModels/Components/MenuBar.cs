@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace Ui.Tests.PageObjectModels.Components
 {
@@ -19,6 +20,8 @@ namespace Ui.Tests.PageObjectModels.Components
         public static MenuItemType CustomersManageYourPolicy => new MenuItemType("Manage Your Policy");
         public static MenuItemType CustomersMakePayment => new MenuItemType("Make a Payment");
         public static MenuItemType NotesAndNews => new MenuItemType("Notes and News");
+
+        public static MenuItemType Customers => new MenuItemType("Customers");
     }
 
     public class MenuBar : BaseComponent
@@ -48,15 +51,25 @@ namespace Ui.Tests.PageObjectModels.Components
 
         public void ClickCustomersClaimsMenuItem() => ClickMenuItemByName(MenuItemType.CustomersClaims);
 
-        public void ClickCustomersManageYourPolicyMenuItem() => ClickMenuItemByName(MenuItemType.CustomersManageYourPolicy);
+        public void ClickCustomersManageYourPolicyMenuItem()
+        {
+            ClickMenuItemByName(MenuItemType.CustomersManageYourPolicy);
+        }
 
         public void ClickCustomersMakePaymentMenuItem() => ClickMenuItemByName(MenuItemType.CustomersMakePayment);
 
         public void ClickNotesAndNewsMenuItem() => ClickMenuItemByName(MenuItemType.NotesAndNews);
 
+        public void HoverCustomersMenuItem() => HoverMenuItemByName(MenuItemType.Customers);
+
         private IWebElement GetMenuLinkByItemName(MenuItemType item)
         {
-            return Driver.FindElement(By.XPath($"/li/a[contains(text(), '{item.Value}')]"));
+            return Driver.FindElement(By.XPath($"//li/a[contains(text(), '{item.Value}')]"));
+        }
+
+        private IWebElement GetExpandableMenuItemByName(MenuItemType item)
+        {
+            return Driver.FindElement(By.XPath("//ul[@id='top-menu']//a[contains(text(), 'Customers')]"));
         }
 
         private void ClickMenuItemByName(MenuItemType item)
@@ -69,6 +82,13 @@ namespace Ui.Tests.PageObjectModels.Components
                 menuItem.FindElement(By.XPath("ancestor::ul[@class = 'sub-menu']/preceding-sibling::a")).Click();
             }
             menuItem.Click();
+        }
+
+        private void HoverMenuItemByName(MenuItemType item)
+        {
+            var menuItem = GetExpandableMenuItemByName(item);
+            Actions action = new Actions(Driver);
+            action.MoveToElement(menuItem).Perform();
         }
     }
 }

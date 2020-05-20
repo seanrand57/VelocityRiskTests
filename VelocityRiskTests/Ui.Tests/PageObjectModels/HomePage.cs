@@ -1,10 +1,24 @@
 ﻿using OpenQA.Selenium;
+using Ui.Tests.PageObjectModels.Components;
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class MainPage : BasePage
+    public class HomePage : BasePage
     {
-        public MainPage(IWebDriver driver) : base(driver) { }
+        protected MenuBar MenuBar { get; set; }
+        protected Header Header { get; set; }
+        protected Footer Footer { get; set; }
+        protected CookieInfo CookieInfo { get; set; }
+
+        public HomePage(IWebDriver driver) : base(driver)
+        {
+            MenuBar = new MenuBar(driver);
+            Header = new Header(driver);
+            Footer = new Footer(driver);
+            CookieInfo = new CookieInfo(driver);
+
+            PageUrl = "https://velocityrisk.com/";
+        }
 
         public IWebElement GetMenuLinkByItemName(string menuItemName)
         {

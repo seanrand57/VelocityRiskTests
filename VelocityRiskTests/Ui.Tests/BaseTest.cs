@@ -9,6 +9,8 @@ namespace Ui.Tests
     {
         protected IWebDriver Driver;
 
+        public IWebDriver GetDriver => Driver;
+
         [OneTimeSetUp]
         public void BaseSetUp()
         {

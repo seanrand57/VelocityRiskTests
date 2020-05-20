@@ -3,19 +3,11 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class HomeownersPage
+    public class HomeownersPage : HomePage
     {
-        private readonly IWebDriver _driver;
-        private const string pageUrl = "https://velocityrisk.com/for-homeowners/";
-
-        public HomeownersPage(IWebDriver driver)
+        public HomeownersPage(IWebDriver driver) : base(driver)
         {
-            _driver = driver;
-        }
-
-        public void NavigateTo()
-        {
-            _driver.Navigate().GoToUrl(pageUrl);
+            PageUrl = "https://velocityrisk.com/for-homeowners/";
         }
         
         [FindsBy(How = How.XPath, Using = "//h3[text() ='Homeowners']/following-sibling::a")]
