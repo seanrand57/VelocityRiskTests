@@ -2,27 +2,23 @@
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PageObjectModels.Components;
-using Ui.Tests.Resources;
 
 namespace Ui.Tests.Steps
 {
     public class MakeAPaymentSteps : BaseSteps
     {
+        private int _currentTabsCount;
+
         public MakeAPaymentSteps(IWebDriver driver) : base(driver)
         {
         }
 
         public void ClickCustomesMakeAPaymentMenuItem()
         {
-            SetCurrentTabsCount();
+            _currentTabsCount = GetCurrentTabsCount();
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersMakePaymentMenuItem();
             SwitchToNewOpenedTab();
-        }
-
-        public new void VerifyNewTabIsOpened()
-        {
-            base.VerifyNewTabIsOpened();
         }
 
         public void VerifyNewTabIsLoginPage(string expectedUrl)

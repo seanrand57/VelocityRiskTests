@@ -6,6 +6,7 @@ using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
+using Ui.Tests.Steps.TestData.Customers;
 
 namespace Ui.Tests
 {
@@ -72,19 +73,21 @@ namespace Ui.Tests
         [Test]
         public void TestCase_10_Customers_ManageYourPolicy()
         {
+            int currentTabsCount = _baseSteps.GetCurrentTabsCount();
             _manageYourPolicySteps.ClickCustomesManageYourPolicyMenuItem();
-            _manageYourPolicySteps.VerifyNewTabIsOpened();
-            _manageYourPolicySteps.VerifyNewTabIsLoginPage("://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f");
+            _baseSteps.VerifyNewTabIsOpened(currentTabsCount, _baseSteps.GetCurrentTabsCount());
+            _manageYourPolicySteps.VerifyNewTabIsLoginPage(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
             _manageYourPolicySteps.VerifyNewTabIsUnderHttpsProtocol();
-            _manageYourPolicySteps.VerifyNewTabPageTitle("Login Page");
-            _manageYourPolicySteps.VerifyNewTabPageHeader("Customer Portal");
+            _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
+            _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
         }
 
         [Test]
         public void TestCase_11_Customers_MakeAPayment()
         {
+            int currentTabsCount = _baseSteps.GetCurrentTabsCount();
             _makeAPaymentSteps.ClickCustomesMakeAPaymentMenuItem();
-            _makeAPaymentSteps.VerifyNewTabIsOpened();
+            _baseSteps.VerifyNewTabIsOpened(currentTabsCount, _baseSteps.GetCurrentTabsCount());
             _makeAPaymentSteps.VerifyNewTabIsUnderHttpsProtocol();
             _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }

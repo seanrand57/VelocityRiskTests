@@ -17,15 +17,9 @@ namespace Ui.Tests.Steps
 
         public void ClickCustomesManageYourPolicyMenuItem()
         {
-            SetCurrentTabsCount();
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersManageYourPolicyMenuItem();
             SwitchToNewOpenedTab();
-        }
-
-        public new void VerifyNewTabIsOpened()
-        {
-            base.VerifyNewTabIsOpened();
         }
 
         public void VerifyNewTabIsLoginPage(string expectedUrl)
@@ -41,15 +35,18 @@ namespace Ui.Tests.Steps
 
         public void VerifyNewTabPageTitle(string expectedText)
         {
-            Driver.Title.ShouldBe(expectedText, $"Title of the current tab should be '{expectedText}'");
+            Driver.Title.ShouldBe(expectedText, string.Format(
+                ShouldlyCustomMessages.TitleOfCurrentTabShouldBe_Formatted,
+                expectedText));
             
         }
 
         public void VerifyNewTabPageHeader(string expectedText)
         {
             WaitUntilElementIsVisible(_manageYourPolicyPage.HeaderElement);
-            _manageYourPolicyPage.HeaderElement.Text.ShouldContain(expectedText, "Header of the current tab's page should " +
-                $"contain text '{expectedText}'");
+            _manageYourPolicyPage.HeaderElement.Text.ShouldContain(expectedText,
+                string.Format(ShouldlyCustomMessages
+                .HeaderOfCurrentTabPageShouldContainText__Formatted, expectedText));
         }
     }
 }

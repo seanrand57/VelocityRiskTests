@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ui.Tests.Resources {
+namespace Ui.Tests.Steps.TestData.Customers {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Ui.Tests.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ShouldlyCustomMessages {
+    public class ManageYourPolicyTestData {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ShouldlyCustomMessages() {
+        internal ManageYourPolicyTestData() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Ui.Tests.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ui.Tests.Resources.ShouldlyCustomMessages", typeof(ShouldlyCustomMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ui.Tests.Steps.TestData.Customers.ManageYourPolicyTestData", typeof(ManageYourPolicyTestData).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,29 @@ namespace Ui.Tests.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Header of the current tab&apos;s page should contain text &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Customer Portal.
         /// </summary>
-        public static string HeaderOfCurrentTabPageShouldContainText__Formatted {
+        public static string LoginPageHeaderText {
             get {
-                return ResourceManager.GetString("HeaderOfCurrentTabPageShouldContainText _Formatted", resourceCulture);
+                return ResourceManager.GetString("LoginPageHeaderText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Link should be opened in new tab.
+        ///   Looks up a localized string similar to Login Page.
         /// </summary>
-        public static string LinkShouldBeOpenedInNewTab {
+        public static string LoginPageTitleText {
             get {
-                return ResourceManager.GetString("LinkShouldBeOpenedInNewTab", resourceCulture);
+                return ResourceManager.GetString("LoginPageTitleText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Url of the current tab should be under HTTPS protocol.
+        ///   Looks up a localized string similar to ://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f.
         /// </summary>
-        public static string ProtocolShouldBeHttps {
+        public static string LoginPageUrlWithoutProtocol {
             get {
-                return ResourceManager.GetString("ProtocolShouldBeHttps", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title of the current tab should be &apos;{0}&apos;.
-        /// </summary>
-        public static string TitleOfCurrentTabShouldBe_Formatted {
-            get {
-                return ResourceManager.GetString("TitleOfCurrentTabShouldBe_Formatted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Url of the current tab should contain text &apos;{0}&apos;.
-        /// </summary>
-        public static string UrlOfCurrentTabShouldContainText_Formatted {
-            get {
-                return ResourceManager.GetString("UrlOfCurrentTabShouldContainText_Formatted", resourceCulture);
+                return ResourceManager.GetString("LoginPageUrlWithoutProtocol", resourceCulture);
             }
         }
     }

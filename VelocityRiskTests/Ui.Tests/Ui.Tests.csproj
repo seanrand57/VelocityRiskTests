@@ -35,12 +35,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ShouldlyCustomMessages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Steps\TestData\Customers\ManageYourPolicyTestData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ManageYourPolicyTestData.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\ShouldlyCustomMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShouldlyCustomMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Steps\TestData\Customers\ManageYourPolicyTestData.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ManageYourPolicyTestData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

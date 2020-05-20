@@ -2,7 +2,7 @@
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class ClaimsPage : BasePage
+    public class ClaimsPage : HomePage
     {
         public ClaimsPage(IWebDriver driver) : base(driver)
         {

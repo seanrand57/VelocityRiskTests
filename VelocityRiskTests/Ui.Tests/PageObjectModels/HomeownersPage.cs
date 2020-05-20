@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Ui.Tests.PageObjectModels
 {
-    public class HomeownersPage : BasePage
+    public class HomeownersPage : HomePage
     {
         public HomeownersPage(IWebDriver driver) : base(driver)
         {

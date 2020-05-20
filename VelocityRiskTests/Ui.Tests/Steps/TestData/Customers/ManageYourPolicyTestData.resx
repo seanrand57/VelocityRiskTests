@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HeaderOfCurrentTabPageShouldContainText _Formatted" xml:space="preserve">
-    <value>Header of the current tab's page should contain text '{0}'</value>
+  <data name="LoginPageHeaderText" xml:space="preserve">
+    <value>Customer Portal</value>
   </data>
-  <data name="LinkShouldBeOpenedInNewTab" xml:space="preserve">
-    <value>Link should be opened in new tab</value>
+  <data name="LoginPageTitleText" xml:space="preserve">
+    <value>Login Page</value>
   </data>
-  <data name="ProtocolShouldBeHttps" xml:space="preserve">
-    <value>Url of the current tab should be under HTTPS protocol</value>
-  </data>
-  <data name="TitleOfCurrentTabShouldBe_Formatted" xml:space="preserve">
-    <value>Title of the current tab should be '{0}'</value>
-  </data>
-  <data name="UrlOfCurrentTabShouldContainText_Formatted" xml:space="preserve">
-    <value>Url of the current tab should contain text '{0}'</value>
+  <data name="LoginPageUrlWithoutProtocol" xml:space="preserve">
+    <value>://portal.velocityrisk.com/Login.aspx?ReturnUrl=%2f</value>
   </data>
 </root>

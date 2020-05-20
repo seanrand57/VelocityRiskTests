@@ -35,23 +35,15 @@ namespace Ui.Tests.Steps
             Driver.Url.Split(':')[0].ShouldBe("https", ShouldlyCustomMessages.ProtocolShouldBeHttps);
         }
 
-        protected void VerifyNewTabIsOpened()
+        public int GetCurrentTabsCount()
         {
-            var afterTabsCount = Driver.WindowHandles.Count;
-            (afterTabsCount == TabsCount + 1).ShouldBeTrue(ShouldlyCustomMessages.LinkShouldBeOpenedInNewTab);
+            return Driver.WindowHandles.Count;
         }
 
-        protected void SetCurrentTabsCount()
+        public void VerifyNewTabIsOpened(int tabsCountBefore, int tabsCountAfter)
         {
-            TabsCount = Driver.WindowHandles.Count;
+            (tabsCountAfter == tabsCountBefore + 1).ShouldBeTrue(ShouldlyCustomMessages.LinkShouldBeOpenedInNewTab);
         }
-
-        //protected IWebElement WaitUntilElementIsVisible(By locator, int timeOut = 10)
-        //{
-        //    var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
-        //    var element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-        //    return element;
-        //}
 
         public void WaitUntilElementIsVisible(IWebElement element, int timeout = 10)
         {
