@@ -43,7 +43,7 @@ namespace Ui.Tests.Steps
 
         public void VerifyNewTabIsOpened(int tabsCountBefore)
         {
-            (GetCurrentTabsCount() == tabsCountBefore + 1).ShouldBeTrue(
+            GetCurrentTabsCount().ShouldBe(tabsCountBefore + 1,
                 "Link should be opened in new tab");
         }
 
