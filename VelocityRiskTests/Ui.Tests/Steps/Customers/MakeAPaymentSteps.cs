@@ -7,28 +7,20 @@ namespace Ui.Tests.Steps
 {
     public class MakeAPaymentSteps : BaseSteps
     {
-        private int _currentTabsCount;
-
         public MakeAPaymentSteps(IWebDriver driver) : base(driver)
         {
         }
 
         public void ClickCustomesMakeAPaymentMenuItem()
         {
-            _currentTabsCount = GetCurrentTabsCount();
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersMakePaymentMenuItem();
-            SwitchToNewOpenedTab();
+            SwitchToLastOpenedTab();
         }
 
         public void VerifyNewTabIsLoginPage(string expectedUrl)
         {
             Driver.Url.ShouldContain(expectedUrl);
-        }
-
-        public void VerifyNewTabIsUnderHttpsProtocol()
-        {
-            VerifyProtocolIsHttps();
         }
 
         public void VerifyCustomerHasOptionToPayByCreditCardOrCheck()

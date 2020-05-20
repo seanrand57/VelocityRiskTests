@@ -2,7 +2,6 @@
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PageObjectModels.Components;
-using Ui.Tests.Resources;
 
 namespace Ui.Tests.Steps
 {
@@ -19,34 +18,25 @@ namespace Ui.Tests.Steps
         {
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersManageYourPolicyMenuItem();
-            SwitchToNewOpenedTab();
+            SwitchToLastOpenedTab();
         }
 
         public void VerifyNewTabIsLoginPage(string expectedUrl)
         {
             Driver.Url.ShouldContain(expectedUrl,
-                string.Format(ShouldlyCustomMessages.UrlOfCurrentTabShouldContainText_Formatted, expectedUrl));
-        }
-
-        public void VerifyNewTabIsUnderHttpsProtocol()
-        {
-            VerifyProtocolIsHttps();
+                $"Url of the current tab should contain text '{expectedUrl}'");
         }
 
         public void VerifyNewTabPageTitle(string expectedText)
         {
-            Driver.Title.ShouldBe(expectedText, string.Format(
-                ShouldlyCustomMessages.TitleOfCurrentTabShouldBe_Formatted,
-                expectedText));
-            
+            Driver.Title.ShouldBe(expectedText, $"Title of the current tab should be '{expectedText}'");
         }
 
         public void VerifyNewTabPageHeader(string expectedText)
         {
             WaitUntilElementIsVisible(_manageYourPolicyPage.HeaderElement);
             _manageYourPolicyPage.HeaderElement.Text.ShouldContain(expectedText,
-                string.Format(ShouldlyCustomMessages
-                .HeaderOfCurrentTabPageShouldContainText__Formatted, expectedText));
+                $"Url of the current tab should contain text '{expectedText}'");
         }
     }
 }

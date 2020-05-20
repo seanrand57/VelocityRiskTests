@@ -6,7 +6,6 @@ using System;
 using System.Linq;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PageObjectModels.Components;
-using Ui.Tests.Resources;
 
 namespace Ui.Tests.Steps
 {
@@ -26,13 +25,15 @@ namespace Ui.Tests.Steps
 
         public void GoToHomePage()
         {
+            SwitchBackToDefaultTab();
             var homePage = new HomePage(Driver);
             homePage.NavigateTo();
         }
 
         public void VerifyProtocolIsHttps()
         {
-            Driver.Url.Split(':')[0].ShouldBe("https", ShouldlyCustomMessages.ProtocolShouldBeHttps);
+            Driver.Url.Split(':')[0].ShouldBe("https",
+                "Url of the current tab should be under HTTPS protocol");
         }
 
         public int GetCurrentTabsCount()
@@ -40,9 +41,10 @@ namespace Ui.Tests.Steps
             return Driver.WindowHandles.Count;
         }
 
-        public void VerifyNewTabIsOpened(int tabsCountBefore, int tabsCountAfter)
+        public void VerifyNewTabIsOpened(int tabsCountBefore)
         {
-            (tabsCountAfter == tabsCountBefore + 1).ShouldBeTrue(ShouldlyCustomMessages.LinkShouldBeOpenedInNewTab);
+            (GetCurrentTabsCount() == tabsCountBefore + 1).ShouldBeTrue(
+                "Link should be opened in new tab");
         }
 
         public void WaitUntilElementIsVisible(IWebElement element, int timeout = 10)
@@ -69,14 +71,31 @@ namespace Ui.Tests.Steps
             action.MoveToElement(element).Perform();
         }
 
-        protected void SwitchToNewOpenedTab()
+        protected void SwitchToLastOpenedTab()
         {
-            Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            SwitchToTabByItsName(Driver.WindowHandles.Last());
         }
 
         protected void SwitchBackToDefaultTab()
         {
-            Driver.SwitchTo().Window(Driver.WindowHandles.First());
+            SwitchToTabByItsName(Driver.WindowHandles.First());
+        }
+
+        protected void SwitchToTabByItsName(string tabName)
+        {
+            Driver.SwitchTo().Window(tabName);
+        }
+
+        public void CloseAllNewlyOpenedTabs()
+        {
+            foreach(var tabName in Driver.WindowHandles)
+            {
+                if (tabName == Driver.WindowHandles.First())
+                    continue;
+
+                SwitchToTabByItsName(tabName);
+                Driver.Close();
+            }
         }
 
         protected IWebElement WaitForClickable(IWebElement webElement, int timeOut = 20)

@@ -34,6 +34,12 @@ namespace Ui.Tests
             _baseSteps.GoToHomePage();
         }
 
+        [TearDown]
+        public void AfterEachTest()
+        {
+            _baseSteps.CloseAllNewlyOpenedTabs();
+        }
+
         [Test]
         [TestCaseSource("MenuInfoExpected")]
         public void MenuItemsAreCorrectTest(MenuItem menuItem)
@@ -75,20 +81,20 @@ namespace Ui.Tests
         {
             int currentTabsCount = _baseSteps.GetCurrentTabsCount();
             _manageYourPolicySteps.ClickCustomesManageYourPolicyMenuItem();
-            _baseSteps.VerifyNewTabIsOpened(currentTabsCount, _baseSteps.GetCurrentTabsCount());
+            _makeAPaymentSteps.VerifyNewTabIsOpened(currentTabsCount);
             _manageYourPolicySteps.VerifyNewTabIsLoginPage(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
-            _manageYourPolicySteps.VerifyNewTabIsUnderHttpsProtocol();
+            _manageYourPolicySteps.VerifyProtocolIsHttps();
             _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
             _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
         }
-
+         
         [Test]
         public void TestCase_11_Customers_MakeAPayment()
         {
             int currentTabsCount = _baseSteps.GetCurrentTabsCount();
             _makeAPaymentSteps.ClickCustomesMakeAPaymentMenuItem();
-            _baseSteps.VerifyNewTabIsOpened(currentTabsCount, _baseSteps.GetCurrentTabsCount());
-            _makeAPaymentSteps.VerifyNewTabIsUnderHttpsProtocol();
+            _makeAPaymentSteps.VerifyNewTabIsOpened(currentTabsCount);
+            _makeAPaymentSteps.VerifyProtocolIsHttps();
             _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }
 
