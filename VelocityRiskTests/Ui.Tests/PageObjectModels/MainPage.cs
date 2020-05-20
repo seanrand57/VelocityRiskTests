@@ -35,5 +35,21 @@ namespace Ui.Tests.PageObjectModels
             }
             menuItem.Click();
         }
+
+        public void ClickOnWhoWeAreMenuItemLink()
+        {            
+            Driver.FindElement(By.XPath("//li[@id='menu-item-470']/a")).Click();
+            Driver.FindElement(By.XPath("//li[@id='menu-item-177']//a")).Click();
+        }
+
+        public IWebElement GetLogo()
+        {
+            return Driver.FindElement(By.XPath("//div[@class='header_white_inner']//img"));
+        }
+
+        public IWebElement GetNavBar()
+        {
+            return Driver.FindElement(By.ClassName("header_orange"));
+        }
     }
 }

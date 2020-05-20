@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Collections.ObjectModel;
 
 namespace Ui.Tests.PageObjectModels
 {
@@ -51,6 +52,16 @@ namespace Ui.Tests.PageObjectModels
             var panelElement = panelItem.FindElement(By.XPath("ancestor::div[@class = 'customer_drop_block']/div"));
 
             return panelElement.GetAttribute("innerText");
+        }
+
+        public IWebElement GetQuestionsOnAnExistingClaimElement()
+        {
+            return Driver.FindElement(By.Id("questions-on-an-existing-claim"));
+        }
+
+        public ReadOnlyCollection<IWebElement> GetLinksFromFileAClaimSection()
+        {
+            return Driver.FindElements(By.XPath("//a[@class='islink underline']"));
         }
     }
 }
