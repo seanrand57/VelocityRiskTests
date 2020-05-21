@@ -21,6 +21,8 @@ namespace Ui.Tests
         private MakeAPaymentSteps _makeAPaymentSteps;
         private int _tabsCountBeforeEachTest;
 
+        private FileAClaimSteps _fileAClaimSteps;
+
         [OneTimeSetUp]
         public void Initialize()
         {
@@ -28,6 +30,8 @@ namespace Ui.Tests
             _makeAPaymentSteps = new MakeAPaymentSteps(Driver);
             _manageYourPolicySteps = new ManageYourPolicySteps(Driver);
             _tabsCountBeforeEachTest = 1;
+
+            _fileAClaimSteps = new FileAClaimSteps(Driver);
         }
 
         [SetUp]
@@ -122,47 +126,14 @@ namespace Ui.Tests
             actions.Perform();
         }
 
-        //CASE 5
-        //Under Customers menu item -> Claims, then expand the file a claim accordion.
-        //Validate the text which is there and the links for personal lines(homeowners) 
-        //and small business.
-
-        //Extending the above test ensure the links for personal lines
-        //and small business claims 
-        //go to the follow on pages which open in a new tab. 
-        //Validate the new tab is velocity risks my claim look up.
-
-
         [Test]
-        public void Test_Case_5_HomeownersLinksAreCorrectTest()
+        public void Test_Case_5_FileAClaimLinksAreCorrectTest()
         {
-            var homePage = new HomePage(Driver);
-            homePage.NavigateTo();
-
-            homePage.ClickMenuItemByName("Claims");
-            var claimsPage = new ClaimsPage(Driver);
-            claimsPage.ClickPaneITitleByName("File a claim");            
-
-            // scroll down
-            var element = claimsPage.GetQuestionsOnAnExistingClaimElement();
-            MoveToElement(element);
-
-            var fileAClaimSectionLinks = claimsPage.GetLinksFromFileAClaimSection();
-            var homeownersLink = fileAClaimSectionLinks[0];
-            var smallCommercialLink = fileAClaimSectionLinks[1];
-            var largeCommercialLink = fileAClaimSectionLinks[2];
-
-            homeownersLink.Click();
-            var homeownersLinkUrl = GetUrl();
-            homeownersLinkUrl.ShouldContain("https://www.claimlookup.com/");
-
-            smallCommercialLink.Click();
-            var smallCommercialLinkUrl = GetUrl();
-            smallCommercialLinkUrl.ShouldContain("https://www.claimlookup.com/");
-
-            largeCommercialLink.Click();
-            var largeCommercialLinkUrl = GetUrl();
-            largeCommercialLinkUrl.ShouldContain("https://www.claimlookup.com/");
+            _fileAClaimSteps.ClickFileAClaimAccordion();
+            _fileAClaimSteps.ScrollDown();
+            _fileAClaimSteps.VerifyHomeownersLink();
+            _fileAClaimSteps.VerifySmallCommercialLink();
+            _fileAClaimSteps.VerifyLargeCommercialLink();             
         }
 
 
