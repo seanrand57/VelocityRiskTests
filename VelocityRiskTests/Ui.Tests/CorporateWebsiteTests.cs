@@ -22,6 +22,7 @@ namespace Ui.Tests
         private int _tabsCountBeforeEachTest;
 
         private FileAClaimSteps _fileAClaimSteps;
+        private VelocityLogoImageAndNavBarSteps _velocityLogoImageAndNavBarSteps;
 
         [OneTimeSetUp]
         public void Initialize()
@@ -32,6 +33,7 @@ namespace Ui.Tests
             _tabsCountBeforeEachTest = 1;
 
             _fileAClaimSteps = new FileAClaimSteps(Driver);
+            _velocityLogoImageAndNavBarSteps = new VelocityLogoImageAndNavBarSteps(Driver);
         }
 
         [SetUp]
@@ -186,24 +188,11 @@ namespace Ui.Tests
             }
         }
 
-        //CASE 9:
-        //1. Navigate to Home Page
-        //2. Verify Velocity Logo image is present(div.header_logo img[alt='Velocity Logo']).isPresent()
-        //3. Verify nav bar color is orange(div.header_orange).getCssVlaue('background') == '#F57F26'
         [Test]
         public void Test_Case_9_VelocityLogoImageAndNavBarAreCorrect()
         {
-            var homePage = new HomePage(Driver);
-            homePage.NavigateTo();
-
-            var velocityLogoImage = homePage.GetLogo();
-            var isLogoPresent = velocityLogoImage.Displayed;
-            isLogoPresent.ShouldBeTrue();
-
-            var navBar = homePage.GetNavBar();
-            var navBarColor = navBar.GetCssValue("background-color");
-
-            navBarColor.ShouldBe("rgba(245, 127, 38, 1)");
+            _velocityLogoImageAndNavBarSteps.VerifyLogoIsPresent();
+            _velocityLogoImageAndNavBarSteps.VerifyNavBarIsOrange();
         }
     }
 }
