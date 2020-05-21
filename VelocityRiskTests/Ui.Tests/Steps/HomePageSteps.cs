@@ -4,11 +4,11 @@ using Ui.Tests.PageObjectModels;
 
 namespace Ui.Tests.Steps
 {
-    public class VelocityLogoImageAndNavBarSteps : BaseSteps
+    public class HomePageSteps : BaseSteps
     {
         private HomePage _homePage;
 
-        public VelocityLogoImageAndNavBarSteps(IWebDriver driver) : base(driver)
+        public HomePageSteps(IWebDriver driver) : base(driver)
         {
             _homePage = new HomePage(Driver);
         }

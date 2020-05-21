@@ -25,6 +25,10 @@ namespace Ui.Tests.PageObjectModels
             return Driver.FindElement(By.XPath("//a[contains(text(), '" + menuItemName + "')]"));
         }
 
+        public void ClickOnAboutUsMenuItem() => Driver.FindElement(By.XPath("//ul[@id='Up']/li/a[contains(text(), 'About Us')]")).Click();
+
+        public void ClickOnWhoWeAreMenuItem() => Driver.FindElement(By.XPath("//ul[@class='sub - menu']/li/a[contains(text(), 'Who We Are')]")).Click();
+
         public bool MenuPresents(string menuItemName)
         {
             try
@@ -51,19 +55,14 @@ namespace Ui.Tests.PageObjectModels
         }
 
         public void ClickOnWhoWeAreMenuItemLink()
-        {            
-            Driver.FindElement(By.XPath("//li[@id='menu-item-470']/a")).Click();
-            Driver.FindElement(By.XPath("//li[@id='menu-item-177']//a")).Click();
+        {
+            ClickOnAboutUsMenuItem();
+            ClickOnWhoWeAreMenuItem();
         }
 
-        public IWebElement GetLogo()
-        {
-            return Driver.FindElement(By.XPath("//div[@class='header_white_inner']//img"));
-        }
-
-        public IWebElement GetNavBar()
-        {
-            return Driver.FindElement(By.ClassName("header_orange"));
-        }
+        public IWebElement GetLogo() => Driver.FindElement(By.XPath("//div[@class='header_white_inner']//img"));
+        
+        public IWebElement GetNavBar() => Driver.FindElement(By.ClassName("header_orange"));
+        
     }
 }

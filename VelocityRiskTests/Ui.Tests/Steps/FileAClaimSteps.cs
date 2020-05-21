@@ -25,34 +25,31 @@ namespace Ui.Tests.Steps
             MouseHoverToElement(element);
         }
 
-        public void VerifyLink(IWebElement linkElement)
+        private void VerifyLink(IWebElement linkElement, string url)
         {
             linkElement.Click();
             VerifyNewTabIsOpened(1);
             SwitchToLastOpenedTab();
-            Driver.Url.ShouldContain("https://www.claimlookup.com/");
+            Driver.Url.ShouldContain(url);
             Driver.Close();
             SwitchBackToDefaultTab();
         }
 
-        public void VerifyHomeownersLink()
+        public void VerifyHomeownersLink(string url)
         {
-            var fileAClaimSectionLinks = _claimsPage.GetLinksFromFileAClaimSection();
-            var homeownersLink = fileAClaimSectionLinks[0];
-            VerifyLink(homeownersLink);
+            var homeownersLink = _claimsPage.GetLinksFromFileAClaimSection("homeowners");
+            VerifyLink(homeownersLink, url);
         }
 
-        public void VerifySmallCommercialLink()
+        public void VerifySmallCommercialLink(string url)
         {
-            var fileAClaimSectionLinks = _claimsPage.GetLinksFromFileAClaimSection();
-            var smallCommercialLink = fileAClaimSectionLinks[1];
-            VerifyLink(smallCommercialLink);
+            var smallCommercialLink = _claimsPage.GetLinksFromFileAClaimSection("small commercial");
+            VerifyLink(smallCommercialLink, url);
         }
-        public void VerifyLargeCommercialLink()
+        public void VerifyLargeCommercialLink(string url)
         {
-            var fileAClaimSectionLinks = _claimsPage.GetLinksFromFileAClaimSection();
-            var largeCommercialLink = fileAClaimSectionLinks[2];
-            VerifyLink(largeCommercialLink);
+            var largeCommercialLink = _claimsPage.GetLinksFromFileAClaimSection("large commercial");
+            VerifyLink(largeCommercialLink, url);
         }
     }
 }

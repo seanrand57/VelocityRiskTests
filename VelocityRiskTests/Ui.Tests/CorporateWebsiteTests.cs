@@ -4,6 +4,7 @@ using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
+using Ui.Tests.Steps.TestData;
 using Ui.Tests.Steps.TestData.Customers;
 
 namespace Ui.Tests
@@ -22,7 +23,7 @@ namespace Ui.Tests
         private int _tabsCountBeforeEachTest;
 
         private FileAClaimSteps _fileAClaimSteps;
-        private VelocityLogoImageAndNavBarSteps _velocityLogoImageAndNavBarSteps;
+        private HomePageSteps _homePageSteps;
         private AboutUsPageSteps _aboutUsPageSteps;
 
         [OneTimeSetUp]
@@ -34,7 +35,7 @@ namespace Ui.Tests
             _tabsCountBeforeEachTest = 1;
 
             _fileAClaimSteps = new FileAClaimSteps(Driver);
-            _velocityLogoImageAndNavBarSteps = new VelocityLogoImageAndNavBarSteps(Driver);
+            _homePageSteps = new HomePageSteps(Driver);
             _aboutUsPageSteps = new AboutUsPageSteps(Driver);
         }
 
@@ -129,9 +130,9 @@ namespace Ui.Tests
         {
             _fileAClaimSteps.ClickFileAClaimAccordion();
             _fileAClaimSteps.ScrollDown();
-            _fileAClaimSteps.VerifyHomeownersLink();
-            _fileAClaimSteps.VerifySmallCommercialLink();
-            _fileAClaimSteps.VerifyLargeCommercialLink();             
+            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimExpectedUrl);
+            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);
+            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);             
         }
 
 
@@ -148,8 +149,8 @@ namespace Ui.Tests
         [Test]
         public void Test_Case_9_VelocityLogoImageAndNavBarAreCorrect()
         {
-            _velocityLogoImageAndNavBarSteps.VerifyLogoIsPresent();
-            _velocityLogoImageAndNavBarSteps.VerifyNavBarIsOrange();
+            _homePageSteps.VerifyLogoIsPresent();
+            _homePageSteps.VerifyNavBarIsOrange();
         }
     }
 }
