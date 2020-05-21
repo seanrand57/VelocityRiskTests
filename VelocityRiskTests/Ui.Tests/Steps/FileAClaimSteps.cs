@@ -14,11 +14,9 @@ namespace Ui.Tests.Steps
         }
 
         public void ClickFileAClaimAccordion()
-        {           
-            var homePage = new HomePage(Driver);
-
-            homePage.ClickMenuItemByName("Claims");
-            _claimsPage.ClickPaneITitleByName("File a claim");
+        {
+            MenuBar.ClickCustomersClaimsMenuItem();
+            _claimsPage.ClickFileAClaimMenuItem();
         }
 
         public void ScrollDown()

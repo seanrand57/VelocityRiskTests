@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
@@ -124,12 +122,6 @@ namespace Ui.Tests
             }
 
             return actualUrl;
-        }
-        private void MoveToElement(IWebElement element)
-        {
-            Actions actions = new Actions(Driver);
-            actions.MoveToElement(element);
-            actions.Perform();
         }
 
         [Test]

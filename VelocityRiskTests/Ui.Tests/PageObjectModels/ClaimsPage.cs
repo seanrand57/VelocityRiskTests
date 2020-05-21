@@ -10,6 +10,8 @@ namespace Ui.Tests.PageObjectModels
             PageUrl = "https://velocityrisk.com/claims/";
         }
 
+        public void ClickFileAClaimMenuItem() => ClickPaneITitleByName("File a claim");
+
         // todo: move to appropriate Steps method
         public void ClickExpandPanel()
         {

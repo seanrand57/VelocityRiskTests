@@ -50,17 +50,17 @@ namespace Ui.Tests.PageObjectModels
                 return leadershipTeamInfo;
             }
             set { }
-        }
+        }      
     }
 
     public class ImageCard
     {
-        public bool IsImageDisplayed;
-        public string TeamMemberName;
-        public bool IsTeamMemberNameDisplayed;
-        public string JobTitle;
-        public bool IsJobTitleDisplayed;
-        public string Location;
-        public bool IsLocationDisplayed;
+        public bool IsImageDisplayed { get; set; }
+        public string TeamMemberName { get; set; }
+        public bool IsTeamMemberNameDisplayed { get; set; }
+        public string JobTitle { get; set; }
+        public bool IsJobTitleDisplayed { get; set; }
+        public string Location { get; set; }
+        public bool IsLocationDisplayed { get; set; }
     }
 }
