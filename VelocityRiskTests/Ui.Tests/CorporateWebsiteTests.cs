@@ -16,6 +16,8 @@ namespace Ui.Tests
 
         public static IEnumerable<PanelItem> PanelInfoExpected { get; } = DataContext.LoadPanelItems();
 
+        public static IEnumerable<PersistenceModels.ImageCard> ImageCardInfoExpected { get; } = DataContext.LoadImageCards();
+
         private BaseSteps _baseSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;
         private MakeAPaymentSteps _makeAPaymentSteps;
@@ -141,52 +143,14 @@ namespace Ui.Tests
         }
 
 
-        //On the about us page -> validate the leadership team has images and also the names listed 
-        //such as Phil Bowie, Rod Harden etc. clicking on their image and validating their title and location.
-
-        //CASE 7:
-        //1. Navigate to "About us" page(from Home Page -> "About us" -> "Who we are")
-        //For each of 6 team members(using Data Driver approach):
-        //2. Verify the image isDisplayed()
-        //3.Verify the Name isDisplayed()
-        //4.Verify the Name is as expected
-        //5.Mouseover(click) the image
-
-        //6. Verify the job title is displayed()
-        //7.Verify the Job title is as expected
-        //8.Verify the Location isDispalyed()
-        //9. Verify Location is as expected
         [Test]
-        [TestCaseSource("PanelInfoExpected")]
-        public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest()
+        [TestCaseSource("ImageCardInfoExpected")]
+        public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(PersistenceModels.ImageCard imageCardItem)
         {
             //Act
             _aboutUsPageSteps.NavigateToPage();
             _aboutUsPageSteps.NavigateToLeadershipTeamView();
-
-            var whoWeArePage = new WhoWeArePage(Driver);
-
-            var leadershipTeamElement = whoWeArePage.MeetOurLeadershipTeamElement;
-            var leadershipTeamImages = whoWeArePage.LeadershipTeamInfo;
-
-            MoveToElement(leadershipTeamElement);
-
-            foreach (var teamMember in leadershipTeamImages)
-            {
-                // check image
-                teamMember.IsImageDisplayed.ShouldBeTrue($"It was not possible to find image card for team member {teamMember.TeamMemberName} :  on UI");
-
-                // check name
-                teamMember.IsTeamMemberNameDisplayed.ShouldBeTrue($"It was not possible to find name card for team member : {teamMember.TeamMemberName} on UI");
-                //teamMember.TeamMemberName.ShouldBe();
-
-                // check job title
-                teamMember.IsJobTitleDisplayed.ShouldBeTrue($"It was not possible to find name card for team member : {teamMember.TeamMemberName} on UI");
-                //teamMember.JobTitle.ShouldBe();
-
-                teamMember.IsLocationDisplayed.ShouldBeTrue($"It was not possible to find name card for team member : {teamMember.TeamMemberName} on UI");
-                //teamMember.Location.ShouldBe();
-            }
+            _aboutUsPageSteps.VerifyItem(imageCardItem);
         }
 
         [Test]
