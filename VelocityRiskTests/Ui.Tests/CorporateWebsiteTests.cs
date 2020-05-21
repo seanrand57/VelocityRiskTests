@@ -23,6 +23,7 @@ namespace Ui.Tests
 
         private FileAClaimSteps _fileAClaimSteps;
         private VelocityLogoImageAndNavBarSteps _velocityLogoImageAndNavBarSteps;
+        private AboutUsPageSteps _aboutUsPageSteps;
 
         [OneTimeSetUp]
         public void Initialize()
@@ -34,6 +35,7 @@ namespace Ui.Tests
 
             _fileAClaimSteps = new FileAClaimSteps(Driver);
             _velocityLogoImageAndNavBarSteps = new VelocityLogoImageAndNavBarSteps(Driver);
+            _aboutUsPageSteps = new AboutUsPageSteps(Driver);
         }
 
         [SetUp]
@@ -155,13 +157,12 @@ namespace Ui.Tests
         //8.Verify the Location isDispalyed()
         //9. Verify Location is as expected
         [Test]
-
+        [TestCaseSource("PanelInfoExpected")]
         public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest()
         {
             //Act
-            var homePage = new HomePage(Driver);
-            homePage.NavigateTo();
-            homePage.ClickOnWhoWeAreMenuItemLink();
+            _aboutUsPageSteps.NavigateToPage();
+            _aboutUsPageSteps.NavigateToLeadershipTeamView();
 
             var whoWeArePage = new WhoWeArePage(Driver);
 
