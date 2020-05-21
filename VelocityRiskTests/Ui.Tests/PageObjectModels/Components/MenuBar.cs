@@ -51,10 +51,7 @@ namespace Ui.Tests.PageObjectModels.Components
 
         public void ClickCustomersClaimsMenuItem() => ClickMenuItemByName(MenuItemType.CustomersClaims);
 
-        public void ClickCustomersManageYourPolicyMenuItem()
-        {
-            ClickMenuItemByName(MenuItemType.CustomersManageYourPolicy);
-        }
+        public void ClickCustomersManageYourPolicyMenuItem() => ClickMenuItemByName(MenuItemType.CustomersManageYourPolicy);
 
         public void ClickCustomersMakePaymentMenuItem() => ClickMenuItemByName(MenuItemType.CustomersMakePayment);
 
@@ -69,7 +66,7 @@ namespace Ui.Tests.PageObjectModels.Components
 
         private IWebElement GetExpandableMenuItemByName(MenuItemType item)
         {
-            return Driver.FindElement(By.XPath("//ul[@id='top-menu']//a[contains(text(), 'Customers')]"));
+            return Driver.FindElement(By.XPath($"//ul[@id='top-menu']//a[contains(text(), '{item.Value}')]"));
         }
 
         private void ClickMenuItemByName(MenuItemType item)
@@ -87,7 +84,7 @@ namespace Ui.Tests.PageObjectModels.Components
         private void HoverMenuItemByName(MenuItemType item)
         {
             var menuItem = GetExpandableMenuItemByName(item);
-            Actions action = new Actions(Driver);
+            var action = new Actions(Driver);
             action.MoveToElement(menuItem).Perform();
         }
     }

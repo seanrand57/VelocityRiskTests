@@ -7,11 +7,11 @@ namespace Ui.Tests.PageObjectModels
 {
     public abstract class BasePage
     {
-        protected string PageUrl;
-
         protected readonly IWebDriver Driver;
 
-        public BasePage(IWebDriver driver)
+        public string PageUrl;
+
+        protected BasePage(IWebDriver driver)
         {
             Driver = driver;
         }
@@ -30,12 +30,6 @@ namespace Ui.Tests.PageObjectModels
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
 
             Thread.Sleep(2000);
-        }
-
-        // todo: move to BaseSteps class
-        public void NavigateTo()
-        {
-            Driver.Navigate().GoToUrl(PageUrl);
         }
     }
 }

@@ -9,9 +9,12 @@ using Ui.Tests.PageObjectModels.Components;
 
 namespace Ui.Tests.Steps
 {
-    public class BaseSteps
+    public class BaseSteps<TPage> where TPage : BasePage
     {
         protected IWebDriver Driver;
+
+        protected TPage Page;
+
         protected int TabsCount;
 
         protected MenuBar MenuBar;
@@ -23,11 +26,23 @@ namespace Ui.Tests.Steps
             MenuBar = new MenuBar(Driver);
         }
 
-        public void GoToHomePage()
+        private void NavigateToHomePage()
         {
             SwitchBackToDefaultTab();
             var homePage = new HomePage(Driver);
-            homePage.NavigateTo();
+            Driver.Navigate().GoToUrl(homePage.PageUrl);
+        }
+
+        public virtual void NavigateTo()
+        {
+            if (Page == null)
+            {
+                NavigateToHomePage();
+            }
+            else
+            {
+                Driver.Navigate().GoToUrl(Page.PageUrl);
+            }
         }
 
         public void VerifyPageUrlWithoutProtocol(string urlWitoutProtocol)
@@ -98,7 +113,9 @@ namespace Ui.Tests.Steps
             foreach(var tabName in Driver.WindowHandles)
             {
                 if (tabName == Driver.WindowHandles.First())
+                {
                     continue;
+                }
 
                 SwitchToTabByItsName(tabName);
                 Driver.Close();

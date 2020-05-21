@@ -1,17 +1,16 @@
 ﻿using OpenQA.Selenium;
-using Shouldly;
 using Ui.Tests.PageObjectModels;
-using Ui.Tests.PageObjectModels.Components;
 
-namespace Ui.Tests.Steps
+namespace Ui.Tests.Steps.Customers
 {
-    public class MakeAPaymentSteps : BaseSteps
+    public class MakeAPaymentSteps : BaseSteps<MakePaymentPage>
     {
         public MakeAPaymentSteps(IWebDriver driver) : base(driver)
         {
+            Page = new MakePaymentPage(Driver);
         }
 
-        public void ClickCustomesMakeAPaymentMenuItem()
+        public void ClickCustomersMakeAPaymentMenuItem()
         {
             MenuBar.HoverCustomersMenuItem();
             MenuBar.ClickCustomersMakePaymentMenuItem();
@@ -19,17 +18,15 @@ namespace Ui.Tests.Steps
 
         public void VerifyCustomerHasOptionToPayByCreditCardOrCheck()
         {
-            var makePaymentPage = new MakePaymentPage(Driver);
+            WaitUntilElementIsVisible(Page.PayWithCheck);
+            Page.PayWithCheck.Click();
+            WaitUntilElementIsVisible(Page.CheckOrCreditCardForm);
 
-            WaitUntilElementIsVisible(makePaymentPage.PayWithCheck);
-            makePaymentPage.PayWithCheck.Click();
-            WaitUntilElementIsVisible(makePaymentPage.CheckOrCreditCardForm);
-            
             Driver.Navigate().Back();
 
-            WaitUntilElementIsVisible(makePaymentPage.PayWithCreditCard);
-            makePaymentPage.PayWithCreditCard.Click();
-            WaitUntilElementIsVisible(makePaymentPage.CheckOrCreditCardForm);
+            WaitUntilElementIsVisible(Page.PayWithCreditCard);
+            Page.PayWithCreditCard.Click();
+            WaitUntilElementIsVisible(Page.CheckOrCreditCardForm);
         }
     }
 }

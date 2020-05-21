@@ -10,20 +10,18 @@ namespace Ui.Tests.PageObjectModels
             PageUrl = "https://velocityrisk.com/claims/";
         }
 
-        public void ClickFileAClaimMenuItem() => ClickPaneITitleByName("File a claim");
+        public void ClickFileAClaimMenuItem() => ClickPanel("File a claim");
 
-        // todo: move to appropriate Steps method
-        public void ClickExpandPanel()
+        public void ExpandAllPanels()
         {
             var expandAllButton = Driver.FindElement(By.ClassName("expand_all_btn"));
             WaitForClickable(expandAllButton);
             expandAllButton.Click();
         }
 
-        // todo: move to appropriate Steps method
-        public void ClickPaneITitleByName(string panelItemName)
+        public void ClickPanel(string name)
         {
-            var spanElement = GetPanelLinkByItemName(panelItemName);
+            var spanElement = GetPanel(name);
             var divElement = spanElement.FindElement(By.XPath("ancestor::div[@class = 'customer_drop_block']"));
             ScrollToElement(divElement);
 
@@ -33,29 +31,14 @@ namespace Ui.Tests.PageObjectModels
             aElement.Click();
         }
 
-        // todo: move to appropriate Steps method
-        public IWebElement GetPanelLinkByItemName(string panelItemTitle)
+        public IWebElement GetPanel(string title)
         {
-            return Driver.FindElement(By.XPath("//span[contains(text(), '" + panelItemTitle + "')]"));
+            return Driver.FindElement(By.XPath("//span[contains(text(), '" + title + "')]"));
         }
 
-        // todo: move to appropriate Steps method
-        public bool IsPanelElementPresent(string panelItemTitle)
+        public string GetPanelContent(string title)
         {
-            try
-            {
-                return GetPanelLinkByItemName(panelItemTitle).Displayed;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        // todo: move to appropriate Steps method
-        public string GetPanelContent(string panelItemTitle)
-        {
-            var panelItem = GetPanelLinkByItemName(panelItemTitle);
+            var panelItem = GetPanel(title);
             var panelElement = panelItem.FindElement(By.XPath("ancestor::div[@class = 'customer_drop_block']/div"));
 
             return panelElement.GetAttribute("innerText");
