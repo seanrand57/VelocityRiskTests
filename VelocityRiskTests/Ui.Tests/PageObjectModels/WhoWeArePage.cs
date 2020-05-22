@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Collections.ObjectModel;
 
 namespace Ui.Tests.PageObjectModels
 {
@@ -12,22 +11,36 @@ namespace Ui.Tests.PageObjectModels
 
         public IWebElement MeetOurLeadershipTeamElement => Driver.FindElement(By.ClassName("filter_inner_part"));
 
-        public ReadOnlyCollection<IWebElement> LeadershipTeamImages => Driver.FindElements(By.XPath("//a[contains(@class, 'filter_image_part')]"));
-
         public IWebElement GetImageCardByName(string name) => Driver.FindElement(By.XPath($"//div[@class='overlay_content']/p[contains(text(), '{name}')]/parent::div"));
 
-        public IWebElement GetJobByName(string name)
+        public string GetJobTitleByName(string name)
         {
             var imageCardDivElement = GetImageCardByName(name);
-            var jobElement = imageCardDivElement.FindElement(By.XPath("//p[@class='filter_image_state'][1]"));
-            return jobElement;
+            var jobElement = imageCardDivElement.FindElements(By.ClassName("filter_image_state"));
+            var jobTitle = jobElement[0].Text;
+            return jobTitle;
         }
 
-        public IWebElement GetLocationByName(string name)
+        public bool IsJobTitleDisplayedByName(string name)
         {
             var imageCardDivElement = GetImageCardByName(name);
-            var locationElement = imageCardDivElement.FindElement(By.XPath("//p[@class='filter_image_state'][2]"));
-            return locationElement;
-        }         
+            var jobElement = imageCardDivElement.FindElements(By.ClassName("filter_image_state"));
+            
+            return jobElement[0].Displayed;
+        }
+
+        public string GetLocationByName(string name)
+        {
+            var imageCardDivElement = GetImageCardByName(name);
+            var locationElement = imageCardDivElement.FindElements(By.ClassName("filter_image_state"));
+            return locationElement[1].Text;
+        }
+
+        public bool IsLocationDisplayedByName(string name)
+        {
+            var imageCardDivElement = GetImageCardByName(name);
+            var locationElement = imageCardDivElement.FindElements(By.ClassName("filter_image_state"));
+            return locationElement[1].Displayed;
+        }
     }
 }
