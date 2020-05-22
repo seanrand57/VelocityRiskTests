@@ -61,8 +61,8 @@ namespace Ui.Tests.PageObjectModels
             return panelElement.GetAttribute("innerText");
         }
 
-        public IWebElement GetQuestionsOnAnExistingClaimElement() => Driver.FindElement(By.Id("questions-on-an-existing-claim"));
+        public IWebElement QuestionsOnAnExistingClaimElement => Driver.FindElement(By.Id("questions-on-an-existing-claim"));
 
-        public IWebElement GetLinksFromFileAClaimSection(string linkName) => Driver.FindElement(By.XPath($"//p/strong[contains(text(), '{linkName}')]/following-sibling::a[contains(@class, 'underline')]"));
+        public IWebElement GetLinkFromFileAClaimSection(string linkName) => Driver.FindElement(By.XPath($"//p/strong[contains(text(), '{linkName}')]/following-sibling::a[contains(@class, 'underline')]"));
     }
 }

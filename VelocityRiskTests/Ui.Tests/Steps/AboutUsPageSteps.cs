@@ -22,8 +22,7 @@ namespace Ui.Tests.Steps
 
         public void NavigateToLeadershipTeamView()
         {
-            var leadershipTeamElement = _whoWeArePage.MeetOurLeadershipTeamElement;
-            MouseHoverToElement(leadershipTeamElement);
+            MouseHoverToElement(_whoWeArePage.MeetOurLeadershipTeamElement);
         }     
 
         public void VerifyIsTeamMemberExists(string name)
@@ -51,27 +50,21 @@ namespace Ui.Tests.Steps
         }
 
         public void VerifyTeamMemberJobTitle(string name, string expectedJobTitle)
-        {
-            var jobElement = _whoWeArePage.GetJobTitleByName(name);
-            jobElement.ShouldBe(expectedJobTitle.ToUpper(), $"There is no job title: {expectedJobTitle} for name: {name} on UI.");
-        }
+        {            
+            var isJobDisplayed = _whoWeArePage.IsJobTitleDisplayedByName(name);
+            isJobDisplayed.ShouldBeTrue($"The job title element for {name} is not displayed on UI.");
 
-        public void VerifyIsTeamMemberJobTitleDisplayed(string name)
-        {
-            var jobElement = _whoWeArePage.IsJobTitleDisplayedByName(name);
-            jobElement.ShouldBeTrue($"The job title element for {name} is not displayed on UI.");
+            var jobTitle = _whoWeArePage.GetJobTitleByName(name);
+            jobTitle.ShouldBe(expectedJobTitle.ToUpper(), $"There is no job title: {expectedJobTitle} for name: {name} on UI.");
         }
 
         public void VerifyTeamMemberLocation(string name, string expectedLocation)
         {
-            var locationElement = _whoWeArePage.GetLocationByName(name);
-            locationElement.ShouldBe(expectedLocation.ToUpper(), $"There is no location: {expectedLocation} for name: {name} on UI.");
-        }
+            var isLocationElementDisplayed = _whoWeArePage.IsLocationDisplayedByName(name);
+            isLocationElementDisplayed.ShouldBeTrue($"The location element for {name} is not displayed on UI.");
 
-        public void VerifyIsTeamMemberLocationDisplayed(string name)
-        {
-            var locationElement = _whoWeArePage.IsLocationDisplayedByName(name);
-            locationElement.ShouldBeTrue($"The location element for {name} is not displayed on UI.");
+            var locationTitle = _whoWeArePage.GetLocationByName(name);
+            locationTitle.ShouldBe(expectedLocation.ToUpper(), $"There is no location: {expectedLocation} for name: {name} on UI.");
         }
     }
 }

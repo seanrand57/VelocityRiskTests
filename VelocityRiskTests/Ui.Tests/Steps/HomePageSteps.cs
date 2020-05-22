@@ -15,14 +15,14 @@ namespace Ui.Tests.Steps
 
         public void VerifyLogoIsPresent()
         {
-            var velocityLogoImage = _homePage.GetLogo();
+            var velocityLogoImage = _homePage.Logo;
             var isLogoPresent = velocityLogoImage.Displayed;
             isLogoPresent.ShouldBeTrue("Velocity risk logo should be present.");
         }
 
         public void VerifyNavBarIsOrange()
         {
-            var navBar = _homePage.GetNavBar();
+            var navBar = _homePage.NavBar;
             var navBarColor = navBar.GetCssValue("background-color");
             navBarColor.ShouldBe("rgba(245, 127, 38, 1)", "NavBar should be orange");
         }

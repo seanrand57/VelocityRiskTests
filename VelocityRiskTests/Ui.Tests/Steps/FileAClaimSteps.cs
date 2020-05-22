@@ -21,7 +21,7 @@ namespace Ui.Tests.Steps
 
         public void ScrollDown()
         {
-            var element = _claimsPage.GetQuestionsOnAnExistingClaimElement();
+            var element = _claimsPage.QuestionsOnAnExistingClaimElement;
             MouseHoverToElement(element);
         }
 
@@ -37,18 +37,18 @@ namespace Ui.Tests.Steps
 
         public void VerifyHomeownersLink(string url)
         {
-            var homeownersLink = _claimsPage.GetLinksFromFileAClaimSection("homeowners");
+            var homeownersLink = _claimsPage.GetLinkFromFileAClaimSection("homeowners");
             VerifyLink(homeownersLink, url);
         }
 
         public void VerifySmallCommercialLink(string url)
         {
-            var smallCommercialLink = _claimsPage.GetLinksFromFileAClaimSection("small commercial");
+            var smallCommercialLink = _claimsPage.GetLinkFromFileAClaimSection("small commercial");
             VerifyLink(smallCommercialLink, url);
         }
         public void VerifyLargeCommercialLink(string url)
         {
-            var largeCommercialLink = _claimsPage.GetLinksFromFileAClaimSection("large commercial");
+            var largeCommercialLink = _claimsPage.GetLinkFromFileAClaimSection("large commercial");
             VerifyLink(largeCommercialLink, url);
         }
     }

@@ -25,8 +25,7 @@ namespace Ui.Tests.PageObjectModels
         {
             var imageCardDivElement = GetImageCardByName(name);
             var jobElement = imageCardDivElement.FindElements(By.ClassName("filter_image_state"));
-            var jobTitle = jobElement[0].Text;
-            return jobTitle;
+            return jobElement[0].Text;
         }
 
         public bool IsJobTitleDisplayedByName(string name)

@@ -150,10 +150,8 @@ namespace Ui.Tests
 
             _aboutUsPageSteps.ClickOnNameCard(imageCardItem.TeamMemberName);
 
-            _aboutUsPageSteps.VerifyIsTeamMemberJobTitleDisplayed(imageCardItem.TeamMemberName);
             _aboutUsPageSteps.VerifyTeamMemberJobTitle(imageCardItem.TeamMemberName, imageCardItem.JobTitle);
 
-            _aboutUsPageSteps.VerifyIsTeamMemberLocationDisplayed(imageCardItem.TeamMemberName);
             _aboutUsPageSteps.VerifyTeamMemberLocation(imageCardItem.TeamMemberName, imageCardItem.Location);
         }
 
