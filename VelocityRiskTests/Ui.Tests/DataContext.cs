@@ -185,5 +185,19 @@ After a major storm, TDI sends a fraud team to the affected area to meet with lo
 The new toolkit lists actions local officials can take to deter scams, such as requiring permits for out-of-town solicitors and contractors. The toolkit also has printable flyers in English and Spanish, sample social media posts, and links to other resources."}
             };
         }
+
+        public static List<ImageCard> LoadImageCards()
+        {
+            return
+                new List<ImageCard>
+                {
+                    new ImageCard {Id = 1, TeamMemberName = "Phil Bowie", JobTitle = "CEO", Location = "Nashville, TN"},
+                    new ImageCard {Id = 2, TeamMemberName = "Rod Harden", JobTitle = "Chief Claims Officer", Location = "Nashville, TN"},
+                    new ImageCard {Id = 3, TeamMemberName = "Jake Rothfuss", JobTitle = "Chief Operating Officer", Location = "Nashville, TN"},
+                    new ImageCard {Id = 4, TeamMemberName = "Kristi Jeffers", JobTitle = "Chief Administrative Officer", Location = "Birmingham, AL"},
+                    new ImageCard {Id = 5, TeamMemberName = "Carolyn Parker", JobTitle = "Chief Underwriting Officer, Commercial Lines", Location = "Birmingham, AL"},
+                    new ImageCard {Id = 6, TeamMemberName = "Praveen Reddy", JobTitle = "Chief of Operations", Location = "Nashville, TN"},
+                };
+        }
     }
 }

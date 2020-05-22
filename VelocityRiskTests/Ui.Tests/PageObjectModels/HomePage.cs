@@ -25,6 +25,13 @@ namespace Ui.Tests.PageObjectModels
             return Driver.FindElement(By.XPath("//a[contains(text(), '" + menuItemName + "')]"));
         }
 
+        public IWebElement AboutUsMenuItem => Driver.FindElement(By.XPath("//ul[@id='Up']/li/a[contains(text(), 'About Us')]"));
+
+        public IWebElement WhoWeAreMenuItem => Driver.FindElement(By.XPath("//ul[@class='sub-menu']/li/a[contains(text(), 'Who We Are')]"));
+        
+        public IWebElement Logo => Driver.FindElement(By.XPath("//div[@class='header_white_inner']//img"));
+        public IWebElement NavBar => Driver.FindElement(By.ClassName("header_orange"));
+
         public bool MenuPresents(string menuItemName)
         {
             try
@@ -48,6 +55,12 @@ namespace Ui.Tests.PageObjectModels
                 menuItem.FindElement(By.XPath("ancestor::ul[@class = 'sub-menu']/preceding-sibling::a")).Click();
             }
             menuItem.Click();
+        }
+
+        public void ClickOnWhoWeAreMenuItemLink()
+        {
+            AboutUsMenuItem.Click();
+            WhoWeAreMenuItem.Click();
         }
     }
 }
