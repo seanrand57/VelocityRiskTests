@@ -30,6 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Steps\TestData\Customers\CopyrightTestData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CopyrightTestData.resx</DependentUpon>
+    </Compile>
     <Compile Update="Steps\TestData\Customers\ManageYourPolicyTestData.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -48,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Steps\TestData\Customers\CopyrightTestData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CopyrightTestData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Steps\TestData\Customers\ManageYourPolicyTestData.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ManageYourPolicyTestData.Designer.cs</LastGenOutput>

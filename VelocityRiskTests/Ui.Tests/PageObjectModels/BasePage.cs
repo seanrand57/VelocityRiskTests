@@ -16,14 +16,12 @@ namespace Ui.Tests.PageObjectModels
             Driver = driver;
         }
 
-        // todo: use the same method from BaseSteps class
         public void WaitForClickable(IWebElement webElement, int timeOut = 20)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeOut));
-            wait.Until(ExpectedConditions.ElementToBeClickable(webElement));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(webElement));
         }
 
-        // todo: move to BaseSteps class
         public void ScrollToElement(IWebElement element)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;

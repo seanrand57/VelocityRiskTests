@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
@@ -57,8 +58,15 @@ namespace Ui.Tests
         }
 
         [Test]
+        public void TestCase_01_SecuredConnection()
+        {
+            _homePageSteps.GivenNavigatedWithoutSsl();
+            _homePageSteps.VerifyProtocolIsHttps();
+        }
+
+        [Test]
         [TestCaseSource(nameof(MenuInfoExpected))]
-        public void TestCase_2_MainMenu_ItemsAreCorrect(MenuItem menuItem)
+        public void TestCase_02_MainMenu_ItemsAreCorrect(MenuItem menuItem)
         {
             _homePageSteps.GivenMenuItemPresented(menuItem);
             _homePageSteps.GivenIClickMenuItem(menuItem);
@@ -66,13 +74,37 @@ namespace Ui.Tests
         }
 
         [Test]
+        public void TestCase_03_FooterItemsAreCorrect()
+        {
+            // given navigated to home page
+            _homePageSteps.ThenVerifyCorporateOfficeAddress();
+            _homePageSteps.ThenVerifyReportClaim();
+            _homePageSteps.ThenVerifyProductInquiries();
+            _homePageSteps.ThenVerifyCopyright();
+        }
+
+        [Test]
         [TestCaseSource(nameof(PanelInfoExpected))]
-        public void TestCase_4_Claims_PanelItemsAreCorrect(PanelItem panelItem)
+        public void TestCase_04_Claims_PanelItemsAreCorrect(PanelItem panelItem)
         {
             _claimsSteps.NavigateTo();
             _claimsSteps.GivenPanelItemPresented(panelItem);
             _claimsSteps.GivenIExpandPanelItem(panelItem);
             _claimsSteps.ThenVerifyPanelContent(panelItem);
+        }
+
+        [Test]
+        public void TestCase_06_Home_CookiePresented()
+        {
+            // given navigated to home page
+            _homePageSteps.ThenVerifyCookiePresented();
+        }
+
+        [Test]
+        public void TestCase_08_Footer_SocialLinkAreOpening()
+        {
+            // given navigated to home page
+            _homePageSteps.ThenVerifySocialLinks();
         }
 
         [Test]
@@ -86,7 +118,7 @@ namespace Ui.Tests
             _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
             _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
         }
-         
+
         [Test]
         public void TestCase_11_Customers_MakeAPayment()
         {

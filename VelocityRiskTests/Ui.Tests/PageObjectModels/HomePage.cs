@@ -5,10 +5,13 @@ namespace Ui.Tests.PageObjectModels
 {
     public class HomePage : BasePage
     {
-        protected MenuBar MenuBar { get; set; }
-        protected Header Header { get; set; }
-        protected Footer Footer { get; set; }
-        protected CookieInfo CookieInfo { get; set; }
+        public MenuBar MenuBar { get; set; }
+
+        public Header Header { get; set; }
+
+        public Footer Footer { get; set; }
+
+        public CookieInfo CookieInfo { get; set; }
 
         public HomePage(IWebDriver driver) : base(driver)
         {
@@ -62,5 +65,74 @@ namespace Ui.Tests.PageObjectModels
             AboutUsMenuItem.Click();
             WhoWeAreMenuItem.Click();
         }
+
+        #region Footer
+
+        public string GetCorporateOfficeAddress()
+        {
+            return Footer.CorporateOfficeAddress.Text;
+        }
+
+        public string GetLinkedInLink()
+        {
+            return Footer.CorporateOfficeLinkedIn.GetAttribute("href");
+        }
+
+        public string GetFacebookLink()
+        {
+            return Footer.CorporateOfficeFacebook.GetAttribute("href");
+        }
+
+        public string GetTwitterLink()
+        {
+            return Footer.CorporateOfficeTwitter.GetAttribute("href");
+        }
+
+        public string GetInstagramLink()
+        {
+            return Footer.CorporateOfficeInstagram.GetAttribute("href");
+        }
+
+        public string GetReportClaimPhoneNumberText()
+        {
+            return Footer.ReportClaimPhoneNumber.Text;
+        }
+
+        public string GetReportClaimLink()
+        {
+            return Footer.ReportClaimPhoneNumber.GetAttribute("href");
+        }
+
+        public string GetPersonalLinesNumberText()
+        {
+            return Footer.PersonalLinesNumber.Text;
+        }
+
+        public string GetSmallComercialNumberText()
+        {
+            return Footer.SmallCommercialNumber.Text;
+        }
+
+        public string GetLargeCommercialNumberText()
+        {
+            return Footer.LargeCommercialNumber.Text;
+        }
+
+        public string GetPersonalLinesNumberLink()
+        {
+            return Footer.PersonalLinesNumber.GetAttribute("href");
+        }
+
+        public string GetSmallComercialNumberLink()
+        {
+            return Footer.SmallCommercialNumber.GetAttribute("href");
+        }
+
+        public string GetLargeCommercialNumberLink()
+        {
+            return Footer.LargeCommercialNumber.GetAttribute("href");
+        }
+
+        #endregion Footer
     }
 }
