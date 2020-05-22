@@ -140,7 +140,6 @@ namespace Ui.Tests
         [TestCaseSource("ImageCardInfoExpected")]
         public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(PersistenceModels.ImageCard imageCardItem)
         {
-            //Act
             _aboutUsPageSteps.NavigateToPage();
             _aboutUsPageSteps.NavigateToLeadershipTeamView();
             _aboutUsPageSteps.VerifyIsTeamMemberExists(imageCardItem.TeamMemberName);
