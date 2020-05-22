@@ -13,6 +13,14 @@ namespace Ui.Tests.PageObjectModels
 
         public IWebElement GetImageCardByName(string name) => Driver.FindElement(By.XPath($"//div[@class='overlay_content']/p[contains(text(), '{name}')]/parent::div"));
 
+        public bool IsTeamMemberImageDisplayedByName(string name)
+        {
+            var imageCardDivElement = GetImageCardByName(name);
+            var imageElement = imageCardDivElement.FindElement(By.XPath("//ancestor::a/img"));
+           
+            return imageElement.Displayed;
+        }
+
         public string GetJobTitleByName(string name)
         {
             var imageCardDivElement = GetImageCardByName(name);

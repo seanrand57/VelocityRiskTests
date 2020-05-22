@@ -34,8 +34,8 @@ namespace Ui.Tests.Steps
 
         public void VerifyIsTeamMemberImageDisplayed(string name)
         {
-            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
-            imageCardElement.Displayed.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
+            var imageCardElement = _whoWeArePage.IsTeamMemberImageDisplayedByName(name);
+            imageCardElement.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
         }
 
         public void VerifyIsTeamMemberNameDisplayed(string name)
