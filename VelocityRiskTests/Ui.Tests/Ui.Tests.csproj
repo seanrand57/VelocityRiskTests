@@ -35,12 +35,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ManageYourPolicyTestData.resx</DependentUpon>
     </Compile>
+    <Compile Update="Steps\TestData\FileAClaimTestData.Designer.cs">
+      <DependentUpon>FileAClaimTestData.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Steps\TestData\HomePageTestData.Designer.cs">
+      <DependentUpon>HomePageTestData.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Steps\TestData\Customers\ManageYourPolicyTestData.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ManageYourPolicyTestData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Steps\TestData\FileAClaimTestData.resx">
+      <LastGenOutput>FileAClaimTestData.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Steps\TestData\HomePageTestData.resx">
+      <LastGenOutput>HomePageTestData.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 

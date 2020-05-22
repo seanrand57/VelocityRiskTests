@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Collections.ObjectModel;
 
 namespace Ui.Tests.PageObjectModels
 {
@@ -8,6 +9,8 @@ namespace Ui.Tests.PageObjectModels
         {
             PageUrl = "https://velocityrisk.com/claims/";
         }
+
+        public void ClickFileAClaimMenuItem() => ClickPaneITitleByName("File a claim");
 
         // todo: move to appropriate Steps method
         public void ClickExpandPanel()
@@ -57,5 +60,9 @@ namespace Ui.Tests.PageObjectModels
 
             return panelElement.GetAttribute("innerText");
         }
+
+        public IWebElement QuestionsOnAnExistingClaimElement => Driver.FindElement(By.Id("questions-on-an-existing-claim"));
+
+        public IWebElement GetLinkFromFileAClaimSection(string linkName) => Driver.FindElement(By.XPath($"//p/strong[contains(text(), '{linkName}')]/following-sibling::a[contains(@class, 'underline')]"));
     }
 }
