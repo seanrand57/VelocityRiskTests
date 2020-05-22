@@ -27,7 +27,7 @@ namespace Ui.Tests.PageObjectModels
 
         public void ClickOnAboutUsMenuItem() => Driver.FindElement(By.XPath("//ul[@id='Up']/li/a[contains(text(), 'About Us')]")).Click();
 
-        public void ClickOnWhoWeAreMenuItem() => Driver.FindElement(By.XPath("//ul[@class='sub - menu']/li/a[contains(text(), 'Who We Are')]")).Click();
+        public void ClickOnWhoWeAreMenuItem()=> Driver.FindElement(By.XPath("//ul[@class='sub-menu']/li/a[contains(text(), 'Who We Are')]")).Click();
 
         public bool MenuPresents(string menuItemName)
         {

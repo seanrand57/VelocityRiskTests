@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using Shouldly;
-using System.Collections.Generic;
 using Ui.Tests.PageObjectModels;
 
 namespace Ui.Tests.Steps
@@ -25,40 +24,54 @@ namespace Ui.Tests.Steps
         {
             var leadershipTeamElement = _whoWeArePage.MeetOurLeadershipTeamElement;
             MouseHoverToElement(leadershipTeamElement);
+        }     
+
+        public void VerifyIsTeamMemberExists(string name)
+        {
+            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            imageCardElement.ShouldNotBeNull($"There is no {name} on UI.");
         }
 
-        public List<ImageCard> GetTeamMembersInfo()
+        public void VerifyIsTeamMemberImageDisplayed(string name)
         {
-            return _whoWeArePage.LeadershipTeamInfo;
+            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            imageCardElement.Displayed.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
         }
 
-        public ImageCard FindExpectedItem(PersistenceModels.ImageCard imageCardItem)
+        public void VerifyIsTeamMemberNameDisplayed(string name)
         {
-            var allTeamMembers = GetTeamMembersInfo();
-            var currentItem = allTeamMembers.Find(x => x.TeamMemberName == imageCardItem.TeamMemberName
-            && x.JobTitle == imageCardItem.JobTitle
-            && x.Location == imageCardItem.Location);
-
-            return currentItem;
+            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            imageCardElement.Displayed.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
         }
-        
-        public void VerifyItem(PersistenceModels.ImageCard imageCardItem)
+
+        public void ClickOnNameCard(string name)
         {
-            var item = FindExpectedItem(imageCardItem);
-            item.ShouldNotBeNull($"There is no {imageCardItem.TeamMemberName}, {imageCardItem.JobTitle}, {imageCardItem.Location} on UI.");
+            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            imageCardElement.Click();
+        }
 
-            item.ShouldNotBeNull($"There is no image card for {imageCardItem.TeamMemberName}.");
-            item.IsImageDisplayed.ShouldBeTrue($"The image card for team member {imageCardItem.TeamMemberName} is not displayed on UI");
-            
-            item.IsTeamMemberNameDisplayed.ShouldBeTrue($"It was not possible to find name card for team member : {imageCardItem.TeamMemberName} on UI");
-            item.TeamMemberName.ShouldBe(imageCardItem.TeamMemberName);
+        public void VerifyTeamMemberJobTitle(string name, string expectedJobTitle)
+        {
+            var jobElement = _whoWeArePage.GetJobByName(name);
+            jobElement.Text.ShouldBe(expectedJobTitle.ToUpper(), $"There is no job title: {expectedJobTitle} for name: {name} on UI.");
+        }
 
-            item.IsJobTitleDisplayed.ShouldBeTrue($"It was not possible to find name card for team member : {imageCardItem.TeamMemberName} on UI");
-            item.JobTitle.ShouldBe(imageCardItem.JobTitle);
+        public void VerifyIsTeamMemberJobTitleDisplayed(string name)
+        {
+            var jobElement = _whoWeArePage.GetJobByName(name);
+            jobElement.Displayed.ShouldBeTrue($"The job title element for {name} is not displayed on UI.");
+        }
 
+        public void VerifyTeamMemberLocation(string name, string expectedLocation)
+        {
+            var locationElement = _whoWeArePage.GetLocationByName(name);
+            locationElement.Text.ShouldBe(expectedLocation.ToUpper(), $"There is no location: {expectedLocation} for name: {name} on UI.");
+        }
 
-            item.IsLocationDisplayed.ShouldBeTrue($"It was not possible to find name card for team member : {imageCardItem.TeamMemberName} on UI");
-            item.Location.ShouldBe(imageCardItem.Location);
+        public void VerifyIsTeamMemberLocationDisplayed(string name)
+        {
+            var locationElement = _whoWeArePage.GetLocationByName(name);
+            locationElement.Displayed.ShouldBeTrue($"The location element for {name} is not displayed on UI.");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Ui.Tests
 
         public static IEnumerable<PanelItem> PanelInfoExpected { get; } = DataContext.LoadPanelItems();
 
-        public static IEnumerable<PersistenceModels.ImageCard> ImageCardInfoExpected { get; } = DataContext.LoadImageCards();
+        public static IEnumerable<ImageCard> ImageCardInfoExpected { get; } = DataContext.LoadImageCards();
 
         private BaseSteps _baseSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;
@@ -143,7 +143,18 @@ namespace Ui.Tests
             //Act
             _aboutUsPageSteps.NavigateToPage();
             _aboutUsPageSteps.NavigateToLeadershipTeamView();
-            _aboutUsPageSteps.VerifyItem(imageCardItem);
+            _aboutUsPageSteps.VerifyIsTeamMemberExists(imageCardItem.TeamMemberName);
+
+            _aboutUsPageSteps.VerifyIsTeamMemberImageDisplayed(imageCardItem.TeamMemberName);
+            _aboutUsPageSteps.VerifyIsTeamMemberNameDisplayed(imageCardItem.TeamMemberName);
+
+            _aboutUsPageSteps.ClickOnNameCard(imageCardItem.TeamMemberName);
+
+            _aboutUsPageSteps.VerifyIsTeamMemberJobTitleDisplayed(imageCardItem.TeamMemberName);
+            _aboutUsPageSteps.VerifyTeamMemberJobTitle(imageCardItem.TeamMemberName, imageCardItem.JobTitle);
+
+            _aboutUsPageSteps.VerifyIsTeamMemberLocationDisplayed(imageCardItem.TeamMemberName);
+            _aboutUsPageSteps.VerifyTeamMemberLocation(imageCardItem.TeamMemberName, imageCardItem.Location);
         }
 
         [Test]
