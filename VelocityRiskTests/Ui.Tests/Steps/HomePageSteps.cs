@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
+using Ui.Tests.Steps.TestData;
 
 namespace Ui.Tests.Steps
 {
@@ -15,16 +16,14 @@ namespace Ui.Tests.Steps
 
         public void VerifyLogoIsPresent()
         {
-            var velocityLogoImage = _homePage.Logo;
-            var isLogoPresent = velocityLogoImage.Displayed;
-            isLogoPresent.ShouldBeTrue("Velocity risk logo should be present.");
+            _homePage.Logo.Displayed.ShouldBeTrue("Velocity risk logo should be present.");
         }
 
         public void VerifyNavBarIsOrange()
         {
             var navBar = _homePage.NavBar;
             var navBarColor = navBar.GetCssValue("background-color");
-            navBarColor.ShouldBe("rgba(245, 127, 38, 1)", "NavBar should be orange");
+            navBarColor.ShouldBe(HomePageTestData.NavBarColor, "NavBar should be orange");
         }
     }
 }

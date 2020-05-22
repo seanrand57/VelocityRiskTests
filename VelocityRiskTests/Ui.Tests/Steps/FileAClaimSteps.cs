@@ -21,8 +21,7 @@ namespace Ui.Tests.Steps
 
         public void ScrollDown()
         {
-            var element = _claimsPage.QuestionsOnAnExistingClaimElement;
-            MouseHoverToElement(element);
+            MouseHoverToElement(_claimsPage.QuestionsOnAnExistingClaimElement);
         }
 
         private void VerifyLink(IWebElement linkElement, string url)
