@@ -4,7 +4,7 @@ using Ui.Tests.PageObjectModels;
 
 namespace Ui.Tests.Steps
 {
-    public class FileAClaimSteps: BaseSteps
+    public class FileAClaimSteps: BaseSteps<ClaimsPage>
     {
         private ClaimsPage _claimsPage;
 

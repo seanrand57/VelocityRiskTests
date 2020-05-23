@@ -4,7 +4,7 @@ using Ui.Tests.PageObjectModels;
 
 namespace Ui.Tests.Steps
 {
-    public class AboutUsPageSteps : BaseSteps
+    public class AboutUsPageSteps : BaseSteps<WhoWeArePage>
     {
         private WhoWeArePage _whoWeArePage;
 
@@ -15,15 +15,15 @@ namespace Ui.Tests.Steps
 
         public void NavigateToPage()
         {
-            GoToHomePage();
+            NavigateTo();
             var homePage = new HomePage(Driver);
-            homePage.ClickOnWhoWeAreMenuItemLink();            
+            homePage.ClickOnWhoWeAreMenuItemLink();
         }
 
         public void NavigateToLeadershipTeamView()
         {
             MouseHoverToElement(_whoWeArePage.MeetOurLeadershipTeamElement);
-        }     
+        }
 
         public void VerifyIsTeamMemberExists(string name)
         {

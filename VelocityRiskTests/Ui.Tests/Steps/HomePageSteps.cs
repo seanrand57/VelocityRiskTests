@@ -2,7 +2,6 @@
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.Steps.TestData;
-using Ui.Tests.PageObjectModels.Components;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps.TestData.Customers;
 
@@ -22,7 +21,7 @@ namespace Ui.Tests.Steps
 
         public void VerifyNavBarIsOrange()
         {
-            var navBar = _homePage.NavBar;
+            var navBar = Page.NavBar;
             var navBarColor = navBar.GetCssValue("background-color");
             navBarColor.ShouldBe(HomePageTestData.NavBarColor, "NavBar should be orange");
         }

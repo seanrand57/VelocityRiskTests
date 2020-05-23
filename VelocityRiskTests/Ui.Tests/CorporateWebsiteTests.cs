@@ -25,7 +25,6 @@ namespace Ui.Tests
         private int _tabsCountBeforeEachTest;
 
         private FileAClaimSteps _fileAClaimSteps;
-        private HomePageSteps _homePageSteps;
         private AboutUsPageSteps _aboutUsPageSteps;
 
         [OneTimeSetUp]
@@ -94,6 +93,16 @@ namespace Ui.Tests
         }
 
         [Test]
+        public void TestCase_05_FileAClaimLinksAreCorrectTest()
+        {
+            _fileAClaimSteps.ClickFileAClaimAccordion();
+            _fileAClaimSteps.ScrollDown();
+            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimExpectedUrl);
+            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);
+            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);             
+        }
+
+        [Test]
         public void TestCase_06_Home_CookiePresented()
         {
             // given navigated to home page
@@ -101,10 +110,35 @@ namespace Ui.Tests
         }
 
         [Test]
+        [TestCaseSource(nameof(ImageCardInfoExpected))]
+        public void TestCase_07_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(ImageCard imageCardItem)
+        {
+            _aboutUsPageSteps.NavigateToPage();
+            _aboutUsPageSteps.NavigateToLeadershipTeamView();
+            _aboutUsPageSteps.VerifyIsTeamMemberExists(imageCardItem.TeamMemberName);
+
+            _aboutUsPageSteps.VerifyIsTeamMemberImageDisplayed(imageCardItem.TeamMemberName);
+            _aboutUsPageSteps.VerifyIsTeamMemberNameDisplayed(imageCardItem.TeamMemberName);
+
+            _aboutUsPageSteps.ClickOnNameCard(imageCardItem.TeamMemberName);
+
+            _aboutUsPageSteps.VerifyTeamMemberJobTitle(imageCardItem.TeamMemberName, imageCardItem.JobTitle);
+
+            _aboutUsPageSteps.VerifyTeamMemberLocation(imageCardItem.TeamMemberName, imageCardItem.Location);
+        }
+
+        [Test]
         public void TestCase_08_Footer_SocialLinkAreOpening()
         {
             // given navigated to home page
             _homePageSteps.ThenVerifySocialLinks();
+        }
+
+        [Test]
+        public void TestCase_09_VelocityLogoImageAndNavBarAreCorrect()
+        {
+            _homePageSteps.VerifyLogoIsPresent();
+            _homePageSteps.VerifyNavBarIsOrange();
         }
 
         [Test]
@@ -127,58 +161,6 @@ namespace Ui.Tests
             _makeAPaymentSteps.SwitchToLastOpenedTab();
             _makeAPaymentSteps.VerifyProtocolIsHttps();
             _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
-        }
-
-        // some links are opened in new tabs, we need to select a tab and get the url
-        private string GetUrl()
-        {
-            var allTabs = Driver.WindowHandles;
-            var actualUrl = Driver.Url;
-            if (allTabs.Count > 1)
-            {
-                Driver.SwitchTo().Window(allTabs[1]);
-                actualUrl = Driver.Url;
-                Driver.Close();
-                Driver.SwitchTo().Window(allTabs[0]);
-            }
-
-            return actualUrl;
-        }
-
-        [Test]
-        public void Test_Case_5_FileAClaimLinksAreCorrectTest()
-        {
-            _fileAClaimSteps.ClickFileAClaimAccordion();
-            _fileAClaimSteps.ScrollDown();
-            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimExpectedUrl);
-            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);
-            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);             
-        }
-
-
-        [Test]
-        [TestCaseSource("ImageCardInfoExpected")]
-        public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(PersistenceModels.ImageCard imageCardItem)
-        {
-            _aboutUsPageSteps.NavigateToPage();
-            _aboutUsPageSteps.NavigateToLeadershipTeamView();
-            _aboutUsPageSteps.VerifyIsTeamMemberExists(imageCardItem.TeamMemberName);
-
-            _aboutUsPageSteps.VerifyIsTeamMemberImageDisplayed(imageCardItem.TeamMemberName);
-            _aboutUsPageSteps.VerifyIsTeamMemberNameDisplayed(imageCardItem.TeamMemberName);
-
-            _aboutUsPageSteps.ClickOnNameCard(imageCardItem.TeamMemberName);
-
-            _aboutUsPageSteps.VerifyTeamMemberJobTitle(imageCardItem.TeamMemberName, imageCardItem.JobTitle);
-
-            _aboutUsPageSteps.VerifyTeamMemberLocation(imageCardItem.TeamMemberName, imageCardItem.Location);
-        }
-
-        [Test]
-        public void Test_Case_9_VelocityLogoImageAndNavBarAreCorrect()
-        {
-            _homePageSteps.VerifyLogoIsPresent();
-            _homePageSteps.VerifyNavBarIsOrange();
         }
     }
 }
