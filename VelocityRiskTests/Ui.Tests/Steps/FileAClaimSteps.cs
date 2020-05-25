@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Linq;
+using OpenQA.Selenium;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
 
@@ -6,49 +7,60 @@ namespace Ui.Tests.Steps
 {
     public class FileAClaimSteps: BaseSteps<ClaimsPage>
     {
-        private ClaimsPage _claimsPage;
-
         public FileAClaimSteps(IWebDriver driver) : base(driver)
         {
-            _claimsPage = new ClaimsPage(Driver);
+            Page = new ClaimsPage(Driver);
         }
 
         public void ClickFileAClaimAccordion()
         {
             MenuBar.ClickCustomersClaimsMenuItem();
-            _claimsPage.ClickFileAClaimMenuItem();
+            Page.ClickFileAClaimMenuItem();
         }
 
-        public void ScrollDown()
+        public void ScrollTo()
         {
-            MouseHoverToElement(_claimsPage.QuestionsOnAnExistingClaimElement);
+            MouseHoverToElement(Page.QuestionsOnAnExistingClaimElement);
         }
 
-        private void VerifyLink(IWebElement linkElement, string url)
+        private void VerifyLink(IWebElement actualLinkElement, string expectedUrl)
         {
-            linkElement.Click();
-            VerifyNewTabIsOpened(1);
-            SwitchToLastOpenedTab();
-            Driver.Url.ShouldContain(url);
+            var tabsCount = TabsCount == 0 ? Driver.WindowHandles.Count : TabsCount;
+            TabsCount = Driver.WindowHandles.Count;
+
+            ScrollToElement(actualLinkElement);
+            WaitForClickable(actualLinkElement);
+            actualLinkElement.Click();
+
+            while (TabsCount == tabsCount)
+            {
+                TabsCount = Driver.WindowHandles.Count;
+            }
+
+            Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            Driver.Url.ShouldContain(expectedUrl, "It was not possible to open an expected link.");
             Driver.Close();
+
+            TabsCount = Driver.WindowHandles.Count;
             SwitchBackToDefaultTab();
         }
 
-        public void VerifyHomeownersLink(string url)
+        public void VerifyHomeownersLink(string expectedUrl)
         {
-            var homeownersLink = _claimsPage.GetLinkFromFileAClaimSection("homeowners");
-            VerifyLink(homeownersLink, url);
+            var actualHomeownersLink = Page.GetLinkFromFileAClaimSection("homeowners");
+            VerifyLink(actualHomeownersLink, expectedUrl);
         }
 
-        public void VerifySmallCommercialLink(string url)
+        public void VerifySmallCommercialLink(string expectedUrl)
         {
-            var smallCommercialLink = _claimsPage.GetLinkFromFileAClaimSection("small commercial");
-            VerifyLink(smallCommercialLink, url);
+            var actualSmallCommercialLink = Page.GetLinkFromFileAClaimSection("small commercial");
+            VerifyLink(actualSmallCommercialLink, expectedUrl);
         }
-        public void VerifyLargeCommercialLink(string url)
+
+        public void VerifyLargeCommercialLink(string expectedUrl)
         {
-            var largeCommercialLink = _claimsPage.GetLinkFromFileAClaimSection("large commercial");
-            VerifyLink(largeCommercialLink, url);
+            var actualLargeCommercialLink = Page.GetLinkFromFileAClaimSection("large commercial");
+            VerifyLink(actualLargeCommercialLink, expectedUrl);
         }
     }
 }

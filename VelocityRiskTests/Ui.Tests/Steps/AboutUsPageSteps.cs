@@ -6,11 +6,9 @@ namespace Ui.Tests.Steps
 {
     public class AboutUsPageSteps : BaseSteps<WhoWeArePage>
     {
-        private WhoWeArePage _whoWeArePage;
-
         public AboutUsPageSteps(IWebDriver driver) : base(driver)
         {
-            _whoWeArePage = new WhoWeArePage(Driver);
+            Page = new WhoWeArePage(Driver);
         }
 
         public void NavigateToPage()
@@ -22,48 +20,48 @@ namespace Ui.Tests.Steps
 
         public void NavigateToLeadershipTeamView()
         {
-            MouseHoverToElement(_whoWeArePage.MeetOurLeadershipTeamElement);
+            MouseHoverToElement(Page.MeetOurLeadershipTeamElement);
         }
 
         public void VerifyIsTeamMemberExists(string name)
         {
-            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            var imageCardElement = Page.GetImageCardByName(name);
             imageCardElement.ShouldNotBeNull($"There is no {name} on UI.");
         }
 
         public void VerifyIsTeamMemberImageDisplayed(string name)
         {
-            var imageCardElement = _whoWeArePage.IsTeamMemberImageDisplayedByName(name);
+            var imageCardElement = Page.IsTeamMemberImageDisplayedByName(name);
             imageCardElement.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
         }
 
         public void VerifyIsTeamMemberNameDisplayed(string name)
         {
-            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            var imageCardElement = Page.GetImageCardByName(name);
             imageCardElement.Displayed.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
         }
 
         public void ClickOnNameCard(string name)
         {
-            var imageCardElement = _whoWeArePage.GetImageCardByName(name);
+            var imageCardElement = Page.GetImageCardByName(name);
             imageCardElement.Click();
         }
 
         public void VerifyTeamMemberJobTitle(string name, string expectedJobTitle)
         {            
-            var isJobDisplayed = _whoWeArePage.IsJobTitleDisplayedByName(name);
+            var isJobDisplayed = Page.IsJobTitleDisplayedByName(name);
             isJobDisplayed.ShouldBeTrue($"The job title element for {name} is not displayed on UI.");
 
-            var jobTitle = _whoWeArePage.GetJobTitleByName(name);
+            var jobTitle = Page.GetJobTitleByName(name);
             jobTitle.ShouldBe(expectedJobTitle.ToUpper(), $"There is no job title: {expectedJobTitle} for name: {name} on UI.");
         }
 
         public void VerifyTeamMemberLocation(string name, string expectedLocation)
         {
-            var isLocationElementDisplayed = _whoWeArePage.IsLocationDisplayedByName(name);
+            var isLocationElementDisplayed = Page.IsLocationDisplayedByName(name);
             isLocationElementDisplayed.ShouldBeTrue($"The location element for {name} is not displayed on UI.");
 
-            var locationTitle = _whoWeArePage.GetLocationByName(name);
+            var locationTitle = Page.GetLocationByName(name);
             locationTitle.ShouldBe(expectedLocation.ToUpper(), $"There is no location: {expectedLocation} for name: {name} on UI.");
         }
     }

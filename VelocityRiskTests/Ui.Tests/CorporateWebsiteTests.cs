@@ -96,10 +96,10 @@ namespace Ui.Tests
         public void TestCase_05_FileAClaimLinksAreCorrectTest()
         {
             _fileAClaimSteps.ClickFileAClaimAccordion();
-            _fileAClaimSteps.ScrollDown();
-            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimExpectedUrl);
-            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);
-            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);             
+            _fileAClaimSteps.ScrollTo();
+            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimHomeownersExpectedUrl);
+            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl);
+            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl);
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace Ui.Tests
         }
 
         [Test]
-        public void TestCase_08_Footer_SocialLinkAreOpening()
+        public void TestCase_08_Footer_SocialLinksAreOpening()
         {
             // given navigated to home page
             _homePageSteps.ThenVerifySocialLinks();

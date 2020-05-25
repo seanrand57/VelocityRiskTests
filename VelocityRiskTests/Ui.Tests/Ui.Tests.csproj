@@ -35,7 +35,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ClaimsTestData.resx</DependentUpon>
     </Compile>
-    <Compile Update="Steps\TestData\Customers\CopyrightTestData.Designer.cs">
+    <Compile Update="Steps\TestData\CopyrightTestData.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CopyrightTestData.resx</DependentUpon>
@@ -45,7 +45,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ManageYourPolicyTestData.resx</DependentUpon>
     </Compile>
-    <Compile Update="Steps\TestData\FileAClaimTestData.Designer.cs">
+    <Compile Update="Steps\TestData\Customers\FileAClaimTestData.Designer.cs">
       <DependentUpon>FileAClaimTestData.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -62,7 +62,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ClaimsTestData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Steps\TestData\Customers\CopyrightTestData.resx">
+    <EmbeddedResource Update="Steps\TestData\CopyrightTestData.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CopyrightTestData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -70,7 +70,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ManageYourPolicyTestData.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Steps\TestData\FileAClaimTestData.resx">
+    <EmbeddedResource Update="Steps\TestData\Customers\FileAClaimTestData.resx">
       <LastGenOutput>FileAClaimTestData.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>

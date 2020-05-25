@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ui.Tests.Steps.TestData.Customers {
+namespace Ui.Tests.Steps.TestData {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Ui.Tests.Steps.TestData.Customers {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ui.Tests.Steps.TestData.Customers.CopyrightTestData", typeof(CopyrightTestData).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ui.Tests.Steps.TestData.CopyrightTestData", typeof(CopyrightTestData).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

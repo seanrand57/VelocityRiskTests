@@ -79,7 +79,6 @@ namespace Ui.Tests.PageObjectModels.Components
             {
                 menuItem.FindElement(By.XPath("ancestor::ul[@class = 'sub-menu']/preceding-sibling::a")).Click();
             }
-//            menuItem.Click();
             var action = new Actions(Driver);
             action.MoveToElement(menuItem).Click().Perform();
 

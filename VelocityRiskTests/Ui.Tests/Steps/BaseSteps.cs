@@ -43,6 +43,7 @@ namespace Ui.Tests.Steps
             }
             else
             {
+                SwitchBackToDefaultTab();
                 Driver.Navigate().GoToUrl(Page.PageUrl);
             }
         }
@@ -165,7 +166,10 @@ namespace Ui.Tests.Steps
             var actualUrl = Driver.Url;
             actualUrl.ShouldBe(expectedUrl, customMessage);
 
-            Driver.Close();
+            if (Driver.WindowHandles.Count > 1)
+            {
+                Driver.Close();
+            }
             Driver.SwitchTo().Window(handles.First());
             TabsCount = Driver.WindowHandles.Count;
         }
