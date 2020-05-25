@@ -6,6 +6,7 @@ using Ui.Tests.Steps;
 using Ui.Tests.Steps.TestData;
 using Ui.Tests.Steps.Customers;
 using Ui.Tests.Steps.TestData.Customers;
+using System;
 
 namespace Ui.Tests
 {
@@ -96,10 +97,12 @@ namespace Ui.Tests
         public void TestCase_05_FileAClaimLinksAreCorrectTest()
         {
             _fileAClaimSteps.ClickFileAClaimAccordion();
-            _fileAClaimSteps.ScrollTo();
-            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimHomeownersExpectedUrl);
-            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl);
-            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl);
+            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData
+                .FileAClaimHomeownersExpectedUrl, "homeowners");
+            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData
+                .FileAClaimSmallCommercialExpectedUrl, "small commercial");
+            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData
+                .FileAClaimLargeCommercialExpectedUrl, "large commercial");
         }
 
         [Test]

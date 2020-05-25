@@ -18,10 +18,10 @@ namespace Ui.Tests.Steps
             Page.ClickFileAClaimMenuItem();
         }
 
-        public void ScrollTo()
-        {
-            MouseHoverToElement(Page.QuestionsOnAnExistingClaimElement);
-        }
+        //public void ScrollTo()
+        //{
+        //    MouseHoverToElement(Page.QuestionsOnAnExistingClaimElement);
+        //}
 
         private void VerifyLink(IWebElement actualLinkElement, string expectedUrl)
         {
@@ -29,7 +29,7 @@ namespace Ui.Tests.Steps
             TabsCount = Driver.WindowHandles.Count;
 
             ScrollToElement(actualLinkElement);
-            WaitForClickable(actualLinkElement);
+            WaitUntilElementIsVisible(actualLinkElement);
             actualLinkElement.Click();
 
             while (TabsCount == tabsCount)
@@ -45,22 +45,11 @@ namespace Ui.Tests.Steps
             SwitchBackToDefaultTab();
         }
 
-        public void VerifyHomeownersLink(string expectedUrl)
+        public void VerifyOneLinkFromFireAClaimSection(string expectedUrl,
+            string linkName)
         {
-            var actualHomeownersLink = Page.GetLinkFromFileAClaimSection("homeowners");
-            VerifyLink(actualHomeownersLink, expectedUrl);
-        }
-
-        public void VerifySmallCommercialLink(string expectedUrl)
-        {
-            var actualSmallCommercialLink = Page.GetLinkFromFileAClaimSection("small commercial");
-            VerifyLink(actualSmallCommercialLink, expectedUrl);
-        }
-
-        public void VerifyLargeCommercialLink(string expectedUrl)
-        {
-            var actualLargeCommercialLink = Page.GetLinkFromFileAClaimSection("large commercial");
-            VerifyLink(actualLargeCommercialLink, expectedUrl);
+            var actualLink = Page.GetLinkFromFileAClaimSection(linkName);
+            VerifyLink(actualLink, expectedUrl);
         }
     }
 }
