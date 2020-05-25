@@ -26,6 +26,11 @@ namespace Ui.Tests
         private HomePageSteps _homePageSteps;
         private AboutUsPageSteps _aboutUsPageSteps;
 
+        public CorporateWebsiteTests()
+        {
+            _browserName = BrowserName.InternetExplorer;
+        }
+
         [OneTimeSetUp]
         public void Initialize()
         {
