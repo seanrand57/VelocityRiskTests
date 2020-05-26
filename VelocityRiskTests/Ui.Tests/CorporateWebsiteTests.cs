@@ -19,10 +19,8 @@ namespace Ui.Tests
         private ClaimsSteps _claimsSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;
         private MakeAPaymentSteps _makeAPaymentSteps;
-        private int _tabsCountBeforeEachTest;
-
-        private FileAClaimSteps _fileAClaimSteps;
         private AboutUsPageSteps _aboutUsPageSteps;
+        private int _tabsCountBeforeEachTest;
 
         [OneTimeSetUp]
         public void Initialize()
@@ -31,10 +29,6 @@ namespace Ui.Tests
             _claimsSteps = new ClaimsSteps(Driver);
             _makeAPaymentSteps = new MakeAPaymentSteps(Driver);
             _manageYourPolicySteps = new ManageYourPolicySteps(Driver);
-
-            _tabsCountBeforeEachTest = 1;
-
-            _fileAClaimSteps = new FileAClaimSteps(Driver);
             _homePageSteps = new HomePageSteps(Driver);
             _aboutUsPageSteps = new AboutUsPageSteps(Driver);
         }
@@ -42,15 +36,14 @@ namespace Ui.Tests
         [SetUp]
         public void BeforEachTest()
         {
-            // any instance will work, since the Driver instance is common for all
             _homePageSteps.NavigateTo();
+            _tabsCountBeforeEachTest = _homePageSteps.GetCurrentTabsCount();
         }
 
         [TearDown]
         public void AfterEachTest()
         {
-            // any instance will work, since the Driver instance is common for all
-            _homePageSteps.CloseAllNewlyOpenedTabs();
+            _homePageSteps.CloseAllTabsExceptFirst();
         }
 
         [Test]
@@ -65,17 +58,17 @@ namespace Ui.Tests
         public void TestCase_02_MainMenu_ItemsAreCorrect(MenuItem menuItem)
         {
             _homePageSteps.VerifyMenuItemPresented(menuItem);
-            _homePageSteps.ClickMenuItem(menuItem);
-            _homePageSteps.VerifyUrlIsAsExpected(menuItem);
+            _homePageSteps.ClickMenuItemByName(menuItem.Name);
+            _homePageSteps.VerifyMenuItemRedirrect(menuItem);
         }
 
         [Test]
         public void TestCase_03_FooterItemsAreCorrect()
         {
             _homePageSteps.VerifyCorporateOfficeAddress();
-            _homePageSteps.VerifyReportClaim();
             _homePageSteps.VerifyProductInquiries();
             _homePageSteps.VerifyCopyright();
+            _homePageSteps.VerifyReportClaim();
         }
 
         [Test]
@@ -91,11 +84,11 @@ namespace Ui.Tests
         [Test]
         public void TestCase_05_FileAClaimLinksAreCorrectTest()
         {
-            _fileAClaimSteps.ClickCustomersClaimsMenuItem();
-            _fileAClaimSteps.ClickPanel("File a claim");
-            _fileAClaimSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimHomeownersExpectedUrl, "homeowners");
-            _fileAClaimSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl, "small commercial");
-            _fileAClaimSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl, "large commercial");
+            _claimsSteps.NavigateTo();
+            _claimsSteps.ClickPanel(ClaimsTestData.FileClaimTitle);
+            _claimsSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimHomeownersExpectedUrl, "homeowners");
+            _claimsSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl, "small commercial");
+            _claimsSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl, "large commercial");
         }
 
         [Test]
@@ -124,7 +117,7 @@ namespace Ui.Tests
         [Test]
         public void TestCase_08_Footer_SocialLinksAreOpening()
         {
-            // given navigated to home page
+            // Test with LinkedIn link fails due to the captcha
             _homePageSteps.VerifySocialLinks();
         }
 
@@ -141,7 +134,7 @@ namespace Ui.Tests
             _manageYourPolicySteps.ClickCustomersManageYourPolicyMenuItem();
             _manageYourPolicySteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
             _manageYourPolicySteps.SwitchToLastOpenedTab();
-            _manageYourPolicySteps.VerifyPageUrlWithoutProtocol(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
+            _manageYourPolicySteps.VerifyPageUrl(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
             _manageYourPolicySteps.VerifyRedirectedToHttps();
             _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
             _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);

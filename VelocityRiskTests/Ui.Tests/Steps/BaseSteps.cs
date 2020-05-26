@@ -4,7 +4,6 @@ using OpenQA.Selenium.Support.UI;
 using Shouldly;
 using System;
 using System.Linq;
-using System.Threading;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PageObjectModels.Components;
 
@@ -27,7 +26,6 @@ namespace Ui.Tests.Steps
 
         private void NavigateToHomePage()
         {
-            SwitchBackToDefaultTab();
             var homePage = new HomePage(Driver);
             Driver.Navigate().GoToUrl(homePage.PageUrl);
         }
@@ -45,9 +43,9 @@ namespace Ui.Tests.Steps
             }
         }
 
-        public void VerifyPageUrlWithoutProtocol(string urlWitoutProtocol)
+        public void VerifyPageUrl(string expectedUrl, string additionalMessage = "")
         {
-            Driver.Url.ShouldContain(urlWitoutProtocol, $"Url of the current tab (without protocol part) should contain text '{urlWitoutProtocol}'");
+            Driver.Url.ShouldContain(expectedUrl, $"Url of the current tab should be: '{expectedUrl}'. {additionalMessage}");
         }
 
         public void VerifyRedirectedToHttps()
@@ -104,8 +102,8 @@ namespace Ui.Tests.Steps
             Driver.SwitchTo().Window(tabName);
         }
 
-        public void CloseAllNewlyOpenedTabs()
-        {
+        public void CloseAllTabsExceptFirst()
+        {       
             foreach(var tabName in Driver.WindowHandles)
             {
                 if (tabName == Driver.WindowHandles.First())
@@ -116,7 +114,6 @@ namespace Ui.Tests.Steps
                 SwitchToTabByItsName(tabName);
                 Driver.Close();
             }
-
             SwitchBackToDefaultTab();
         }
 
@@ -133,31 +130,32 @@ namespace Ui.Tests.Steps
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
         }
 
-        public void VerifyLink(IWebElement actualLinkElement, string expectedUrl, string customMessage)
+        public void VerifyOpenLinkInCurrentTab(IWebElement actualLinkElement, string expectedUrl, string customMessage)
         {
-            ScrollToElement(actualLinkElement);
-            WaitUntilElementIsVisible(actualLinkElement);
-            actualLinkElement.Click();
-
-            SwitchToLastOpenedTab();
-            Driver.Url.ShouldContain(expectedUrl, customMessage);
-            SwitchBackToDefaultTab();
+            var initialTabsCount = GetCurrentTabsCount();
+            ClickElement(actualLinkElement);
+            GetCurrentTabsCount().ShouldBe(initialTabsCount, "Link should be opened in current tab");
+            VerifyPageUrl(expectedUrl, customMessage);
+        } 
+        public void VerifyOpenLinkInANewTab(IWebElement actualLinkElement, string expectedUrl, string customMessage)
+        {
+            var initialTabsCount = GetCurrentTabsCount();
+            ClickElement(actualLinkElement);
+            VerifyNewTabIsOpened(initialTabsCount);
+            verifyNewTabUrl(expectedUrl, customMessage);
         }
 
-        // some links are opened in new tabs, we need to select a tab and get the url
-        public string GetUrl()
+        public void verifyNewTabUrl(string expectedUrl, string customMessage)
         {
-            var allTabs = Driver.WindowHandles;
-            var actualUrl = Driver.Url;
-            if (allTabs.Count > 1)
-            {
-                Driver.SwitchTo().Window(allTabs[1]);
-                actualUrl = Driver.Url;
-                Driver.Close();
-                Driver.SwitchTo().Window(allTabs[0]);
-            }
-
-            return actualUrl;
+            SwitchToLastOpenedTab();
+            VerifyPageUrl(expectedUrl, customMessage);
+            SwitchBackToDefaultTab();
+        }
+        protected void ClickElement(IWebElement element)
+        {
+            ScrollToElement(element);
+            WaitForClickable(element);
+            element.Click();
         }
     }
 }

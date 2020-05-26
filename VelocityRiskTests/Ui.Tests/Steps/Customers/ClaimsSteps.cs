@@ -12,11 +12,10 @@ namespace Ui.Tests.Steps.Customers
             Page = new ClaimsPage(Driver);
         }
 
-        public override void NavigateTo()
+        public void VerifyOneLinkFromFileAClaimSection(string expectedUrl, string linkName)
         {
-            MouseHoverToElement(MenuBar.CustomersMenuItemElement);
-            MenuBar.CustomersClaimsMenuItemElement.Click();
-            SwitchToLastOpenedTab();
+            var actualLink = Page.GetLinkFromFileAClaimSection(linkName);
+            VerifyOpenLinkInANewTab(actualLink, expectedUrl, $"It was not possible to open {linkName} page.");
         }
 
         public void VerifyPanelItemPresented(PanelItem panelItem)

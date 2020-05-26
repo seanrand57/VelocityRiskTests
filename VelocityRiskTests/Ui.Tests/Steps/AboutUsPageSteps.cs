@@ -32,8 +32,7 @@ namespace Ui.Tests.Steps
 
         public void VerifyIsTeamMemberImageDisplayed(string name)
         {
-            var imageCardElement = Page.IsTeamMemberImageDisplayedByName(name);
-            imageCardElement.ShouldBeTrue($"There element with name {name} is not displayed on UI.");
+            Page.IsTeamMemberImageDisplayedByName(name).ShouldBeTrue($"There element with name {name} is not displayed on UI.");
         }
 
         public void VerifyIsTeamMemberNameDisplayed(string name)
@@ -50,18 +49,14 @@ namespace Ui.Tests.Steps
 
         public void VerifyTeamMemberJobTitle(string name, string expectedJobTitle)
         {            
-            var isJobDisplayed = Page.IsJobTitleDisplayedByName(name);
-            isJobDisplayed.ShouldBeTrue($"The job title element for {name} is not displayed on UI.");
-
+            Page.IsJobTitleDisplayedByName(name).ShouldBeTrue($"The job title element for {name} is not displayed on UI.");
             var jobTitle = Page.GetJobTitleByName(name);
             jobTitle.ShouldBe(expectedJobTitle.ToUpper(), $"There is no job title: {expectedJobTitle} for name: {name} on UI.");
         }
 
         public void VerifyTeamMemberLocation(string name, string expectedLocation)
         {
-            var isLocationElementDisplayed = Page.IsLocationDisplayedByName(name);
-            isLocationElementDisplayed.ShouldBeTrue($"The location element for {name} is not displayed on UI.");
-
+            Page.IsLocationDisplayedByName(name).ShouldBeTrue($"The location element for {name} is not displayed on UI.");
             var locationTitle = Page.GetLocationByName(name);
             locationTitle.ShouldBe(expectedLocation.ToUpper(), $"There is no location: {expectedLocation} for name: {name} on UI.");
         }

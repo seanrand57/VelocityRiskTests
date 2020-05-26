@@ -3,7 +3,6 @@ using Shouldly;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.Steps.TestData;
 using Ui.Tests.PersistenceModels;
-using Ui.Tests.Steps.TestData.Customers;
 
 namespace Ui.Tests.Steps
 {
@@ -21,8 +20,7 @@ namespace Ui.Tests.Steps
 
         public void VerifyNavBarIsOrange()
         {
-            var navBar = Page.NavBar;
-            var navBarColor = navBar.GetCssValue("background-color");
+            var navBarColor = Page.NavBar.GetCssValue("background-color");
             navBarColor.ShouldBe(HomePageTestData.NavBarColor, "NavBar should be orange");
         }
 
@@ -34,22 +32,23 @@ namespace Ui.Tests.Steps
 
         public void VerifyMenuItemPresented(MenuItem menuItem)
         {
-            var isMenuElement = MenuPresents(menuItem.Name);
+            var isMenuElement = IsMenuItemPresentByName(menuItem.Name);
             isMenuElement.ShouldBeTrue($"It was not possible to find menu item : {menuItem.Name} on UI");
         }
 
-        public void ClickMenuItem(MenuItem menuItem)
+        public void VerifyMenuItemRedirrect(MenuItem menuItem)
         {
-            ClickMenuItemByName(menuItem.Name);
+            if (menuItem.opensNewTab)
+            {
+                verifyNewTabUrl(menuItem.Link, $"Clicking {menuItem.Name} should redirrect to {menuItem.Link} on a new tab");
+            } 
+            else
+            {
+                VerifyPageUrl(menuItem.Link, $"Clicking {menuItem.Name} should redirrect to {menuItem.Link} on the same page");
+            }
         }
 
-        public void VerifyUrlIsAsExpected(MenuItem menuItem)
-        {
-            var actualUrl = GetUrl();
-            actualUrl.ShouldBe(menuItem.Link, $"It was not possible to find expected link for menu item : {menuItem.Name} on UI");
-        }
-
-        public bool MenuPresents(string menuItemName)
+        public bool IsMenuItemPresentByName(string menuItemName)
         {
             try
             {
@@ -98,11 +97,10 @@ namespace Ui.Tests.Steps
         {
             var actualLinkedInUrl = Page.Footer.CorporateOfficeLinkedIn.GetAttribute("href");
             actualLinkedInUrl.ShouldBe(CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-
-            // VerifyLink(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-            VerifyLink(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
-            VerifyLink(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
-            VerifyLink(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
+            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
+            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
+            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
+            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
         }
 
         public void VerifyReportClaim()
@@ -112,8 +110,8 @@ namespace Ui.Tests.Steps
 
             var actualLink = Page.GetReportClaimLink();
             actualLink.ShouldBe(CopyrightTestData.ReportClaimPhoneLink, "It was not possible to find an expected link for the phone number to report a claim.");
-
-            VerifyLink(Page.Footer.ReportClaimOnlineLink, CopyrightTestData.ReportClaimOnlineUrl, "It was not possible to find an expected URL to report a claim online.");
+            ClickReportAClaimOnlineLink();
+            VerifyPageUrl(CopyrightTestData.ReportClaimOnlineUrl);
         }
 
         public void VerifyProductInquiries()
@@ -140,18 +138,19 @@ namespace Ui.Tests.Steps
 
         public void VerifyCopyright()
         {
-            VerifyLink(Page.Footer.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to find an expected URL for disclaimer.");
-            VerifyLink(Page.Footer.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to find an expected URL for terms of use.");
-            VerifyLink(Page.Footer.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to find an expected URL for privacy policy.");
+            VerifyOpenLinkInCurrentTab(Page.Footer.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to find an expected URL for disclaimer.");
+            VerifyOpenLinkInCurrentTab(Page.Footer.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to find an expected URL for terms of use.");
+            VerifyOpenLinkInCurrentTab(Page.Footer.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to find an expected URL for privacy policy.");
         }
 
         public void VerifyCookiePresented()
         {
             Page.CookieInfo.Accept.Displayed.ShouldBe(true, "It was not possible to find an expected cookie message.");
+        }
 
-            VerifyLink(Page.CookieInfo.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to open an expected disclaimer page.");
-            VerifyLink(Page.CookieInfo.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to open an expected terms of use page.");
-            VerifyLink(Page.CookieInfo.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to open an expected privacy policy page.");
+        public void ClickReportAClaimOnlineLink()
+        {
+            ClickElement(Page.Footer.ReportClaimOnlineLink);
         }
 
         #endregion Footer Steps

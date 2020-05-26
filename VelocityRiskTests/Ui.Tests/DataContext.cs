@@ -11,14 +11,14 @@ namespace Ui.Tests
             return
                 new List<MenuItem>
                 {
-                    new MenuItem {Id = 1, Name = ClaimsTestData.MenuAgents, Link = ClaimsTestData.MenuAgentsLink},
-                    new MenuItem {Id = 2, Name = ClaimsTestData.MenuHomeowners, Link = ClaimsTestData.MenuHomeownersLink},
-                    new MenuItem {Id = 3, Name = ClaimsTestData.MenuLargeCommercial, Link = ClaimsTestData.MenuLargeCommercialLink},
-                    new MenuItem {Id = 4, Name = ClaimsTestData.MenuSmallCommercial, Link = ClaimsTestData.MenuSmallCommercialLink},
-                    new MenuItem {Id = 5, Name = ClaimsTestData.MenuClaims, Link = ClaimsTestData.MenuClaimsLink},
-                    new MenuItem {Id = 6, Name = ClaimsTestData.MenuManageYourPolicy, Link = ClaimsTestData.MenuManageYourPolicyLink},
-                    new MenuItem {Id = 7, Name = ClaimsTestData.MenuMakePayment, Link = ClaimsTestData.MenuMakePaymentLink},
-                    new MenuItem {Id = 8, Name = ClaimsTestData.MenuNotesAndNews, Link = ClaimsTestData.MenuNotesAndNewsLink}
+                    new MenuItem {Id = 1, Name = ClaimsTestData.MenuAgents, Link = ClaimsTestData.MenuAgentsLink, opensNewTab = false},
+                    new MenuItem {Id = 2, Name = ClaimsTestData.MenuHomeowners, Link = ClaimsTestData.MenuHomeownersLink, opensNewTab = false},
+                    new MenuItem {Id = 3, Name = ClaimsTestData.MenuLargeCommercial, Link = ClaimsTestData.MenuLargeCommercialLink, opensNewTab = false},
+                    new MenuItem {Id = 4, Name = ClaimsTestData.MenuSmallCommercial, Link = ClaimsTestData.MenuSmallCommercialLink, opensNewTab = false},
+                    new MenuItem {Id = 5, Name = ClaimsTestData.MenuClaims, Link = ClaimsTestData.MenuClaimsLink, opensNewTab = false},
+                    new MenuItem {Id = 6, Name = ClaimsTestData.MenuManageYourPolicy, Link = ClaimsTestData.MenuManageYourPolicyLink, opensNewTab = true},
+                    new MenuItem {Id = 7, Name = ClaimsTestData.MenuMakePayment, Link = ClaimsTestData.MenuMakePaymentLink, opensNewTab = true},
+                    new MenuItem {Id = 8, Name = ClaimsTestData.MenuNotesAndNews, Link = ClaimsTestData.MenuNotesAndNewsLink, opensNewTab = false}
                 };
         }
 
