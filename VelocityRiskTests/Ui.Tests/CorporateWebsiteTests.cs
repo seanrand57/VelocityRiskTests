@@ -15,7 +15,6 @@ namespace Ui.Tests
 
         public static IEnumerable<ImageCard> ImageCardInfoExpected { get; } = DataContext.LoadImageCards();
 
-        // private BaseSteps _baseSteps;
         private HomePageSteps _homePageSteps;
         private ClaimsSteps _claimsSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;

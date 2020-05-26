@@ -28,7 +28,7 @@ namespace Ui.Tests.Steps
                 TabsCount = Driver.WindowHandles.Count;
             }
 
-            Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            SwitchToLastOpenedTab();
             Driver.Url.ShouldContain(expectedUrl, "It was not possible to open an expected link.");
             Driver.Close();
 

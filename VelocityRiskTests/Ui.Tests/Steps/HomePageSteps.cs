@@ -152,21 +152,5 @@ namespace Ui.Tests.Steps
         }
 
         #endregion Footer Steps
-
-        // some links are opened in new tabs, we need to select a tab and get the url
-        private string GetUrl()
-        {
-            var allTabs = Driver.WindowHandles;
-            var actualUrl = Driver.Url;
-            if (allTabs.Count > 1)
-            {
-                Driver.SwitchTo().Window(allTabs[1]);
-                actualUrl = Driver.Url;
-                Driver.Close();
-                Driver.SwitchTo().Window(allTabs[0]);
-            }
-
-            return actualUrl;
-        }
     }
 }
