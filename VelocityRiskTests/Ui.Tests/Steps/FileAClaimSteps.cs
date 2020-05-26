@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using OpenQA.Selenium;
-using Shouldly;
+﻿using OpenQA.Selenium;
 using Ui.Tests.Steps.Customers;
 
 namespace Ui.Tests.Steps
@@ -16,7 +14,7 @@ namespace Ui.Tests.Steps
             SwitchToLastOpenedTab();
         }
 
-        public void VerifyOneLinkFromFireAClaimSection(string expectedUrl, string linkName)
+        public void VerifyOneLinkFromFileAClaimSection(string expectedUrl, string linkName)
         {
             var actualLink = Page.GetLinkFromFileAClaimSection(linkName);
             VerifyLink(actualLink, expectedUrl, $"It was not possible to open {linkName} page.");

@@ -142,7 +142,7 @@ namespace Ui.Tests.Steps
             SwitchToLastOpenedTab();
             Driver.Url.ShouldContain(expectedUrl, customMessage);
             SwitchBackToDefaultTab();
-        }        
+        }
 
         // some links are opened in new tabs, we need to select a tab and get the url
         public string GetUrl()

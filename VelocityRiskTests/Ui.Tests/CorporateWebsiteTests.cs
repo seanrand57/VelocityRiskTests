@@ -93,9 +93,9 @@ namespace Ui.Tests
         {
             _fileAClaimSteps.ClickCustomersClaimsMenuItem();
             _fileAClaimSteps.ClickPanel("File a claim");
-            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData.FileAClaimHomeownersExpectedUrl, "homeowners");
-            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl, "small commercial");
-            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl, "large commercial");
+            _fileAClaimSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimHomeownersExpectedUrl, "homeowners");
+            _fileAClaimSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl, "small commercial");
+            _fileAClaimSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl, "large commercial");
         }
 
         [Test]
@@ -118,7 +118,6 @@ namespace Ui.Tests
             _aboutUsPageSteps.ClickOnNameCard(imageCardItem.TeamMemberName);
 
             _aboutUsPageSteps.VerifyTeamMemberJobTitle(imageCardItem.TeamMemberName, imageCardItem.JobTitle);
-
             _aboutUsPageSteps.VerifyTeamMemberLocation(imageCardItem.TeamMemberName, imageCardItem.Location);
         }
 

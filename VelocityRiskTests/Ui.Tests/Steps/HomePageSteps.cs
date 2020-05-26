@@ -96,7 +96,10 @@ namespace Ui.Tests.Steps
 
         public void VerifySocialLinks()
         {
-            VerifyLink(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
+            var actualLinkedInUrl = Page.Footer.CorporateOfficeLinkedIn.GetAttribute("href");
+            actualLinkedInUrl.ShouldBe(CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
+
+            // VerifyLink(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
             VerifyLink(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
             VerifyLink(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
             VerifyLink(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
