@@ -1,12 +1,15 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
 
 namespace Ui.Tests
 {
-    public class BaseTest
+    public abstract class BaseTest
     {
+        private UIConfiguration _configuration;
         protected IWebDriver Driver;
 
         public IWebDriver GetDriver => Driver;
@@ -14,7 +17,23 @@ namespace Ui.Tests
         [OneTimeSetUp]
         public void BaseSetUp()
         {
-            Driver = new ChromeDriver();
+            _configuration = ConfigHelpers.GetApplicationConfiguration(TestContext.CurrentContext.TestDirectory);
+
+            switch (_configuration.Browser)
+            {
+                case BrowserNamesConstants.Chrome:
+                    Driver = new ChromeDriver();
+                    return;
+                case BrowserNamesConstants.InternetExplorer:
+                    Driver = new InternetExplorerDriver(new InternetExplorerOptions
+                    {
+                        IntroduceInstabilityByIgnoringProtectedModeSettings = true,
+                        RequireWindowFocus = true
+                    });
+                    return;
+                default:
+                    throw new Exception("Unsupported browser");
+            }
 
             Driver.Manage().Window.Maximize();
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);

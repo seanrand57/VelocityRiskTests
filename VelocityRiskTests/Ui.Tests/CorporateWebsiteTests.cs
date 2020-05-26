@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using NUnit.Framework;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
 using Ui.Tests.Steps.Customers;
 using Ui.Tests.Steps.TestData.Customers;
+using Microsoft.Extensions.Configuration;
 
 namespace Ui.Tests
 {
