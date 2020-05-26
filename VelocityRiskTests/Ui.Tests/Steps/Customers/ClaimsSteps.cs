@@ -18,19 +18,19 @@ namespace Ui.Tests.Steps.Customers
             MenuBar.ClickCustomersClaimsMenuItem();
         }
 
-        public void GivenPanelItemPresented(PanelItem panelItem)
+        public void VerifyPanelItemPresented(PanelItem panelItem)
         {
             var isPanelPresented = Page.GetPanel(panelItem.Title).Displayed;
             isPanelPresented.ShouldBeTrue($"It was not possible to find panel item : {panelItem.Title} on UI");
         }
 
-        public void GivenIExpandPanelItem(PanelItem panelItem)
+        public void ExpandPanelItem(PanelItem panelItem)
         {
             // expand panel
             ClickPanel(panelItem.Title);
         }
 
-        public void ThenVerifyPanelContent(PanelItem panelItem)
+        public void VerifyPanelContent(PanelItem panelItem)
         {
             var actualContent = Page.GetPanelContent(panelItem.Title);
             panelItem.Content.ShouldBe(actualContent, $"It was not possible to find expected content for : {panelItem.Title} on UI");

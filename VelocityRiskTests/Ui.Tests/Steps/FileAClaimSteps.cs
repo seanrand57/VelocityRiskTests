@@ -36,8 +36,7 @@ namespace Ui.Tests.Steps
             SwitchBackToDefaultTab();
         }
 
-        public void VerifyOneLinkFromFireAClaimSection(string expectedUrl,
-            string linkName)
+        public void VerifyOneLinkFromFireAClaimSection(string expectedUrl, string linkName)
         {
             var actualLink = Page.GetLinkFromFileAClaimSection(linkName);
             VerifyLink(actualLink, expectedUrl);

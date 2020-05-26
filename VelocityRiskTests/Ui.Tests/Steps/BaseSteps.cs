@@ -4,7 +4,6 @@ using OpenQA.Selenium.Support.UI;
 using Shouldly;
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PageObjectModels.Components;
@@ -50,12 +49,10 @@ namespace Ui.Tests.Steps
 
         public void VerifyPageUrlWithoutProtocol(string urlWitoutProtocol)
         {
-            Driver.Url.ShouldContain(urlWitoutProtocol,
-                $"Url of the current tab (without protocol part) " +
-                $"should contain text '{urlWitoutProtocol}'");
+            Driver.Url.ShouldContain(urlWitoutProtocol, $"Url of the current tab (without protocol part) should contain text '{urlWitoutProtocol}'");
         }
 
-        public void VerifyProtocolIsHttps()
+        public void VerifyRedirectedToHttps()
         {
             Driver.Url.Split(':')[0].ShouldBe("https", "Url of the current tab should be under HTTPS protocol");
         }

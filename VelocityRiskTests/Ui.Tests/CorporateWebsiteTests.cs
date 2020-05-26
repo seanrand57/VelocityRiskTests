@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
-using Ui.Tests.Steps.TestData;
 using Ui.Tests.Steps.Customers;
 using Ui.Tests.Steps.TestData.Customers;
-using System;
 
 namespace Ui.Tests
 {
@@ -60,27 +57,26 @@ namespace Ui.Tests
         [Test]
         public void TestCase_01_SecuredConnection()
         {
-            _homePageSteps.GivenNavigatedWithoutSsl();
-            _homePageSteps.VerifyProtocolIsHttps();
+            _homePageSteps.NavigateWithoutSsl();
+            _homePageSteps.VerifyRedirectedToHttps();
         }
 
         [Test]
         [TestCaseSource(nameof(MenuInfoExpected))]
         public void TestCase_02_MainMenu_ItemsAreCorrect(MenuItem menuItem)
         {
-            _homePageSteps.GivenMenuItemPresented(menuItem);
-            _homePageSteps.GivenIClickMenuItem(menuItem);
-            _homePageSteps.ThenUrlIsAsExpected(menuItem);
+            _homePageSteps.VerifyMenuItemPresented(menuItem);
+            _homePageSteps.ClickMenuItem(menuItem);
+            _homePageSteps.VerifyUrlIsAsExpected(menuItem);
         }
 
         [Test]
         public void TestCase_03_FooterItemsAreCorrect()
         {
-            // given navigated to home page
-            _homePageSteps.ThenVerifyCorporateOfficeAddress();
-            _homePageSteps.ThenVerifyReportClaim();
-            _homePageSteps.ThenVerifyProductInquiries();
-            _homePageSteps.ThenVerifyCopyright();
+            _homePageSteps.VerifyCorporateOfficeAddress();
+            _homePageSteps.VerifyReportClaim();
+            _homePageSteps.VerifyProductInquiries();
+            _homePageSteps.VerifyCopyright();
         }
 
         [Test]
@@ -88,9 +84,9 @@ namespace Ui.Tests
         public void TestCase_04_Claims_PanelItemsAreCorrect(PanelItem panelItem)
         {
             _claimsSteps.NavigateTo();
-            _claimsSteps.GivenPanelItemPresented(panelItem);
-            _claimsSteps.GivenIExpandPanelItem(panelItem);
-            _claimsSteps.ThenVerifyPanelContent(panelItem);
+            _claimsSteps.VerifyPanelItemPresented(panelItem);
+            _claimsSteps.ExpandPanelItem(panelItem);
+            _claimsSteps.VerifyPanelContent(panelItem);
         }
 
         [Test]
@@ -106,8 +102,7 @@ namespace Ui.Tests
         [Test]
         public void TestCase_06_Home_CookiePresented()
         {
-            // given navigated to home page
-            _homePageSteps.ThenVerifyCookiePresented();
+            _homePageSteps.VerifyCookiePresented();
         }
 
         [Test]
@@ -131,8 +126,7 @@ namespace Ui.Tests
         [Test]
         public void TestCase_08_Footer_SocialLinksAreOpening()
         {
-            // given navigated to home page
-            _homePageSteps.ThenVerifySocialLinks();
+            _homePageSteps.VerifySocialLinks();
         }
 
         [Test]
@@ -149,7 +143,7 @@ namespace Ui.Tests
             _manageYourPolicySteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
             _manageYourPolicySteps.SwitchToLastOpenedTab();
             _manageYourPolicySteps.VerifyPageUrlWithoutProtocol(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
-            _manageYourPolicySteps.VerifyProtocolIsHttps();
+            _manageYourPolicySteps.VerifyRedirectedToHttps();
             _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
             _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
         }
@@ -160,7 +154,7 @@ namespace Ui.Tests
             _makeAPaymentSteps.ClickCustomersMakeAPaymentMenuItem();
             _makeAPaymentSteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
             _makeAPaymentSteps.SwitchToLastOpenedTab();
-            _makeAPaymentSteps.VerifyProtocolIsHttps();
+            _makeAPaymentSteps.VerifyRedirectedToHttps();
             _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }
     }
