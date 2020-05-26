@@ -137,23 +137,12 @@ namespace Ui.Tests.Steps
 
         public void VerifyLink(IWebElement actualLinkElement, string expectedUrl, string customMessage)
         {
-            var tabsCount = TabsCount == 0 ? Driver.WindowHandles.Count : TabsCount;
-            TabsCount = Driver.WindowHandles.Count;
-
             ScrollToElement(actualLinkElement);
             WaitUntilElementIsVisible(actualLinkElement);
-            actualLinkElement.Click();
-
-            while (TabsCount == tabsCount)
-            {
-                TabsCount = Driver.WindowHandles.Count;
-            }
+            actualLinkElement.Click(); 
 
             Driver.SwitchTo().Window(Driver.WindowHandles.Last());
             Driver.Url.ShouldContain(expectedUrl, customMessage);
-            Driver.Close();
-
-            TabsCount = Driver.WindowHandles.Count;
             SwitchBackToDefaultTab();
         }        
 
