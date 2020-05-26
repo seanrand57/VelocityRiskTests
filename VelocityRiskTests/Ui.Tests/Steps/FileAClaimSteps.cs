@@ -11,7 +11,9 @@ namespace Ui.Tests.Steps
 
         public void ClickCustomersClaimsMenuItem()
         {
-            MenuBar.ClickCustomersClaimsMenuItem();
+            MouseHoverToElement(MenuBar.CustomersMenuItemElement);
+            MenuBar.CustomersClaimsMenuItemElement.Click();
+            SwitchToLastOpenedTab();
         }
 
         private void VerifyLink(IWebElement actualLinkElement, string expectedUrl)

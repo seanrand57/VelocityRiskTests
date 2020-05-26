@@ -14,8 +14,9 @@ namespace Ui.Tests.Steps.Customers
 
         public override void NavigateTo()
         {
-            MenuBar.HoverCustomersMenuItem();
-            MenuBar.ClickCustomersClaimsMenuItem();
+            MouseHoverToElement(MenuBar.CustomersMenuItemElement);
+            MenuBar.CustomersClaimsMenuItemElement.Click();
+            SwitchToLastOpenedTab();
         }
 
         public void GivenPanelItemPresented(PanelItem panelItem)

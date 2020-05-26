@@ -135,15 +135,6 @@ namespace Ui.Tests.Steps
         {
             var js = (IJavaScriptExecutor)Driver;
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
-
-            Thread.Sleep(2000);
-        }
-
-        public void VerifyNavigation(string actualUrl, string expectedUrl, string customMessage)
-        {
-            Driver.Navigate().GoToUrl(actualUrl);
-            var actualurl = Driver.Url;
-            actualurl.ShouldBe(expectedUrl, customMessage);
         }
 
         public void VerifyClickNavigation(IWebElement element, string expectedUrl, string customMessage)
@@ -151,7 +142,7 @@ namespace Ui.Tests.Steps
             var tabsCount = TabsCount;
 
             ScrollToElement(element);
-            WaitForClickable(element);
+            WaitUntilElementIsVisible(element);
 
             // open in a new tab explicitly
             var action = new Actions(Driver);

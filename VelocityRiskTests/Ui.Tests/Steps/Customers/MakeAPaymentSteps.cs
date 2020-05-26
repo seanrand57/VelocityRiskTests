@@ -12,8 +12,9 @@ namespace Ui.Tests.Steps.Customers
 
         public void ClickCustomersMakeAPaymentMenuItem()
         {
-            MenuBar.HoverCustomersMenuItem();
-            MenuBar.ClickCustomersMakePaymentMenuItem();
+            MouseHoverToElement(MenuBar.CustomersMenuItemElement);
+            MenuBar.CustomersMakePaymentMenuItem().Click();
+            SwitchToLastOpenedTab();
         }
 
         public void VerifyCustomerHasOptionToPayByCreditCardOrCheck()

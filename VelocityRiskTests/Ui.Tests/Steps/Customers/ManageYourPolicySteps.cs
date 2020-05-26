@@ -13,8 +13,9 @@ namespace Ui.Tests.Steps.Customers
 
         public void ClickCustomersManageYourPolicyMenuItem()
         {
-            MenuBar.HoverCustomersMenuItem();
-            MenuBar.ClickCustomersManageYourPolicyMenuItem();
+            MouseHoverToElement(MenuBar.CustomersMenuItemElement);
+            MenuBar.CustomersManageYourPolicyMenuItem().Click();
+            SwitchToLastOpenedTab();
         }
 
         public void VerifyNewTabPageTitle(string expectedText)

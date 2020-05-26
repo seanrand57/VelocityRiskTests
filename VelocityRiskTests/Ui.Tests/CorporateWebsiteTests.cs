@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
-using Ui.Tests.Steps.TestData;
 using Ui.Tests.Steps.Customers;
 using Ui.Tests.Steps.TestData.Customers;
-using System;
 
 namespace Ui.Tests
 {
@@ -18,7 +15,6 @@ namespace Ui.Tests
 
         public static IEnumerable<ImageCard> ImageCardInfoExpected { get; } = DataContext.LoadImageCards();
 
-        // private BaseSteps _baseSteps;
         private HomePageSteps _homePageSteps;
         private ClaimsSteps _claimsSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;
@@ -132,7 +128,7 @@ namespace Ui.Tests
         public void TestCase_08_Footer_SocialLinksAreOpening()
         {
             // given navigated to home page
-            _homePageSteps.ThenVerifySocialLinks();
+            _homePageSteps.VerifySocialLinks();
         }
 
         [Test]

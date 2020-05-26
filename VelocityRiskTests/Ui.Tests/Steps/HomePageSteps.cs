@@ -94,7 +94,7 @@ namespace Ui.Tests.Steps
             actualInstagramUrl.ShouldBe(CopyrightTestData.InstagramHref, "It was not possible to find an expected Instagram link.");
         }
 
-        public void ThenVerifySocialLinks()
+        public void VerifySocialLinks()
         {
             VerifyClickNavigation(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
             VerifyClickNavigation(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
