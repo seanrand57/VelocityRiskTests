@@ -22,6 +22,11 @@ namespace Ui.Tests.Steps
 
         public void NavigateToLeadershipTeamView()
         {
+            // todo: use method from BaseSteps once it will be added there
+            var js = (IJavaScriptExecutor)Driver;
+            js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})",
+                _whoWeArePage.MeetOurLeadershipTeamElement);
+
             MouseHoverToElement(_whoWeArePage.MeetOurLeadershipTeamElement);
         }     
 

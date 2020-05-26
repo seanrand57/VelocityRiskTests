@@ -11,7 +11,10 @@ namespace Ui.Tests.PageObjectModels
 
         public IWebElement MeetOurLeadershipTeamElement => Driver.FindElement(By.ClassName("filter_inner_part"));
 
-        public IWebElement GetImageCardByName(string name) => Driver.FindElement(By.XPath($"//div[@class='overlay_content']/p[contains(text(), '{name}')]/parent::div"));
+        public IWebElement GetImageCardByName(string name)
+        {
+            return Driver.FindElement(By.XPath($"//img[@alt='{name}']"));
+        }
 
         public bool IsTeamMemberImageDisplayedByName(string name)
         {
