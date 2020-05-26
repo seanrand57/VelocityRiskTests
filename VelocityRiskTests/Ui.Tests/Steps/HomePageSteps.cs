@@ -26,24 +26,24 @@ namespace Ui.Tests.Steps
             navBarColor.ShouldBe(HomePageTestData.NavBarColor, "NavBar should be orange");
         }
 
-        public void GivenNavigatedWithoutSsl()
+        public void NavigateWithoutSsl()
         {
             const string url = "http://www.velocityrisk.com";
             Page.PageUrl = url;
         }
 
-        public void GivenMenuItemPresented(MenuItem menuItem)
+        public void VerifyMenuItemPresented(MenuItem menuItem)
         {
             var isMenuElement = MenuPresents(menuItem.Name);
             isMenuElement.ShouldBeTrue($"It was not possible to find menu item : {menuItem.Name} on UI");
         }
 
-        public void GivenIClickMenuItem(MenuItem menuItem)
+        public void ClickMenuItem(MenuItem menuItem)
         {
             ClickMenuItemByName(menuItem.Name);
         }
 
-        public void ThenUrlIsAsExpected(MenuItem menuItem)
+        public void VerifyUrlIsAsExpected(MenuItem menuItem)
         {
             var actualUrl = GetUrl();
             actualUrl.ShouldBe(menuItem.Link, $"It was not possible to find expected link for menu item : {menuItem.Name} on UI");
@@ -76,7 +76,7 @@ namespace Ui.Tests.Steps
 
         #region Footer Steps
 
-        public void ThenVerifyCorporateOfficeAddress()
+        public void VerifyCorporateOfficeAddress()
         {
             var actualAddress = Page.GetCorporateOfficeAddress();
             actualAddress.ShouldBe(CopyrightTestData.CorporateOfficeAddress, "It was not possible to find an expected address.");
@@ -96,13 +96,13 @@ namespace Ui.Tests.Steps
 
         public void VerifySocialLinks()
         {
-            VerifyClickNavigation(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-            VerifyClickNavigation(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
-            VerifyClickNavigation(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
-            VerifyClickNavigation(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
+            VerifyLink(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
+            VerifyLink(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
+            VerifyLink(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
+            VerifyLink(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
         }
 
-        public void ThenVerifyReportClaim()
+        public void VerifyReportClaim()
         {
             var actualNumber = Page.GetReportClaimPhoneNumberText();
             actualNumber.ShouldBe(CopyrightTestData.ReportClaimPhoneNumber, "It was not possible to find expected phone number to report a claim.");
@@ -110,10 +110,10 @@ namespace Ui.Tests.Steps
             var actualLink = Page.GetReportClaimLink();
             actualLink.ShouldBe(CopyrightTestData.ReportClaimPhoneLink, "It was not possible to find an expected link for the phone number to report a claim.");
 
-            VerifyClickNavigation(Page.Footer.ReportClaimOnlineLink, CopyrightTestData.ReportClaimOnlineUrl, "It was not possible to find an expected URL to report a claim online.");
+            VerifyLink(Page.Footer.ReportClaimOnlineLink, CopyrightTestData.ReportClaimOnlineUrl, "It was not possible to find an expected URL to report a claim online.");
         }
 
-        public void ThenVerifyProductInquiries()
+        public void VerifyProductInquiries()
         {
             var actualPersonalLinesText = Page.GetPersonalLinesNumberText();
             actualPersonalLinesText.ShouldBe(CopyrightTestData.PersonalLinesPhoneNumber, "It was not possible to find expected phone number for personal lines.");
@@ -135,38 +135,22 @@ namespace Ui.Tests.Steps
             actualLargeComercialsLink.ShouldBe(CopyrightTestData.LargeCommercialPhoneNumberLink, "It was not possible to find expected phone number for large commercial.");
         }
 
-        public void ThenVerifyCopyright()
+        public void VerifyCopyright()
         {
-            VerifyClickNavigation(Page.Footer.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to find an expected URL for disclaimer.");
-            VerifyClickNavigation(Page.Footer.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to find an expected URL for terms of use.");
-            VerifyClickNavigation(Page.Footer.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to find an expected URL for privacy policy.");
+            VerifyLink(Page.Footer.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to find an expected URL for disclaimer.");
+            VerifyLink(Page.Footer.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to find an expected URL for terms of use.");
+            VerifyLink(Page.Footer.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to find an expected URL for privacy policy.");
         }
 
-        public void ThenVerifyCookiePresented()
+        public void VerifyCookiePresented()
         {
             Page.CookieInfo.Accept.Displayed.ShouldBe(true, "It was not possible to find an expected cookie message.");
 
-            VerifyClickNavigation(Page.CookieInfo.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to open an expected disclaimer page.");
-            VerifyClickNavigation(Page.CookieInfo.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to open an expected terms of use page.");
-            VerifyClickNavigation(Page.CookieInfo.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to open an expected privacy policy page.");
+            VerifyLink(Page.CookieInfo.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to open an expected disclaimer page.");
+            VerifyLink(Page.CookieInfo.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to open an expected terms of use page.");
+            VerifyLink(Page.CookieInfo.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to open an expected privacy policy page.");
         }
 
         #endregion Footer Steps
-
-        // some links are opened in new tabs, we need to select a tab and get the url
-        private string GetUrl()
-        {
-            var allTabs = Driver.WindowHandles;
-            var actualUrl = Driver.Url;
-            if (allTabs.Count > 1)
-            {
-                Driver.SwitchTo().Window(allTabs[1]);
-                actualUrl = Driver.Url;
-                Driver.Close();
-                Driver.SwitchTo().Window(allTabs[0]);
-            }
-
-            return actualUrl;
-        }
     }
 }

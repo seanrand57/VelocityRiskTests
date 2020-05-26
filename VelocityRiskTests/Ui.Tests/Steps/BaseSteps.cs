@@ -4,7 +4,6 @@ using OpenQA.Selenium.Support.UI;
 using Shouldly;
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using Ui.Tests.PageObjectModels;
 using Ui.Tests.PageObjectModels.Components;
@@ -50,12 +49,10 @@ namespace Ui.Tests.Steps
 
         public void VerifyPageUrlWithoutProtocol(string urlWitoutProtocol)
         {
-            Driver.Url.ShouldContain(urlWitoutProtocol,
-                $"Url of the current tab (without protocol part) " +
-                $"should contain text '{urlWitoutProtocol}'");
+            Driver.Url.ShouldContain(urlWitoutProtocol, $"Url of the current tab (without protocol part) should contain text '{urlWitoutProtocol}'");
         }
 
-        public void VerifyProtocolIsHttps()
+        public void VerifyRedirectedToHttps()
         {
             Driver.Url.Split(':')[0].ShouldBe("https", "Url of the current tab should be under HTTPS protocol");
         }
@@ -131,40 +128,58 @@ namespace Ui.Tests.Steps
             var element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(webElement));
             return element;
         }
+
         public void ScrollToElement(IWebElement element)
         {
             var js = (IJavaScriptExecutor)Driver;
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
+
+            Thread.Sleep(2000);
         }
 
-        public void VerifyClickNavigation(IWebElement element, string expectedUrl, string customMessage)
+        public void VerifyNavigation(string actualUrl, string expectedUrl, string customMessage)
         {
-            var tabsCount = TabsCount;
+            Driver.Navigate().GoToUrl(actualUrl);
+            var actualurl = Driver.Url;
+            actualurl.ShouldBe(expectedUrl, customMessage);
+        }
 
-            ScrollToElement(element);
-            WaitUntilElementIsVisible(element);
+        public void VerifyLink(IWebElement actualLinkElement, string expectedUrl, string customMessage)
+        {
+            var tabsCount = TabsCount == 0 ? Driver.WindowHandles.Count : TabsCount;
+            TabsCount = Driver.WindowHandles.Count;
 
-            // open in a new tab explicitly
-            var action = new Actions(Driver);
-            action.KeyDown(Keys.Control).MoveToElement(element).Click().Perform();
+            ScrollToElement(actualLinkElement);
+            WaitUntilElementIsVisible(actualLinkElement);
+            actualLinkElement.Click();
 
             while (TabsCount == tabsCount)
             {
                 TabsCount = Driver.WindowHandles.Count;
             }
 
-            var handles = Driver.WindowHandles;
-            Driver.SwitchTo().Window(handles.Last());
+            Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            Driver.Url.ShouldContain(expectedUrl, customMessage);
+            Driver.Close();
 
-            var actualUrl = Driver.Url;
-            actualUrl.ShouldBe(expectedUrl, customMessage);
-
-            if (Driver.WindowHandles.Count > 1)
-            {
-                Driver.Close();
-            }
-            Driver.SwitchTo().Window(handles.First());
             TabsCount = Driver.WindowHandles.Count;
+            SwitchBackToDefaultTab();
+        }        
+
+        // some links are opened in new tabs, we need to select a tab and get the url
+        public string GetUrl()
+        {
+            var allTabs = Driver.WindowHandles;
+            var actualUrl = Driver.Url;
+            if (allTabs.Count > 1)
+            {
+                Driver.SwitchTo().Window(allTabs[1]);
+                actualUrl = Driver.Url;
+                Driver.Close();
+                Driver.SwitchTo().Window(allTabs[0]);
+            }
+
+            return actualUrl;
         }
     }
 }
