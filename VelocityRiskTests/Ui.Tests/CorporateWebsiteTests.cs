@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using NUnit.Framework;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
@@ -6,6 +7,7 @@ using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
 using Ui.Tests.Steps.TestData;
 using Ui.Tests.Steps.TestData.Customers;
+using Microsoft.Extensions.Configuration;
 
 namespace Ui.Tests
 {
