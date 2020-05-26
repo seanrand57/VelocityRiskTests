@@ -128,6 +128,7 @@ namespace Ui.Tests.Steps
             var element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(webElement));
             return element;
         }
+
         public void ScrollToElement(IWebElement element)
         {
             var js = (IJavaScriptExecutor)Driver;
@@ -171,6 +172,22 @@ namespace Ui.Tests.Steps
             }
             Driver.SwitchTo().Window(handles.First());
             TabsCount = Driver.WindowHandles.Count;
+        }
+
+        // some links are opened in new tabs, we need to select a tab and get the url
+        public string GetUrl()
+        {
+            var allTabs = Driver.WindowHandles;
+            var actualUrl = Driver.Url;
+            if (allTabs.Count > 1)
+            {
+                Driver.SwitchTo().Window(allTabs[1]);
+                actualUrl = Driver.Url;
+                Driver.Close();
+                Driver.SwitchTo().Window(allTabs[0]);
+            }
+
+            return actualUrl;
         }
     }
 }
