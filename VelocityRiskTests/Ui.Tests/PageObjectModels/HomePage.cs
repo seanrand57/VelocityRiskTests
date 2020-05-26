@@ -31,40 +31,9 @@ namespace Ui.Tests.PageObjectModels
         public IWebElement AboutUsMenuItem => Driver.FindElement(By.XPath("//ul[@id='Up']/li/a[contains(text(), 'About Us')]"));
 
         public IWebElement WhoWeAreMenuItem => Driver.FindElement(By.XPath("//ul[@class='sub-menu']/li/a[contains(text(), 'Who We Are')]"));
-        
+
         public IWebElement Logo => Driver.FindElement(By.XPath("//div[@class='header_white_inner']//img"));
         public IWebElement NavBar => Driver.FindElement(By.ClassName("header_orange"));
-
-        public bool MenuPresents(string menuItemName)
-        {
-            try
-            {
-                GetMenuLinkByItemName(menuItemName);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public void ClickMenuItemByName(string menuItemName)
-        {
-            var menuItem = GetMenuLinkByItemName(menuItemName);
-
-            var parentElements = menuItem.FindElements(By.XPath("ancestor::ul[@class = 'sub-menu']"));
-            if (parentElements.Count > 0)
-            {
-                menuItem.FindElement(By.XPath("ancestor::ul[@class = 'sub-menu']/preceding-sibling::a")).Click();
-            }
-            menuItem.Click();
-        }
-
-        public void ClickOnWhoWeAreMenuItemLink()
-        {
-            AboutUsMenuItem.Click();
-            WhoWeAreMenuItem.Click();
-        }
 
         #region Footer
 

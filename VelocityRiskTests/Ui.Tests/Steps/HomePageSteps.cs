@@ -34,19 +34,44 @@ namespace Ui.Tests.Steps
 
         public void GivenMenuItemPresented(MenuItem menuItem)
         {
-            var isMenuElement = Page.MenuPresents(menuItem.Name);
+            var isMenuElement = MenuPresents(menuItem.Name);
             isMenuElement.ShouldBeTrue($"It was not possible to find menu item : {menuItem.Name} on UI");
         }
 
         public void GivenIClickMenuItem(MenuItem menuItem)
         {
-            Page.ClickMenuItemByName(menuItem.Name);
+            ClickMenuItemByName(menuItem.Name);
         }
 
         public void ThenUrlIsAsExpected(MenuItem menuItem)
         {
             var actualUrl = GetUrl();
             actualUrl.ShouldBe(menuItem.Link, $"It was not possible to find expected link for menu item : {menuItem.Name} on UI");
+        }
+
+        public bool MenuPresents(string menuItemName)
+        {
+            try
+            {
+                Page.GetMenuLinkByItemName(menuItemName);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public void ClickMenuItemByName(string menuItemName)
+        {
+            var menuItem = Page.GetMenuLinkByItemName(menuItemName);
+
+            var parentElements = menuItem.FindElements(By.XPath("ancestor::ul[@class = 'sub-menu']"));
+            if (parentElements.Count > 0)
+            {
+                menuItem.FindElement(By.XPath("ancestor::ul[@class = 'sub-menu']/preceding-sibling::a")).Click();
+            }
+            menuItem.Click();
         }
 
         #region Footer Steps

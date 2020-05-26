@@ -1,27 +1,18 @@
 ﻿using System.Linq;
 using OpenQA.Selenium;
 using Shouldly;
-using Ui.Tests.PageObjectModels;
+using Ui.Tests.Steps.Customers;
 
 namespace Ui.Tests.Steps
 {
-    public class FileAClaimSteps: BaseSteps<ClaimsPage>
+    public class FileAClaimSteps: ClaimsSteps
     {
-        public FileAClaimSteps(IWebDriver driver) : base(driver)
-        {
-            Page = new ClaimsPage(Driver);
-        }
+        public FileAClaimSteps(IWebDriver driver) : base(driver) { }
 
-        public void ClickFileAClaimAccordion()
+        public void ClickCustomersClaimsMenuItem()
         {
             MenuBar.ClickCustomersClaimsMenuItem();
-            Page.ClickFileAClaimMenuItem();
         }
-
-        //public void ScrollTo()
-        //{
-        //    MouseHoverToElement(Page.QuestionsOnAnExistingClaimElement);
-        //}
 
         private void VerifyLink(IWebElement actualLinkElement, string expectedUrl)
         {

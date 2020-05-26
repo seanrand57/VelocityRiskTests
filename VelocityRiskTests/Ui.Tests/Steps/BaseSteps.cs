@@ -121,6 +121,8 @@ namespace Ui.Tests.Steps
                 SwitchToTabByItsName(tabName);
                 Driver.Close();
             }
+
+            SwitchBackToDefaultTab();
         }
 
         public IWebElement WaitForClickable(IWebElement webElement, int timeOut = 20)

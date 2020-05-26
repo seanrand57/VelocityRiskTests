@@ -96,13 +96,11 @@ namespace Ui.Tests
         [Test]
         public void TestCase_05_FileAClaimLinksAreCorrectTest()
         {
-            _fileAClaimSteps.ClickFileAClaimAccordion();
-            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData
-                .FileAClaimHomeownersExpectedUrl, "homeowners");
-            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData
-                .FileAClaimSmallCommercialExpectedUrl, "small commercial");
-            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData
-                .FileAClaimLargeCommercialExpectedUrl, "large commercial");
+            _fileAClaimSteps.ClickCustomersClaimsMenuItem();
+            _fileAClaimSteps.ClickPanel("File a claim");
+            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData.FileAClaimHomeownersExpectedUrl, "homeowners");
+            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl, "small commercial");
+            _fileAClaimSteps.VerifyOneLinkFromFireAClaimSection(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl, "large commercial");
         }
 
         [Test]

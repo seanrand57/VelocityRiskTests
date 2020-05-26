@@ -15,7 +15,8 @@ namespace Ui.Tests.Steps
         {
             NavigateTo();
             var homePage = new HomePage(Driver);
-            homePage.ClickOnWhoWeAreMenuItemLink();
+            homePage.AboutUsMenuItem.Click();
+            homePage.WhoWeAreMenuItem.Click();
         }
 
         public void NavigateToLeadershipTeamView()

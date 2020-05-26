@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace Ui.Tests.PageObjectModels
 {
@@ -10,45 +9,32 @@ namespace Ui.Tests.PageObjectModels
             PageUrl = "https://velocityrisk.com/for-agents/";
         }
 
-        [FindsBy(How = How.CssSelector, Using = "a[href='#appointment_headline']")]
-        public IWebElement GetStartedButton { get; set; }
+        public IWebElement GetStartedButton => Driver.FindElement(By.CssSelector("a[href='#appointment_headline']"));
 
-        [FindsBy(How = How.CssSelector, Using = "a[href='http://velocityrisk.com/for-agents/#login_links']")]
-        public IWebElement LogInButton { get; set; }
+        public IWebElement LogInButton => Driver.FindElement(By.CssSelector("a[href='http://velocityrisk.com/for-agents/#login_links']"));
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'Velocity Flex Home')]")]
-        public IWebElement VelocityFlexHomeLink { get; set; }
+        public IWebElement VelocityFlexHomeLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'Velocity Flex Home')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'Connecticut')]")]
-        public IWebElement ConnecticutLink { get; set; }
+        public IWebElement ConnecticutLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'Connecticut')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'Florida')]")]
-        public IWebElement FloridaLink { get; set; }
+        public IWebElement FloridaLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'Florida')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'New Jersey')]")]
-        public IWebElement NewJerseyLink { get; set; }
+        public IWebElement NewJerseyLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'New Jersey')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'New York')]")]
-        public IWebElement NewYorkLink { get; set; }
+        public IWebElement NewYorkLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'New York')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'North Carolina')]")]
-        public IWebElement NorthCarolinaLink { get; set; }
+        public IWebElement NorthCarolinaLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'North Carolina')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'Texas')]")]
-        public IWebElement TexasLink { get; set; }
+        public IWebElement TexasLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'Texas')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='login_links']//a[contains(text(), 'here')]")]
-        public IWebElement SmallCommercialPortalLink { get; set; }
+        public IWebElement SmallCommercialPortalLink => Driver.FindElement(By.XPath("//div[@id='login_links']//a[contains(text(), 'here')]"));
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='cta_part']//span[contains(text(), 'Large Commercial')]")]
-        public IWebElement LargeCommercialButton { get; set; }
+        public IWebElement LargeCommercialButton => Driver.FindElement(By.XPath("//div[@class='cta_part']//span[contains(text(), 'Large Commercial')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='cta_part']//span[contains(text(), 'Small Commercial')]")]
-        public IWebElement SmallCommercialButton { get; set; }
+        public IWebElement SmallCommercialButton => Driver.FindElement(By.XPath("//div[@class='cta_part']//span[contains(text(), 'Small Commercial')]"));
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='cta_part']//span[contains(text(), 'Personal Lines')]")]
-        public IWebElement PersonalLinesButton { get; set; }
+        public IWebElement PersonalLinesButton => Driver.FindElement(By.XPath("//div[@class='cta_part']//span[contains(text(), 'Personal Lines')]"));
     }
 }

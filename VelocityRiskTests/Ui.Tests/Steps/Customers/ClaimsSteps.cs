@@ -27,7 +27,7 @@ namespace Ui.Tests.Steps.Customers
         public void GivenIExpandPanelItem(PanelItem panelItem)
         {
             // expand panel
-            Page.ClickPanel(panelItem.Title);
+            ClickPanel(panelItem.Title);
         }
 
         public void ThenVerifyPanelContent(PanelItem panelItem)
@@ -36,7 +36,26 @@ namespace Ui.Tests.Steps.Customers
             panelItem.Content.ShouldBe(actualContent, $"It was not possible to find expected content for : {panelItem.Title} on UI");
 
             // collapse panel
-            Page.ClickPanel(panelItem.Title);
+            ClickPanel(panelItem.Title);
+        }
+
+        public void ExpandAllPanels()
+        {
+            var expandAllButton = Page.ExpandAllButton;
+            WaitForClickable(expandAllButton);
+            expandAllButton.Click();
+        }
+
+        public void ClickPanel(string name)
+        {
+            var spanElement = Page.GetPanel(name);
+            var divElement = spanElement.FindElement(By.XPath("ancestor::div[@class = 'customer_drop_block']"));
+            ScrollToElement(divElement);
+
+            var aElement = divElement.FindElement(By.XPath("a[@class = 'customer_head_part']"));
+            WaitForClickable(aElement);
+
+            aElement.Click();
         }
     }
 }
