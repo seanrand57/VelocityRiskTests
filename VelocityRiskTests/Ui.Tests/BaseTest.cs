@@ -23,14 +23,14 @@ namespace Ui.Tests
             {
                 case BrowserNamesConstants.Chrome:
                     Driver = new ChromeDriver();
-                    return;
+                    break;
                 case BrowserNamesConstants.InternetExplorer:
                     Driver = new InternetExplorerDriver(new InternetExplorerOptions
                     {
                         IntroduceInstabilityByIgnoringProtectedModeSettings = true,
                         RequireWindowFocus = true
                     });
-                    return;
+                    break;
                 default:
                     throw new Exception("Unsupported browser");
             }
