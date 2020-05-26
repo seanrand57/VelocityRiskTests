@@ -16,8 +16,6 @@ namespace Ui.Tests.Steps
 
         protected TPage Page;
 
-        protected int TabsCount;
-
         protected MenuBar MenuBar;
 
         public BaseSteps(IWebDriver driver)
@@ -139,9 +137,9 @@ namespace Ui.Tests.Steps
         {
             ScrollToElement(actualLinkElement);
             WaitUntilElementIsVisible(actualLinkElement);
-            actualLinkElement.Click(); 
+            actualLinkElement.Click();
 
-            Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            SwitchToLastOpenedTab();
             Driver.Url.ShouldContain(expectedUrl, customMessage);
             SwitchBackToDefaultTab();
         }        
