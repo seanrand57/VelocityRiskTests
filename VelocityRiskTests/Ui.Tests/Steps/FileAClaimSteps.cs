@@ -17,7 +17,7 @@ namespace Ui.Tests.Steps
         public void VerifyOneLinkFromFireAClaimSection(string expectedUrl, string linkName)
         {
             var actualLink = Page.GetLinkFromFileAClaimSection(linkName);
-            VerifyClickNavigation(actualLink, expectedUrl, $"It was not possible to open {linkName} page.");
+            VerifyLink(actualLink, expectedUrl, $"It was not possible to open {linkName} page.");
         }
     }
 }

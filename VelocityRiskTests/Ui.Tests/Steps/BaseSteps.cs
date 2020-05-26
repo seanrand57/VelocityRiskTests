@@ -144,35 +144,27 @@ namespace Ui.Tests.Steps
             actualurl.ShouldBe(expectedUrl, customMessage);
         }
 
-        public void VerifyClickNavigation(IWebElement element, string expectedUrl, string customMessage)
+        public void VerifyLink(IWebElement actualLinkElement, string expectedUrl, string customMessage)
         {
-            var tabsCount = TabsCount;
+            var tabsCount = TabsCount == 0 ? Driver.WindowHandles.Count : TabsCount;
+            TabsCount = Driver.WindowHandles.Count;
 
-            ScrollToElement(element);
-            WaitForClickable(element);
-
-            // open in a new tab explicitly
-            var action = new Actions(Driver);
-            action.KeyDown(Keys.Control).MoveToElement(element).Click().Perform();
+            ScrollToElement(actualLinkElement);
+            WaitUntilElementIsVisible(actualLinkElement);
+            actualLinkElement.Click();
 
             while (TabsCount == tabsCount)
             {
                 TabsCount = Driver.WindowHandles.Count;
             }
 
-            var handles = Driver.WindowHandles;
-            Driver.SwitchTo().Window(handles.Last());
+            Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            Driver.Url.ShouldContain(expectedUrl, customMessage);
+            Driver.Close();
 
-            var actualUrl = Driver.Url;
-            actualUrl.ShouldBe(expectedUrl, customMessage);
-
-            if (Driver.WindowHandles.Count > 1)
-            {
-                Driver.Close();
-            }
-            Driver.SwitchTo().Window(handles.First());
             TabsCount = Driver.WindowHandles.Count;
-        }
+            SwitchBackToDefaultTab();
+        }        
 
         // some links are opened in new tabs, we need to select a tab and get the url
         public string GetUrl()

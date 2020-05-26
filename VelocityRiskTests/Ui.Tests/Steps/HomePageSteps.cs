@@ -96,10 +96,10 @@ namespace Ui.Tests.Steps
 
         public void VerifySocialLinks()
         {
-            VerifyClickNavigation(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-            VerifyClickNavigation(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
-            VerifyClickNavigation(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
-            VerifyClickNavigation(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
+            VerifyLink(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
+            VerifyLink(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
+            VerifyLink(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
+            VerifyLink(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
         }
 
         public void VerifyReportClaim()
@@ -110,7 +110,7 @@ namespace Ui.Tests.Steps
             var actualLink = Page.GetReportClaimLink();
             actualLink.ShouldBe(CopyrightTestData.ReportClaimPhoneLink, "It was not possible to find an expected link for the phone number to report a claim.");
 
-            VerifyClickNavigation(Page.Footer.ReportClaimOnlineLink, CopyrightTestData.ReportClaimOnlineUrl, "It was not possible to find an expected URL to report a claim online.");
+            VerifyLink(Page.Footer.ReportClaimOnlineLink, CopyrightTestData.ReportClaimOnlineUrl, "It was not possible to find an expected URL to report a claim online.");
         }
 
         public void VerifyProductInquiries()
@@ -137,18 +137,18 @@ namespace Ui.Tests.Steps
 
         public void VerifyCopyright()
         {
-            VerifyClickNavigation(Page.Footer.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to find an expected URL for disclaimer.");
-            VerifyClickNavigation(Page.Footer.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to find an expected URL for terms of use.");
-            VerifyClickNavigation(Page.Footer.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to find an expected URL for privacy policy.");
+            VerifyLink(Page.Footer.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to find an expected URL for disclaimer.");
+            VerifyLink(Page.Footer.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to find an expected URL for terms of use.");
+            VerifyLink(Page.Footer.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to find an expected URL for privacy policy.");
         }
 
         public void VerifyCookiePresented()
         {
             Page.CookieInfo.Accept.Displayed.ShouldBe(true, "It was not possible to find an expected cookie message.");
 
-            VerifyClickNavigation(Page.CookieInfo.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to open an expected disclaimer page.");
-            VerifyClickNavigation(Page.CookieInfo.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to open an expected terms of use page.");
-            VerifyClickNavigation(Page.CookieInfo.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to open an expected privacy policy page.");
+            VerifyLink(Page.CookieInfo.Disclaimer, CopyrightTestData.DisclaimerUrl, "It was not possible to open an expected disclaimer page.");
+            VerifyLink(Page.CookieInfo.TermsOfUse, CopyrightTestData.TermsOfUseUrl, "It was not possible to open an expected terms of use page.");
+            VerifyLink(Page.CookieInfo.PrivacyPolicy, CopyrightTestData.PrivacyPolicyUrl, "It was not possible to open an expected privacy policy page.");
         }
 
         #endregion Footer Steps
