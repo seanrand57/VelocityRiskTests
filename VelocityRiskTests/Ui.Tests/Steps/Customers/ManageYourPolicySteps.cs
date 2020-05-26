@@ -1,23 +1,21 @@
 ﻿using OpenQA.Selenium;
 using Shouldly;
 using Ui.Tests.PageObjectModels;
-using Ui.Tests.PageObjectModels.Components;
 
-namespace Ui.Tests.Steps
+namespace Ui.Tests.Steps.Customers
 {
-    public class ManageYourPolicySteps : BaseSteps
+    public class ManageYourPolicySteps : BaseSteps<ManageYourPolicyPage>
     {
-        private ManageYourPolicyPage _manageYourPolicyPage;
-
         public ManageYourPolicySteps(IWebDriver driver) : base(driver)
         {
-            _manageYourPolicyPage = new ManageYourPolicyPage(Driver);
+            Page = new ManageYourPolicyPage(Driver);
         }
 
-        public void ClickCustomesManageYourPolicyMenuItem()
+        public void ClickCustomersManageYourPolicyMenuItem()
         {
-            MenuBar.HoverCustomersMenuItem();
-            MenuBar.ClickCustomersManageYourPolicyMenuItem();
+            MouseHoverToElement(MenuBar.CustomersMenuItemElement);
+            MenuBar.CustomersManageYourPolicyMenuItem().Click();
+            SwitchToLastOpenedTab();
         }
 
         public void VerifyNewTabPageTitle(string expectedText)
@@ -27,8 +25,8 @@ namespace Ui.Tests.Steps
 
         public void VerifyNewTabPageHeader(string expectedText)
         {
-            WaitUntilElementIsVisible(_manageYourPolicyPage.HeaderElement);
-            _manageYourPolicyPage.HeaderElement.Text.ShouldContain(expectedText,
+            WaitUntilElementIsVisible(Page.HeaderElement);
+            Page.HeaderElement.Text.ShouldContain(expectedText,
                 $"Url of the current tab should contain text '{expectedText}'");
         }
     }

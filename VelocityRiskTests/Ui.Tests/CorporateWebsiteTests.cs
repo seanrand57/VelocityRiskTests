@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using NUnit.Framework;
-using Shouldly;
-using Ui.Tests.PageObjectModels;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
-using Ui.Tests.Steps.TestData;
+using Ui.Tests.Steps.Customers;
 using Ui.Tests.Steps.TestData.Customers;
 using Microsoft.Extensions.Configuration;
 
@@ -19,24 +17,20 @@ namespace Ui.Tests
 
         public static IEnumerable<ImageCard> ImageCardInfoExpected { get; } = DataContext.LoadImageCards();
 
-        private BaseSteps _baseSteps;
+        private HomePageSteps _homePageSteps;
+        private ClaimsSteps _claimsSteps;
         private ManageYourPolicySteps _manageYourPolicySteps;
         private MakeAPaymentSteps _makeAPaymentSteps;
-        private int _tabsCountBeforeEachTest;
-
-        private FileAClaimSteps _fileAClaimSteps;
-        private HomePageSteps _homePageSteps;
         private AboutUsPageSteps _aboutUsPageSteps;
+        private int _tabsCountBeforeEachTest;
 
         [OneTimeSetUp]
         public void Initialize()
         {
-            _baseSteps = new BaseSteps(Driver);
+            _homePageSteps = new HomePageSteps(Driver);
+            _claimsSteps = new ClaimsSteps(Driver);
             _makeAPaymentSteps = new MakeAPaymentSteps(Driver);
             _manageYourPolicySteps = new ManageYourPolicySteps(Driver);
-            _tabsCountBeforeEachTest = 1;
-
-            _fileAClaimSteps = new FileAClaimSteps(Driver);
             _homePageSteps = new HomePageSteps(Driver);
             _aboutUsPageSteps = new AboutUsPageSteps(Driver);
         }
@@ -44,103 +38,70 @@ namespace Ui.Tests
         [SetUp]
         public void BeforEachTest()
         {
-            _baseSteps.GoToHomePage();
+            _homePageSteps.NavigateTo();
+            _tabsCountBeforeEachTest = _homePageSteps.GetCurrentTabsCount();
         }
 
         [TearDown]
         public void AfterEachTest()
         {
-            _baseSteps.CloseAllNewlyOpenedTabs();
+            _homePageSteps.CloseAllTabsExceptFirst();
         }
 
         [Test]
-        [TestCaseSource("MenuInfoExpected")]
-        public void MenuItemsAreCorrectTest(MenuItem menuItem)
+        public void TestCase_01_SecuredConnection()
         {
-            var homePage = new HomePage(Driver);
-            homePage.NavigateTo();
-
-            var isMenuElement = homePage.MenuPresents(menuItem.Name);
-            isMenuElement.ShouldBeTrue($"It was not possible to find menu item : {menuItem.Name} on UI");
-
-            homePage.ClickMenuItemByName(menuItem.Name);
-
-            var actualUrl = GetUrl();
-            actualUrl.ShouldBe(menuItem.Link, $"It was not possible to find expected link for menu item : {menuItem.Name} on UI");
+            _homePageSteps.NavigateWithoutSsl();
+            _homePageSteps.VerifyRedirectedToHttps();
         }
 
         [Test]
-        [TestCaseSource("PanelInfoExpected")]
-        public void PanelItemsAreCorrectTest(PanelItem panelItem)
+        [TestCaseSource(nameof(MenuInfoExpected))]
+        public void TestCase_02_MainMenu_ItemsAreCorrect(MenuItem menuItem)
         {
-            var claimsPage = new ClaimsPage(Driver);
-            claimsPage.NavigateTo();
-
-            var isPanelElement = claimsPage.IsPanelElementPresent(panelItem.Title);
-            isPanelElement.ShouldBeTrue($"It was not possible to find panel item : {panelItem.Title} on UI");
-
-            // expand panel
-            claimsPage.ClickPaneITitleByName(panelItem.Title);
-
-            var actualContent = claimsPage.GetPanelContent(panelItem.Title);
-            panelItem.Content.ShouldBe(actualContent, $"It was not possible to find expected content for : {panelItem.Title} on UI");
-
-            // collapse panel
-            claimsPage.ClickPaneITitleByName(panelItem.Title);
+            _homePageSteps.VerifyMenuItemPresented(menuItem);
+            _homePageSteps.ClickMenuItemByName(menuItem.Name);
+            _homePageSteps.VerifyMenuItemRedirrect(menuItem);
         }
 
         [Test]
-        public void TestCase_10_Customers_ManageYourPolicy()
+        public void TestCase_03_FooterItemsAreCorrect()
         {
-            _manageYourPolicySteps.ClickCustomesManageYourPolicyMenuItem();
-            _manageYourPolicySteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
-            _manageYourPolicySteps.SwitchToLastOpenedTab();
-            _manageYourPolicySteps.VerifyPageUrlWithoutProtocol(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
-            _manageYourPolicySteps.VerifyProtocolIsHttps();
-            _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
-            _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
-        }
-         
-        [Test]
-        public void TestCase_11_Customers_MakeAPayment()
-        {
-            _makeAPaymentSteps.ClickCustomesMakeAPaymentMenuItem();
-            _makeAPaymentSteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
-            _manageYourPolicySteps.SwitchToLastOpenedTab();
-            _makeAPaymentSteps.VerifyProtocolIsHttps();
-            _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
-        }
-
-        // some links are opened in new tabs, we need to select a tab and get the url
-        private string GetUrl()
-        {
-            var allTabs = Driver.WindowHandles;
-            var actualUrl = Driver.Url;
-            if (allTabs.Count > 1)
-            {
-                Driver.SwitchTo().Window(allTabs[1]);
-                actualUrl = Driver.Url;
-                Driver.Close();
-                Driver.SwitchTo().Window(allTabs[0]);
-            }
-
-            return actualUrl;
+            _homePageSteps.VerifyCorporateOfficeAddress();
+            _homePageSteps.VerifyProductInquiries();
+            _homePageSteps.VerifyCopyright();
+            _homePageSteps.VerifyReportClaim();
         }
 
         [Test]
-        public void Test_Case_5_FileAClaimLinksAreCorrectTest()
+        [TestCaseSource(nameof(PanelInfoExpected))]
+        public void TestCase_04_Claims_PanelItemsAreCorrect(PanelItem panelItem)
         {
-            _fileAClaimSteps.ClickFileAClaimAccordion();
-            _fileAClaimSteps.ScrollDown();
-            _fileAClaimSteps.VerifyHomeownersLink(FileAClaimTestData.FileAClaimExpectedUrl);
-            _fileAClaimSteps.VerifySmallCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);
-            _fileAClaimSteps.VerifyLargeCommercialLink(FileAClaimTestData.FileAClaimExpectedUrl);             
+            _claimsSteps.NavigateTo();
+            _claimsSteps.VerifyPanelItemPresented(panelItem);
+            _claimsSteps.ExpandPanelItem(panelItem);
+            _claimsSteps.VerifyPanelContent(panelItem);
         }
 
+        [Test]
+        public void TestCase_05_FileAClaimLinksAreCorrectTest()
+        {
+            _claimsSteps.NavigateTo();
+            _claimsSteps.ClickPanel(ClaimsTestData.FileClaimTitle);
+            _claimsSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimHomeownersExpectedUrl, "homeowners");
+            _claimsSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimSmallCommercialExpectedUrl, "small commercial");
+            _claimsSteps.VerifyOneLinkFromFileAClaimSection(FileAClaimTestData.FileAClaimLargeCommercialExpectedUrl, "large commercial");
+        }
 
         [Test]
-        [TestCaseSource("ImageCardInfoExpected")]
-        public void Test_Case_7_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(PersistenceModels.ImageCard imageCardItem)
+        public void TestCase_06_Home_CookiePresented()
+        {
+            _homePageSteps.VerifyCookiePresented();
+        }
+
+        [Test]
+        [TestCaseSource(nameof(ImageCardInfoExpected))]
+        public void TestCase_07_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(ImageCard imageCardItem)
         {
             _aboutUsPageSteps.NavigateToPage();
             _aboutUsPageSteps.NavigateToLeadershipTeamView();
@@ -152,15 +113,43 @@ namespace Ui.Tests
             _aboutUsPageSteps.ClickOnNameCard(imageCardItem.TeamMemberName);
 
             _aboutUsPageSteps.VerifyTeamMemberJobTitle(imageCardItem.TeamMemberName, imageCardItem.JobTitle);
-
             _aboutUsPageSteps.VerifyTeamMemberLocation(imageCardItem.TeamMemberName, imageCardItem.Location);
         }
 
         [Test]
-        public void Test_Case_9_VelocityLogoImageAndNavBarAreCorrect()
+        public void TestCase_08_Footer_SocialLinksAreOpening()
+        {
+            // Test with LinkedIn link fails due to the captcha
+            _homePageSteps.VerifySocialLinks();
+        }
+
+        [Test]
+        public void TestCase_09_VelocityLogoImageAndNavBarAreCorrect()
         {
             _homePageSteps.VerifyLogoIsPresent();
             _homePageSteps.VerifyNavBarIsOrange();
+        }
+
+        [Test]
+        public void TestCase_10_Customers_ManageYourPolicy()
+        {
+            _manageYourPolicySteps.ClickCustomersManageYourPolicyMenuItem();
+            _manageYourPolicySteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
+            _manageYourPolicySteps.SwitchToLastOpenedTab();
+            _manageYourPolicySteps.VerifyPageUrl(ManageYourPolicyTestData.LoginPageUrlWithoutProtocol);
+            _manageYourPolicySteps.VerifyRedirectedToHttps();
+            _manageYourPolicySteps.VerifyNewTabPageTitle(ManageYourPolicyTestData.LoginPageTitleText);
+            _manageYourPolicySteps.VerifyNewTabPageHeader(ManageYourPolicyTestData.LoginPageHeaderText);
+        }
+
+        [Test]
+        public void TestCase_11_Customers_MakeAPayment()
+        {
+            _makeAPaymentSteps.ClickCustomersMakeAPaymentMenuItem();
+            _makeAPaymentSteps.VerifyNewTabIsOpened(_tabsCountBeforeEachTest);
+            _makeAPaymentSteps.SwitchToLastOpenedTab();
+            _makeAPaymentSteps.VerifyRedirectedToHttps();
+            _makeAPaymentSteps.VerifyCustomerHasOptionToPayByCreditCardOrCheck();
         }
     }
 }

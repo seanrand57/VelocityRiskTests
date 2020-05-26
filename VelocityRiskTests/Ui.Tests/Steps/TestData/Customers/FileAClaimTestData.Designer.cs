@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ui.Tests.Steps.TestData {
+namespace Ui.Tests.Steps.TestData.Customers {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Ui.Tests.Steps.TestData {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ui.Tests.Steps.TestData.FileAClaimTestData", typeof(FileAClaimTestData).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ui.Tests.Steps.TestData.Customers.FileAClaimTestData", typeof(FileAClaimTestData).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,29 @@ namespace Ui.Tests.Steps.TestData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://www.claimlookup.com/.
+        ///   Looks up a localized string similar to https://www.claimlookup.com/homeowners.
         /// </summary>
-        public static string FileAClaimExpectedUrl {
+        public static string FileAClaimHomeownersExpectedUrl {
             get {
-                return ResourceManager.GetString("FileAClaimExpectedUrl", resourceCulture);
+                return ResourceManager.GetString("FileAClaimHomeownersExpectedUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.claimlookup.com/business.
+        /// </summary>
+        public static string FileAClaimLargeCommercialExpectedUrl {
+            get {
+                return ResourceManager.GetString("FileAClaimLargeCommercialExpectedUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.claimlookup.com/smallbusiness.
+        /// </summary>
+        public static string FileAClaimSmallCommercialExpectedUrl {
+            get {
+                return ResourceManager.GetString("FileAClaimSmallCommercialExpectedUrl", resourceCulture);
             }
         }
     }

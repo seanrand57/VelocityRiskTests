@@ -9,59 +9,48 @@ namespace Ui.Tests.PageObjectModels
         {
             PageUrl = "https://velocityrisk.com/for-homeowners/";
         }
-        
-        [FindsBy(How = How.XPath, Using = "//h3[text() ='Homeowners']/following-sibling::a")]
-        public IWebElement HomeownersMoreInfoLink { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//h3[text() ='Rental Properties']/following-sibling::a")]
-        public IWebElement RentalPropertiesMoreInfoLink { get; set; }
+        public IWebElement HomeownersMoreInfoLink => Driver.FindElement(By.XPath("//h3[text() ='Homeowners']/following-sibling::a"));
 
-        [FindsBy(How = How.XPath, Using = "//h3[text() ='Condominiums']/following-sibling::a")]
-        public IWebElement CondominiumsMoreInfoLink { get; set; }
-        
-        [FindsBy(How = How.ClassName, Using = "faq_button open-modal-popup")]
-        public IWebElement GetStartedButton { get; set; }
+        public IWebElement RentalPropertiesMoreInfoLink => Driver.FindElement(By.XPath("//h3[text() ='Rental Properties']/following-sibling::a"));
 
-        [FindsBy(How = How.ClassName, Using = "faq_button")]
-        public IWebElement MakePaymentButton { get; set; }
+        public IWebElement CondominiumsMoreInfoLink => Driver.FindElement(By.XPath("//h3[text() ='Condominiums']/following-sibling::a"));
 
-        [FindsBy(How = How.LinkText, Using = "Manage Account")]
-        public IWebElement ManageAccountButton { get; set; }
+        public IWebElement GetStartedButton => Driver.FindElement(By.XPath("//a[text()='Get Started']"));
 
-        [FindsBy(How = How.ClassName, Using = "expand_text")]
-        public IWebElement ExpandAllButton { get; set; }
-        
-        [FindsBy(How = How.ClassName, Using = "faq_button_part homeowners_banner_buttonpart")]
-        public IWebElement CustomerDropDownItems { get; set; }
+        public IWebElement MakePaymentButton => Driver.FindElement(By.XPath("//a[text()='Make a Payment']"));
 
-        [FindsBy(How = How.ClassName, Using = "modal_popupbutton open-modal-popup")]
-        public IWebElement ContactUsButton { get; set; }
+        public IWebElement ManageAccountButton => Driver.FindElement(By.XPath("//a[text()='Manage Account']"));
 
-        [FindsBy(How = How.LinkText, Using = "National Weather Service")]
-        public IWebElement NationalWeatherServiceLink { get; set; }
+        public IWebElement ExpandAllButton => Driver.FindElement(By.ClassName("expand_text"));
 
-        [FindsBy(How = How.LinkText, Using = "NOAA National Hurricane Center")]
-        public IWebElement NoaaNationalHurricaneCenterLink { get; set; }
+        public IWebElement CustomerDropDownItems => Driver.FindElement(By.ClassName("faq_button_part homeowners_banner_buttonpart"));
 
-        [FindsBy(How = How.LinkText, Using = "USGS World EQ Maps")]
-        public IWebElement UsgsWorldEqMapsLink { get; set; }
+        public IWebElement ContactUsButton => Driver.FindElement(By.ClassName("modal_popupbutton open-modal-popup"));
 
-        [FindsBy(How = How.LinkText, Using = "Northern California EQ Data")]
-        public IWebElement NothernCaliforniaEqDataLink { get; set; }
+        public IWebElement NationalWeatherServiceLink => Driver.FindElement(By.XPath("//a[text()='National Weather Service']"));
 
-        [FindsBy(How = How.LinkText, Using = "Southern California EQ Data")]
-        public IWebElement SouthernCaliforniaEqDataLink { get; set; }
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement NoaaNationalHurricaneCenterLink => Driver.FindElement(By.XPath("//a[text()='NOAA National Hurricane Center']"));
 
-        [FindsBy(How = How.LinkText, Using = "Pacific Northwest EQ Data")]
-        public IWebElement PacificNorthwestEqDataLink { get; set; }
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement UsgsWorldEqMapsLink => Driver.FindElement(By.XPath("//a[text()='USGS World EQ Maps']"));
 
-        [FindsBy(How = How.LinkText, Using = "Intermountain West EQ Data")]
-        public IWebElement IntermountainWestEqDataLink { get; set; }
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement NothernCaliforniaEqDataLink => Driver.FindElement(By.XPath("//a[text()='Northern California EQ Data']"));
 
-        [FindsBy(How = How.LinkText, Using = "FEMA Flood Maps")]
-        public IWebElement FemaFloodMapsLink { get; set; }
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement SouthernCaliforniaEqDataLink => Driver.FindElement(By.XPath("//a[text()='Southern California EQ Data']"));
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='contact_title']/a")]
-        public IWebElement ReportClaimLink { get; set; }
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement PacificNorthwestEqDataLink => Driver.FindElement(By.XPath("//a[text()='Pacific Northwest EQ Data']"));
+
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement IntermountainWestEqDataLink => Driver.FindElement(By.XPath("//a[text()='Intermountain West EQ Data']"));
+
+        [FindsBy(How = How.LinkText, Using = "")]
+        public IWebElement FemaFloodMapsLink => Driver.FindElement(By.XPath("//a[text()='FEMA Flood Maps']"));
+
+        public IWebElement ReportClaimLink => Driver.FindElement(By.XPath("//p[@class='contact_title']/a"));
     }
 }

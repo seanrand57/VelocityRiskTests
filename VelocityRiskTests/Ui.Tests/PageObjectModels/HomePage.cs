@@ -5,10 +5,13 @@ namespace Ui.Tests.PageObjectModels
 {
     public class HomePage : BasePage
     {
-        protected MenuBar MenuBar { get; set; }
-        protected Header Header { get; set; }
-        protected Footer Footer { get; set; }
-        protected CookieInfo CookieInfo { get; set; }
+        public MenuBar MenuBar { get; set; }
+
+        public Header Header { get; set; }
+
+        public Footer Footer { get; set; }
+
+        public CookieInfo CookieInfo { get; set; }
 
         public HomePage(IWebDriver driver) : base(driver)
         {
@@ -28,39 +31,77 @@ namespace Ui.Tests.PageObjectModels
         public IWebElement AboutUsMenuItem => Driver.FindElement(By.XPath("//ul[@id='Up']/li/a[contains(text(), 'About Us')]"));
 
         public IWebElement WhoWeAreMenuItem => Driver.FindElement(By.XPath("//ul[@class='sub-menu']/li/a[contains(text(), 'Who We Are')]"));
-        
+
         public IWebElement Logo => Driver.FindElement(By.XPath("//div[@class='header_white_inner']//img"));
         public IWebElement NavBar => Driver.FindElement(By.ClassName("header_orange"));
 
-        public bool MenuPresents(string menuItemName)
+        #region Footer
+
+        public string GetCorporateOfficeAddress()
         {
-            try
-            {
-                GetMenuLinkByItemName(menuItemName);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return Footer.CorporateOfficeAddress.Text;
         }
 
-        public void ClickMenuItemByName(string menuItemName)
+        public string GetLinkedInLink()
         {
-            var menuItem = GetMenuLinkByItemName(menuItemName);
-
-            var parentElements = menuItem.FindElements(By.XPath("ancestor::ul[@class = 'sub-menu']"));
-            if (parentElements.Count > 0)
-            {
-                menuItem.FindElement(By.XPath("ancestor::ul[@class = 'sub-menu']/preceding-sibling::a")).Click();
-            }
-            menuItem.Click();
+            return Footer.CorporateOfficeLinkedIn.GetAttribute("href");
         }
 
-        public void ClickOnWhoWeAreMenuItemLink()
+        public string GetFacebookLink()
         {
-            AboutUsMenuItem.Click();
-            WhoWeAreMenuItem.Click();
+            return Footer.CorporateOfficeFacebook.GetAttribute("href");
         }
+
+        public string GetTwitterLink()
+        {
+            return Footer.CorporateOfficeTwitter.GetAttribute("href");
+        }
+
+        public string GetInstagramLink()
+        {
+            return Footer.CorporateOfficeInstagram.GetAttribute("href");
+        }
+
+        public string GetReportClaimPhoneNumberText()
+        {
+            return Footer.ReportClaimPhoneNumber.Text;
+        }
+
+        public string GetReportClaimLink()
+        {
+            return Footer.ReportClaimPhoneNumber.GetAttribute("href");
+        }
+
+        public string GetPersonalLinesNumberText()
+        {
+            return Footer.PersonalLinesNumber.Text;
+        }
+
+        public string GetSmallComercialNumberText()
+        {
+            return Footer.SmallCommercialNumber.Text;
+        }
+
+        public string GetLargeCommercialNumberText()
+        {
+            return Footer.LargeCommercialNumber.Text;
+        }
+
+        public string GetPersonalLinesNumberLink()
+        {
+            return Footer.PersonalLinesNumber.GetAttribute("href");
+        }
+
+        public string GetSmallComercialNumberLink()
+        {
+            return Footer.SmallCommercialNumber.GetAttribute("href");
+        }
+
+        public string GetLargeCommercialNumberLink()
+        {
+            return Footer.LargeCommercialNumber.GetAttribute("href");
+        }
+
+        #endregion Footer
     }
 }
