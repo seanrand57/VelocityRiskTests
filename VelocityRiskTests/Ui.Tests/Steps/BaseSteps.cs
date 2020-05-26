@@ -133,15 +133,6 @@ namespace Ui.Tests.Steps
         {
             var js = (IJavaScriptExecutor)Driver;
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
-
-            Thread.Sleep(2000);
-        }
-
-        public void VerifyNavigation(string actualUrl, string expectedUrl, string customMessage)
-        {
-            Driver.Navigate().GoToUrl(actualUrl);
-            var actualurl = Driver.Url;
-            actualurl.ShouldBe(expectedUrl, customMessage);
         }
 
         public void VerifyLink(IWebElement actualLinkElement, string expectedUrl, string customMessage)
