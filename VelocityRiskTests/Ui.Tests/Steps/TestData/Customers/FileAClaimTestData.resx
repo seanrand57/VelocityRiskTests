@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FileAClaimExpectedUrl" xml:space="preserve">
-    <value>https://www.claimlookup.com/</value>
+  <data name="FileAClaimHomeownersExpectedUrl" xml:space="preserve">
+    <value>https://www.claimlookup.com/homeowners</value>
+  </data>
+  <data name="FileAClaimLargeCommercialExpectedUrl" xml:space="preserve">
+    <value>https://www.claimlookup.com/business</value>
+  </data>
+  <data name="FileAClaimSmallCommercialExpectedUrl" xml:space="preserve">
+    <value>https://www.claimlookup.com/smallbusiness</value>
   </data>
 </root>

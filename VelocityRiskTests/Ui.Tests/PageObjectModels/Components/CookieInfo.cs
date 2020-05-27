@@ -1,21 +1,16 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 
 namespace Ui.Tests.PageObjectModels.Components
 {
     public class CookieInfo : BaseComponent
     {
-        [FindsBy(How = How.XPath, Using = "(//span a)[0]")]
-        public IWebElement Disclaimer;
+        public IWebElement Disclaimer => Driver.FindElement(By.XPath("//div[@id='cookie-law-info-bar']//a[@href= 'https://velocityrisk.com/disclaimer/']"));
 
-        [FindsBy(How = How.XPath, Using = "(//span a)[1]")]
-        public IWebElement TermsOfUse;
+        public IWebElement TermsOfUse => Driver.FindElement(By.XPath("//div[@id='cookie-law-info-bar']//a[@href= 'https://velocityrisk.com/terms-of-use/']"));
 
-        [FindsBy(How = How.XPath, Using = "(//span a)[2]")]
-        public IWebElement PrivacyPolicy;
+        public IWebElement PrivacyPolicy => Driver.FindElement(By.XPath("//div[@id='cookie-law-info-bar']//a[@href= 'https://velocityrisk.com/privacy-policy/']"));
 
-        [FindsBy(How = How.Id, Using = "cookie_action_close_header")]
-        public IWebElement Accept;
+        public IWebElement Accept => Driver.FindElement(By.Id("cookie_action_close_header"));
 
         public CookieInfo(IWebDriver driver) : base(driver) { }
     }
