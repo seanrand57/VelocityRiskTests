@@ -24,9 +24,9 @@ namespace Ui.Tests.Steps
             // todo: use method from BaseSteps once it will be added there
             var js = (IJavaScriptExecutor)Driver;
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})",
-                _whoWeArePage.MeetOurLeadershipTeamElement);
+                Page.MeetOurLeadershipTeamElement);
 
-            MouseHoverToElement(_whoWeArePage.MeetOurLeadershipTeamElement);
+            MouseHoverToElement(Page.MeetOurLeadershipTeamElement);
         }     
 
         public void VerifyIsTeamMemberExists(string name)
