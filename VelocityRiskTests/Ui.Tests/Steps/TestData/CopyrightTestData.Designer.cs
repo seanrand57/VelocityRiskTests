@@ -89,7 +89,7 @@ namespace Ui.Tests.Steps.TestData {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://web.facebook.com/velocityriskunderwriters/?_rdc=1&amp;_rdr.
+        ///   Looks up a localized string similar to https://web.facebook.com/velocityriskunderwriters/.
         /// </summary>
         internal static string FacebookUrl {
             get {
