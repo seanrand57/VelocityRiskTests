@@ -97,7 +97,6 @@ namespace Ui.Tests.Steps
         {
             var actualLinkedInUrl = Page.Footer.CorporateOfficeLinkedIn.GetAttribute("href");
             actualLinkedInUrl.ShouldBe(CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
             VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
             VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
             VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
