@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
 using NUnit.Framework;
 using Ui.Tests.PersistenceModels;
 using Ui.Tests.Steps;
 using Ui.Tests.Steps.Customers;
 using Ui.Tests.Steps.TestData.Customers;
-using Microsoft.Extensions.Configuration;
 
 namespace Ui.Tests
 {
@@ -84,7 +82,7 @@ namespace Ui.Tests
         }
 
         [Test]
-        public void TestCase_05_FileAClaimLinksAreCorrectTest()
+        public void TestCase_05_FileAClaimLinksAreCorrect()
         {
             _claimsSteps.NavigateTo();
             _claimsSteps.ClickPanel(ClaimsTestData.FileClaimTitle);
@@ -101,7 +99,7 @@ namespace Ui.Tests
 
         [Test]
         [TestCaseSource(nameof(ImageCardInfoExpected))]
-        public void TestCase_07_AboutUsPageLeadershipTeamImagesAndNamesAreCorrectTest(ImageCard imageCardItem)
+        public void TestCase_07_AboutUsPageLeadershipTeamImagesAndNamesAreCorrect(ImageCard imageCardItem)
         {
             _aboutUsPageSteps.NavigateToPage();
             _aboutUsPageSteps.NavigateToLeadershipTeamView();
@@ -119,7 +117,6 @@ namespace Ui.Tests
         [Test]
         public void TestCase_08_Footer_SocialLinksAreOpening()
         {
-            // Test with LinkedIn link fails due to the captcha
             _homePageSteps.VerifySocialLinks();
         }
 

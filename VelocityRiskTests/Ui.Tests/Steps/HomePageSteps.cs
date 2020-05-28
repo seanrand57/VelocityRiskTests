@@ -40,7 +40,7 @@ namespace Ui.Tests.Steps
         {
             if (menuItem.opensNewTab)
             {
-                verifyNewTabUrl(menuItem.Link, $"Clicking {menuItem.Name} should redirrect to {menuItem.Link} on a new tab");
+                VerifyNewTabUrl(menuItem.Link, $"Clicking {menuItem.Name} should redirrect to {menuItem.Link} on a new tab");
             } 
             else
             {
@@ -95,12 +95,10 @@ namespace Ui.Tests.Steps
 
         public void VerifySocialLinks()
         {
-            var actualLinkedInUrl = Page.Footer.CorporateOfficeLinkedIn.GetAttribute("href");
-            actualLinkedInUrl.ShouldBe(CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInUrl, "It was not possible to open an expected LinkedIn link.");
-            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookUrl, "It was not possible to open an expected Facebook link.");
-            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterUrl, "It was not possible to open an expected Twitter link.");
-            VerifyOpenLinkInANewTab(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramUrl, "It was not possible to open an expected Instagram link.");
+            VerifyLinkAttributes(Page.Footer.CorporateOfficeLinkedIn, CopyrightTestData.LinkedInHref, "It was not possible to verify LinkedIn link.");
+            VerifyLinkAttributes(Page.Footer.CorporateOfficeFacebook, CopyrightTestData.FacebookHref, "It was not possible to verify Facebook link.");
+            VerifyLinkAttributes(Page.Footer.CorporateOfficeTwitter, CopyrightTestData.TwitterHref, "It was not possible to verify Twitter link.");
+            VerifyLinkAttributes(Page.Footer.CorporateOfficeInstagram, CopyrightTestData.InstagramHref, "It was not possible to verify Instagram link.");
         }
 
         public void VerifyReportClaim()

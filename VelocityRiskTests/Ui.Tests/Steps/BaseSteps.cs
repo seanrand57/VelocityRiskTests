@@ -103,7 +103,7 @@ namespace Ui.Tests.Steps
         }
 
         public void CloseAllTabsExceptFirst()
-        {       
+        {
             foreach(var tabName in Driver.WindowHandles)
             {
                 if (tabName == Driver.WindowHandles.First())
@@ -130,6 +130,15 @@ namespace Ui.Tests.Steps
             js.ExecuteScript("arguments[0].scrollIntoView({behavior:'auto', block: 'center', inline: 'center'})", element);
         }
 
+        public void VerifyLinkAttributes(IWebElement actualLinkElement, string expectedUrl, string customMessage)
+        {
+            var href = actualLinkElement.GetAttribute("href");
+            href.ShouldBe(expectedUrl, customMessage);
+
+            var target = actualLinkElement.GetAttribute("target");
+            target.ShouldBe("_blank", customMessage);
+        }
+
         public void VerifyOpenLinkInCurrentTab(IWebElement actualLinkElement, string expectedUrl, string customMessage)
         {
             var initialTabsCount = GetCurrentTabsCount();
@@ -137,20 +146,22 @@ namespace Ui.Tests.Steps
             GetCurrentTabsCount().ShouldBe(initialTabsCount, "Link should be opened in current tab");
             VerifyPageUrl(expectedUrl, customMessage);
         } 
+
         public void VerifyOpenLinkInANewTab(IWebElement actualLinkElement, string expectedUrl, string customMessage)
         {
             var initialTabsCount = GetCurrentTabsCount();
             ClickElement(actualLinkElement);
             VerifyNewTabIsOpened(initialTabsCount);
-            verifyNewTabUrl(expectedUrl, customMessage);
+            VerifyNewTabUrl(expectedUrl, customMessage);
         }
 
-        public void verifyNewTabUrl(string expectedUrl, string customMessage)
+        public void VerifyNewTabUrl(string expectedUrl, string customMessage)
         {
             SwitchToLastOpenedTab();
             VerifyPageUrl(expectedUrl, customMessage);
             SwitchBackToDefaultTab();
         }
+
         protected void ClickElement(IWebElement element)
         {
             ScrollToElement(element);
