@@ -15,13 +15,13 @@ namespace Ui.Tests.Steps.Customers
         public void VerifyOneLinkFromFileAClaimSection(string expectedUrl, string linkName)
         {
             var actualLink = Page.GetLinkFromFileAClaimSection(linkName);
-            VerifyOpenLinkInANewTab(actualLink, expectedUrl, $"It was not possible to open {linkName} page.");
+            VerifyLinkAttributes(actualLink, expectedUrl, $"It was not possible to verify {linkName} page.");
         }
 
         public void VerifyPanelItemPresented(PanelItem panelItem)
         {
             var isPanelPresented = Page.GetPanel(panelItem.Title).Displayed;
-            isPanelPresented.ShouldBeTrue($"It was not possible to find panel item : {panelItem.Title} on UI");
+            isPanelPresented.ShouldBeTrue($"It was not possible to find panel item: {panelItem.Title} on UI");
         }
 
         public void ExpandPanelItem(PanelItem panelItem)
@@ -33,7 +33,7 @@ namespace Ui.Tests.Steps.Customers
         public void VerifyPanelContent(PanelItem panelItem)
         {
             var actualContent = Page.GetPanelContent(panelItem.Title);
-            panelItem.Content.ShouldBe(actualContent, $"It was not possible to find expected content for : {panelItem.Title} on UI");
+            panelItem.Content.ShouldBe(actualContent, $"It was not possible to find expected content for: {panelItem.Title} on UI");
 
             // collapse panel
             ClickPanel(panelItem.Title);
